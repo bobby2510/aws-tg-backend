@@ -119,7 +119,7 @@ let getRoleId = (category_list,sport_category_id,position)=>{
         ['wicketkeeper','batsman','allrounder','bowler'],
         ['G','D','M','F'],
         ['PG','SG','SF','PF','C'],
-        ['DEF','ALL','RAI']
+        ['defender','allrounder','raider']
     ]
     let sport_index = -1
     for(let i=0;i<category_list.length;i++)
