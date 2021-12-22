@@ -47,7 +47,8 @@ router.get('/api/fantasy/matches',async (req,res)=>{
     let category_list = [
         [1,2,3,4],
         [5],
-        [7]
+        [7],
+        [6]
     ]
     let req_data = []
     for(let i =0;i<category_list.length;i++)
@@ -117,7 +118,8 @@ let getRoleId = (category_list,sport_category_id,position)=>{
     let role_names = [
         ['wicketkeeper','batsman','allrounder','bowler'],
         ['G','D','M','F'],
-        ['PG','SG','SF','PF','C']
+        ['PG','SG','SF','PF','C'],
+        ['DEF','ALL','RAI']
     ]
     let sport_index = -1
     for(let i=0;i<category_list.length;i++)
@@ -141,7 +143,8 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
     let category_list = [
         [1,2,3,4],
         [5],
-        [7]
+        [7],
+        [6]
     ]
     let sport_category_id_list = response.data.game.tournament.sport_category_id
     let sport_index = -1 
