@@ -153,37 +153,114 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
         if(category_list[i].includes(sport_category_id_list))
             sport_index = i
     }
-    //left team data 
-    response.data.game.home_team.players.forEach((player,index)=>{
-        left_team_players.push({
-            name: player.name,
-            image: getPlayerImage(player.image),
-            playing: player.playing ===1? 1 : 0,
-            role: getRoleId(category_list,sport_category_id_list,player.position),
-            credits: Number(player.cost)/10,
-            points: player.points,
-            selected_by: player.selected_by,
-            team_index:0,
-            team_name: response.data.game.home_team_code,
-            player_index:index+1
+  
+    if(response.data.game.home_team.players.length === 0 || response.data.game.away_team.players.length ===0)
+    {
+        if(response.data.game.home_team.players.length === 0)
+        {
+            //right team having player data
+            response.data.game.away_team.players.forEach((player,index)=>{
+                if(response.data.game.home_team_code === player.team_code)
+                {
+                    left_team_players.push({
+                        name: player.name,
+                        image: getPlayerImage(player.image),
+                        playing: player.playing ===1? 1 : 0,
+                        role: getRoleId(category_list,sport_category_id_list,player.position),
+                        credits: Number(player.cost)/10,
+                        points: player.points,
+                        selected_by: player.selected_by,
+                        team_index:0,
+                        team_name: response.data.game.home_team_code,
+                        player_index:index+1
+                    })
+                }
+                else 
+                {
+                    right_team_players.push({
+                        name: player.name,
+                        image: getPlayerImage(player.image),
+                        playing: player.playing ===1? 1 : 0,
+                        role: getRoleId(category_list,sport_category_id_list,player.position),
+                        credits: Number(player.cost)/10,
+                        points: player.points,
+                        selected_by: player.selected_by,
+                        team_index:0,
+                        team_name: response.data.game.away_team_code,
+                        player_index:left_team_players.length+index+1
+                    })
+                }
+            })
+        }
+        else 
+        {
+            // left team having player data 
+            response.data.game.home_team.players.forEach((player,index)=>{
+                if(response.data.game.home_team_code === player.team_code)
+                {
+                    left_team_players.push({
+                        name: player.name,
+                        image: getPlayerImage(player.image),
+                        playing: player.playing ===1? 1 : 0,
+                        role: getRoleId(category_list,sport_category_id_list,player.position),
+                        credits: Number(player.cost)/10,
+                        points: player.points,
+                        selected_by: player.selected_by,
+                        team_index:0,
+                        team_name: response.data.game.home_team_code,
+                        player_index:index+1
+                    })
+                }
+                else 
+                {
+                    right_team_players.push({
+                        name: player.name,
+                        image: getPlayerImage(player.image),
+                        playing: player.playing ===1? 1 : 0,
+                        role: getRoleId(category_list,sport_category_id_list,player.position),
+                        credits: Number(player.cost)/10,
+                        points: player.points,
+                        selected_by: player.selected_by,
+                        team_index:0,
+                        team_name: response.data.game.away_team_code,
+                        player_index:left_team_players.length+index+1
+                    })
+                }
+            })
+        }
+    }
+    else {
+        //left team data 
+        response.data.game.home_team.players.forEach((player,index)=>{
+            left_team_players.push({
+                name: player.name,
+                image: getPlayerImage(player.image),
+                playing: player.playing ===1? 1 : 0,
+                role: getRoleId(category_list,sport_category_id_list,player.position),
+                credits: Number(player.cost)/10,
+                points: player.points,
+                selected_by: player.selected_by,
+                team_index:0,
+                team_name: response.data.game.home_team_code,
+                player_index:index+1
+            })
         })
-    })
-    
-    //right team data 
-    response.data.game.away_team.players.forEach((player,index)=>{
-        right_team_players.push({
-            name: player.name,
-            image: getPlayerImage(player.image),
-            playing: player.playing ===1? 1 : 0,
-            role: getRoleId(category_list,sport_category_id_list,player.position),
-            credits: Number(player.cost)/10,
-            points: player.points,
-            selected_by: player.selected_by,
-            team_index:1,
-            team_name: response.data.game.away_team_code,
-            player_index:left_team_players.length+index+1
+        //right team data 
+        response.data.game.away_team.players.forEach((player,index)=>{
+            right_team_players.push({
+                name: player.name,
+                image: getPlayerImage(player.image),
+                playing: player.playing ===1? 1 : 0,
+                role: getRoleId(category_list,sport_category_id_list,player.position),
+                credits: Number(player.cost)/10,
+                points: player.points,
+                selected_by: player.selected_by,
+                team_index:1,
+                team_name: response.data.game.away_team_code,
+                player_index:left_team_players.length+index+1
+            })
         })
-    })
+    }
     let req_data ={
         match_time: response.data.game.game_date,
         sport_index:sport_index,
