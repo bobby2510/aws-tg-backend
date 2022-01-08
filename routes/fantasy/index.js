@@ -187,7 +187,7 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                         selected_by: player.selected_by,
                         team_index:1,
                         team_name: response.data.game.away_team_code,
-                        player_index:left_team_players.length+index+1
+                        player_index:index+1
                     })
                 }
             })
@@ -223,7 +223,7 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                         selected_by: player.selected_by,
                         team_index:1,
                         team_name: response.data.game.away_team_code,
-                        player_index:left_team_players.length+index+1
+                        player_index:index+1
                     })
                 }
             })
