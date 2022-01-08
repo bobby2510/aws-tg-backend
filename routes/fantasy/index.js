@@ -185,7 +185,7 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                         credits: Number(player.cost)/10,
                         points: player.points,
                         selected_by: player.selected_by,
-                        team_index:0,
+                        team_index:1,
                         team_name: response.data.game.away_team_code,
                         player_index:left_team_players.length+index+1
                     })
@@ -221,7 +221,7 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                         credits: Number(player.cost)/10,
                         points: player.points,
                         selected_by: player.selected_by,
-                        team_index:0,
+                        team_index:1,
                         team_name: response.data.game.away_team_code,
                         player_index:left_team_players.length+index+1
                     })
