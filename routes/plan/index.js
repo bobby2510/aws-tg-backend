@@ -88,7 +88,8 @@ router.post('/api/plan/add/super/:userid/:superid', async (req,res)=>{
                     {
                         superUserPhoneNumber: super_obj.phoneNumber,
                         userPhoneNumber: user_obj.phoneNumber,
-                        duration: req.body.duration
+                        duration: req.body.duration,
+                        notifyType:"addplan"
                     }
                 )
                 console.log(notify_obj)
