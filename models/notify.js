@@ -14,11 +14,6 @@ const NotifySchema =  new mongoose.Schema({
         type:Number,
         require:true
     },
-    notifyType:{
-        type:String,
-        require:true,
-        default:'register'
-    },
     createdAt:{
         type:Date,
         default:Date.now
