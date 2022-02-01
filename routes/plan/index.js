@@ -1,6 +1,7 @@
 const express = require('express')
 const plan = require('../../models/plan')
 const user = require('../../models/user')
+const notify = require('../../models/notify')
 const router = express.Router()
 
 
@@ -56,6 +57,71 @@ router.post('/api/plan/add/:userid/:adminid', async (req,res)=>{
         })
     }
 })
+
+router.post('/api/plan/add/super/:userid/:superid', async (req,res)=>{
+    try{
+        let super_obj = await user.findOne({_id:req.params.superid.toString().trim()})      
+        if(super_obj!=null && super_obj.role === 'superuser')
+        {
+            let user_obj = await user.findById(req.params.userid)
+            if(user_obj!=null)
+            {
+                console.log(user_obj)
+                let plan_obj = await plan.findOne({user:user_obj._id,active:true})
+                if(plan_obj!=null)
+                {
+                    plan_obj.duration = plan_obj.duration + req.body.duration 
+                    console.log(plan_obj)
+                    await plan_obj.save()
+                }
+                else 
+                {
+                    await plan.create({
+                        startDate:Date.now(),
+                        active:true,
+                        duration:req.body.duration,
+                        user:user_obj._id 
+                    })
+                }
+                //here again i should get notified codervp
+             let notify_obj =  await notify.create(
+                    {
+                        superUserPhoneNumber: super_obj.phoneNumber,
+                        userPhoneNumber: user_obj.phoneNumber,
+                        duration: req.body.duration
+                    }
+                )
+                console.log(notify_obj)
+                res.status(200).json({
+                    status:'success',
+                    message:'Plan Upgraded Successfully!'
+                })
+            }
+            else
+            {
+                res.status(201).json({
+                    status:'fail',
+                    message:'Invalid User!'
+                })
+            }
+        }
+        else
+        {
+            res.status(201).json({
+                status:'fail',
+                message:'Invalid Admin!'
+            })
+        }
+    }
+    catch(e){
+        res.status(404).json({
+            status:'fail',
+            message:e
+        })
+    }
+})
+
+
 
 router.get('/api/plan/status/:userid', async (req,res)=>{
         try{
@@ -157,11 +223,17 @@ router.get('/api/plan/status/:userid', async (req,res)=>{
 router.delete('/api/plan/remove/:userid/:adminid',async (req,res)=>{
     try{
         let admin_obj = await user.findById(req.params.adminid)
-        if(admin_obj!=null && admin_obj.role === 'admin')
+        if(admin_obj!=null && admin_obj.role === 'admin' || admin_obj.role === 'superuser')
         {
             let user_obj = await user.findById(req.params.userid)
             if(user_obj!=null)
             {
+
+                if(user_obj.role === 'admin')
+                {
+                    return;
+                }
+
                 let plan_obj = await plan.findOne({user:user_obj._id,active:true})
                 if(plan_obj!=null)
                 {

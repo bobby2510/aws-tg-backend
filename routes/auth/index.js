@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const user = require('../../models/user')
 const plan = require('../../models/plan')
+const notify = require('../../models/notify')
 
 
 
@@ -163,11 +164,15 @@ router.post('/api/auth/login',async (req,res)=>{
 router.post('/api/auth/block/:userid/:adminid',async (req,res)=>{
     try{
         admin_obj = await user.findById(req.params.adminid)
-        if(admin_obj!=null && admin_obj.role === 'admin')
+        if(admin_obj!=null && admin_obj.role === 'admin' || admin_obj.role === 'superuser')
         {
             user_obj = await user.findById(req.params.userid)
             if(user_obj!=null)
             {
+                if(user_obj.role === 'admin')
+                {
+                    return;
+                }
                 user_obj.accountBlocked = true 
                 await user_obj.save()
                 res.status(200).json({
@@ -203,11 +208,15 @@ router.post('/api/auth/block/:userid/:adminid',async (req,res)=>{
 router.post('/api/auth/unblock/:userid/:adminid',async (req,res)=>{
     try{
         admin_obj = await user.findById(req.params.adminid)
-        if(admin_obj!=null && admin_obj.role === 'admin')
+        if(admin_obj!=null && admin_obj.role === 'admin' || admin_obj.role === 'superuser')
         {
             user_obj = await user.findById(req.params.userid)
             if(user_obj!=null)
             {
+                if(user_obj.role === 'admin')
+                {
+                    return;
+                }
                 user_obj.accountBlocked = false
                 await user_obj.save()
                 res.status(200).json({
@@ -251,6 +260,27 @@ let get_plan_obj = (p)=>{
         status: p.active 
     }
 }
+router.get('/api/auth/notify/:adminid',async (req,res)=>{
+    try{
+        admin_obj = await user.findById(req.params.adminid)
+        if(admin_obj!=null && admin_obj.role === 'admin')
+        {
+            let recent_list = await notify.find({}).sort({createdAt:-1}).limit(10)
+            res.status(200).json({
+                status:'success',
+                data: recent_list,
+                message: "SuperUser accounts fetched successfully!"
+            })
+        }
+    }
+    catch 
+    {
+        res.status(404).json({
+            status:'fail',
+            message:'Something Went Wrong!'
+        })
+    }
+})
 
 router.post('/api/auth/details/:adminid',async (req,res)=>{
     try{
@@ -391,6 +421,81 @@ router.post('/api/auth/register4642',async(req,res)=>{
         res.status(404).json({
             status:'fail',
             message:'Some Error Occured!'
+        })
+    }
+})
+
+
+router.post('/api/auth/super/register4642',async(req,res)=>{
+    try{
+        let user_obj = await user.findOne({phoneNumber:req.body.phoneNumber})
+        if(user_obj!=null)
+        {
+            res.status(201).json({
+                status:'fail',
+                message:'Mobile nubmer Already Registered!'
+            })
+            return 
+        }
+        let user_data = {
+            phoneNumber:req.body.phoneNumber,
+            password: req.body.password,
+            
+        }
+        console.log('here')
+        let superUserPhoneNumber = req.body.superUserPhoneNumber
+        if(req.body.phoneNumber === '9848579715')
+            user_data.role = 'admin'
+        created_user = await user.create(user_data)
+        if(created_user!=null)
+        {
+            let new_plan = await plan.create(
+                {startDate:Date.now(),
+                    active:true,
+                    duration:req.body.duration,
+                    user:created_user._id
+                })
+            if(new_plan!=null)
+            {
+                console.log(superUserPhoneNumber)
+                console.log(created_user.phoneNumber)
+                console.log(req.body.duration)
+                let notify_obj = await notify.create(
+                    {
+                        superUserPhoneNumber: superUserPhoneNumber,
+                        userPhoneNumber: created_user.phoneNumber,
+                        duration: req.body.duration
+                    }
+                )
+                console.log(notify_obj)
+                console.log("hi hello")
+                res.status(200).json({
+                    status:'success',
+                    message:'Accounted Created successfully! and active for plan: '+req.body.duration+' days!'
+                })
+                //here i should get notified 
+                //account creation and plan creation 
+                // codervp
+               
+            }
+            else{
+                res.status(201).json({
+                    status:'fail',
+                    message:'Account Created, Error While Creating the Plan!'
+                })
+            }
+        }
+        else{
+            res.status(201).json({
+                status:'fail',
+                message:'Failed to create your account!'
+            })
+        }
+    }
+    catch(e){
+        res.status(404).json({
+            status:'fail',
+            message: e
         })
     }
 })

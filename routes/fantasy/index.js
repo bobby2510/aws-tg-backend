@@ -236,7 +236,7 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                 name: player.name,
                 image: getPlayerImage(player.image),
                 playing: player.playing ===1? 1 : 0,
-                role: getRoleId(category_list,sport_category_id_list,player.position),
+                role: getRoleId(category_list,sport_category_id_list,player.position),  
                 credits: Number(player.cost)/10,
                 points: player.points,
                 selected_by: player.selected_by,
