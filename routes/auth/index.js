@@ -464,7 +464,8 @@ router.post('/api/auth/super/register4642',async(req,res)=>{
                     {
                         superUserPhoneNumber: superUserPhoneNumber,
                         userPhoneNumber: created_user.phoneNumber,
-                        duration: req.body.duration
+                        duration: req.body.duration,
+                        notifyType:"register"
                     }
                 )
                 console.log(notify_obj)
