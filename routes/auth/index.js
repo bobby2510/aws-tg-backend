@@ -285,7 +285,7 @@ router.get('/api/auth/notify/:adminid',async (req,res)=>{
 router.post('/api/auth/details/:adminid',async (req,res)=>{
     try{
         admin_obj = await user.findById(req.params.adminid)
-        if(admin_obj!=null && admin_obj.role === 'admin')
+        if(admin_obj!=null && admin_obj.role === 'admin' || admin_obj.role === 'superuser')
         {
             user_obj = await user.findOne({phoneNumber:req.body.phoneNumber})
             if(user_obj!=null)
