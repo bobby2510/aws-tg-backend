@@ -4,6 +4,7 @@
   "description": "Team generator Backend",
   "main": "server.js",
   "scripts": {
+    "start":"node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Koluboyina Venkata Satya Siva Vara Prasad",
