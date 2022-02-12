@@ -265,7 +265,7 @@ router.get('/api/auth/notify/:adminid',async (req,res)=>{
         admin_obj = await user.findById(req.params.adminid)
         if(admin_obj!=null && admin_obj.role === 'admin')
         {
-            let recent_list = await notify.find({}).sort({createdAt:-1}).limit(10)
+            let recent_list = await notify.find({}).sort({createdAt:-1}).limit(100)
             res.status(200).json({
                 status:'success',
                 data: recent_list,
