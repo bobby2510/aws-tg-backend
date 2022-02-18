@@ -6,6 +6,12 @@ let base_url_two = '/1.1.json'
 let all_matches_api = 'https://api.cricpick.in/games/listing/active/safe.json'
 
 
+let cricket_scorecard = 'https://api.cricpick.in//game-players/scorecard/'
+let football_scorecard = 'https://api.cricpick.in//football-game-players/scorecard/'
+let basketball_scorecard = 'https://api.cricpick.in//nba-game-players/scorecard/'
+let kabaddi_scorecard = 'https://api.cricpick.in//kabaddi-game-players/scorecard/'
+let generic_scorecard_end = '.json'
+
 
 //helper function to calculate difference between the times 
 function timeDifference(date1,date2) {
@@ -30,8 +36,45 @@ function timeDifference(date1,date2) {
     }
 }
 
+let get_req_scorecard_url = (match_id,sport_type) =>{
+    if(sport_type === 'cricket')
+        return cricket_scorecard+match_id+generic_scorecard_end;
+    else if(sport_type === 'football')
+        return football_scorecard+match_id+generic_scorecard_end;
+    else if(sport_type === 'basketball') 
+        return basketball_scorecard+match_id+generic_scorecard_end;
+    else 
+        return kabaddi_scorecard+match_id+generic_scorecard_end;
+}
 
-
+router.get('/api/fantasy/scorecard/:sport/:id',async (req,res)=>{
+    let match_id = req.params.id 
+    let sport_type = req.params.sport 
+    let req_url = get_req_scorecard_url(match_id,sport_type)
+    let response = await axios.get(req_url)
+    match_status  = response.data.players[0].game.status 
+    let players_data = response.data.players
+    let req_list = []
+    for(let i=0;i<players_data.length;i++)
+    {
+        req_list.push({
+            player_fixed_id: players_data[i].player_id,
+            player_points: players_data[i].points,
+            player_name: players_data[i].player.name,
+            player_team_code: players_data[i].player.team_code
+        })
+    }
+     res.status(200).json({
+        status:'success',
+        data: {
+            match_status: match_status,
+            player_data : req_list,
+            sport: sport_type,
+            match_id: match_id,
+            match_time: response.data.players[0].game.game_date
+        }
+    })
+})
 
 
 
@@ -172,7 +215,8 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                         selected_by: player.selected_by,
                         team_index:0,
                         team_name: response.data.game.home_team_code,
-                        player_index:index+1
+                        player_index:index+1,
+                        player_fixed_id: player.id
                     })
                 }
                 else 
@@ -187,7 +231,8 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                         selected_by: player.selected_by,
                         team_index:1,
                         team_name: response.data.game.away_team_code,
-                        player_index:index+1
+                        player_index:index+1,
+                        player_fixed_id: player.id
                     })
                 }
             })
@@ -208,7 +253,8 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                         selected_by: player.selected_by,
                         team_index:0,
                         team_name: response.data.game.home_team_code,
-                        player_index:index+1
+                        player_index:index+1,
+                        player_fixed_id: player.id
                     })
                 }
                 else 
@@ -223,7 +269,8 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                         selected_by: player.selected_by,
                         team_index:1,
                         team_name: response.data.game.away_team_code,
-                        player_index:index+1
+                        player_index:index+1,
+                        player_fixed_id: player.id
                     })
                 }
             })
@@ -242,7 +289,8 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                 selected_by: player.selected_by,
                 team_index:0,
                 team_name: response.data.game.home_team_code,
-                player_index:index+1
+                player_index:index+1,
+                player_fixed_id: player.id
             })
         })
         //right team data 
@@ -257,7 +305,8 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                 selected_by: player.selected_by,
                 team_index:1,
                 team_name: response.data.game.away_team_code,
-                player_index:left_team_players.length+index+1
+                player_index:left_team_players.length+index+1,
+                player_fixed_id: player.id
             })
         })
     }
