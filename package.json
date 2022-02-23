@@ -2,12 +2,12 @@
   "name": "backend",
   "version": "1.0.0",
   "engines": {
-   "node": "12.11.1"
-   },
+    "node": "12.11.1"
+  },
   "description": "Team generator Backend",
   "main": "server.js",
   "scripts": {
-    "start":"node server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Koluboyina Venkata Satya Siva Vara Prasad",
@@ -17,6 +17,7 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongoose": "^6.0.14"
+    "mongoose": "^6.0.14",
+    "serve": "^13.0.2"
   }
 }

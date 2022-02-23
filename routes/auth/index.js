@@ -267,7 +267,7 @@ router.get('/api/auth/admin/superuserdetail/:adminid/:superuserphonenumber',asyn
         let superuserphonenumber = req.params.superuserphonenumber
         if(admin_obj !=null && admin_obj.role === 'admin')
         {
-            let req_list = await notify.find({superUserPhoneNumber: superuserphonenumber })
+            let req_list = await notify.find({superUserPhoneNumber: superuserphonenumber})
             res.status(200).json({
                 status:'success',
                 data:req_list,
@@ -282,7 +282,7 @@ router.get('/api/auth/admin/superuserdetail/:adminid/:superuserphonenumber',asyn
         })
     }
 
-//h i hell
+})
 
 router.get('/api/auth/superuser/:superuserid',async (req,res)=>{
     try{
