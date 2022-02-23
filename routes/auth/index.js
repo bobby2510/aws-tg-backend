@@ -282,7 +282,7 @@ router.get('/api/auth/admin/superuserdetail/:adminid/:superuserphonenumber',asyn
         })
     }
 
-
+//h i hell
 
 router.get('/api/auth/superuser/:superuserid',async (req,res)=>{
     try{
