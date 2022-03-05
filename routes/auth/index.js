@@ -284,9 +284,60 @@ router.get('/api/auth/admin/superuserdetail/:adminid/:superuserphonenumber',asyn
 
 })
 
+router.post('/api/auth/removelimit/:userid/:adminid',async (req,res)=>{
+    try{
+        admin_obj = await user.findById(req.params.adminid)
+        if(admin_obj!=null && admin_obj.role === 'admin' || admin_obj.role === 'superuser')
+        {
+            user_obj = await user.findById(req.params.userid)
+            if(user_obj!=null)
+            {
+                if(user_obj.role === 'admin')
+                {
+                    return;
+                }
+                // do some stuff here 
+                let arr = user_obj.loginHistory 
+                if(arr.length>0)
+                    arr.splice(-1);
+                user_obj.loginHistory = arr;
+                user_obj.markModified('loginHistory')
+                await user_obj.save()
+                res.status(200).json({
+                    status:'success',
+                    message:'Login Limit Removed Successfully!'
+                })
+            }
+            else 
+            {
+                res.status(201).json({
+                    status:'fail',
+                    message:'Invalid User!'
+                })
+            }
+        }
+        else 
+        {
+            res.status(201).json({
+                status:'fail',
+                message:'Invalid Admin!'
+            })
+        }      
+    }
+    catch(e)
+    {
+        res.status(404).json({
+            status:'fail',
+            message:'Something Went Wrong!'
+        })
+    }
+})
+
 router.get('/api/auth/superuser/:superuserid',async (req,res)=>{
     try{
+        console.log(req.params.superuserid)
         let super_user_obj = await user.findById(req.params.superuserid)
+        cosole.log(super_user_obj)
         if(super_user_obj!=null && super_user_obj.role === 'superuser')
         {
             let req_list = await notify.find({superUserPhoneNumber:super_user_obj.phoneNumber})
