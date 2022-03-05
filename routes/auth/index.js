@@ -335,9 +335,9 @@ router.post('/api/auth/removelimit/:userid/:adminid',async (req,res)=>{
 
 router.get('/api/auth/superuser/:superuserid',async (req,res)=>{
     try{
-        console.log(req.params.superuserid)
+       // console.log(req.params.superuserid)
         let super_user_obj = await user.findById(req.params.superuserid)
-        cosole.log(super_user_obj)
+        //console.log(super_user_obj)
         if(super_user_obj!=null && super_user_obj.role === 'superuser')
         {
             let req_list = await notify.find({superUserPhoneNumber:super_user_obj.phoneNumber})
@@ -349,10 +349,11 @@ router.get('/api/auth/superuser/:superuserid',async (req,res)=>{
 
         }
     }
-    catch{
+    catch(e){
+        console.log(e)
         res.status(404).json({
             status:'fail',
-            message:'Something Went Wrong!'
+            message:'error'
         })
     }
 })
