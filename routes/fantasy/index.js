@@ -228,7 +228,7 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
         if(category_list[i].includes(sport_category_id_list))
             sport_index = i
     }
-  
+   // console.log(response.data.game.home_team.players)
     if(response.data.game.home_team.players.length === 0 || response.data.game.away_team.players.length ===0)
     {
         if(response.data.game.home_team.players.length === 0)
@@ -238,7 +238,7 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                 if(response.data.game.home_team_code === player.team_code)
                 {
                     let kvp = 0;
-                    if(player.playing === null)
+                    if(player.playing === null || player.playing === undefined)
                     {
                         let jp = player.last_match_playing_info
                         if(jp!==null && jp=== 'Announced')
@@ -267,7 +267,7 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                 else 
                 {
                     let kvp = 0;
-                    if(player.playing === null)
+                    if(player.playing === null || player.playing === undefined)
                     {
                         let jp = player.last_match_playing_info
                         if(jp!==null && jp=== 'Announced')
@@ -302,7 +302,7 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                 if(response.data.game.home_team_code === player.team_code)
                 {
                     let kvp = 0;
-                    if(player.playing === null)
+                    if(player.playing === null || player.playing === undefined)
                     {
                         let jp = player.last_match_playing_info
                         if(jp!==null && jp=== 'Announced')
@@ -331,7 +331,7 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                 else 
                 {
                     let kvp = 0;
-                    if(player.playing === null)
+                    if(player.playing === null || player.playing === undefined)
                     {
                         let jp = player.last_match_playing_info
                         if(jp!==null && jp=== 'Announced')
@@ -364,10 +364,10 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
         //left team data 
         response.data.game.home_team.players.forEach((player,index)=>{
             let kvp = 0;
-            if(player.playing === null)
+            if(player.playing === null || player.playing === undefined)
             {
                 let jp = player.last_match_playing_info
-                if(jp!==null && jp=== 'Announced')
+                if(jp!==null && jp === 'Announced')
                 {
                     kvp =1;
                 }
@@ -376,6 +376,7 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
             {
                 kvp= player.playing ===1? 1 : 0 
             }
+            console.log(kvp)
             left_team_players.push({
                 name: player.name,
                 image: getPlayerImage(player.image),
@@ -393,7 +394,7 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
         //right team data 
         response.data.game.away_team.players.forEach((player,index)=>{
             let kvp = 0;
-            if(player.playing === null)
+            if(player.playing === null || player.playing === undefined)
             {
                 let jp = player.last_match_playing_info
                 if(jp!==null && jp=== 'Announced')
