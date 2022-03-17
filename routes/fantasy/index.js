@@ -237,10 +237,23 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
             response.data.game.away_team.players.forEach((player,index)=>{
                 if(response.data.game.home_team_code === player.team_code)
                 {
+                    let kvp = 0;
+                    if(player.playing === null)
+                    {
+                        let jp = player.last_match_playing_info
+                        if(jp!==null && jp=== 'Announced')
+                        {
+                            kvp =1;
+                        }
+                    }
+                    else 
+                    {
+                        kvp= player.playing ===1? 1 : 0 
+                    }
                     left_team_players.push({
                         name: player.name,
                         image: getPlayerImage(player.image),
-                        playing: player.playing ===1? 1 : 0,
+                        playing: kvp,
                         role: getRoleId(category_list,sport_category_id_list,player.position),
                         credits: Number(player.cost)/10,
                         points: player.points,
@@ -253,10 +266,23 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                 }
                 else 
                 {
+                    let kvp = 0;
+                    if(player.playing === null)
+                    {
+                        let jp = player.last_match_playing_info
+                        if(jp!==null && jp=== 'Announced')
+                        {
+                            kvp =1;
+                        }
+                    }
+                    else 
+                    {
+                        kvp= player.playing ===1? 1 : 0 
+                    }
                     right_team_players.push({
                         name: player.name,
                         image: getPlayerImage(player.image),
-                        playing: player.playing ===1? 1 : 0,
+                        playing: kvp,
                         role: getRoleId(category_list,sport_category_id_list,player.position),
                         credits: Number(player.cost)/10,
                         points: player.points,
@@ -275,10 +301,23 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
             response.data.game.home_team.players.forEach((player,index)=>{
                 if(response.data.game.home_team_code === player.team_code)
                 {
+                    let kvp = 0;
+                    if(player.playing === null)
+                    {
+                        let jp = player.last_match_playing_info
+                        if(jp!==null && jp=== 'Announced')
+                        {
+                            kvp =1;
+                        }
+                    }
+                    else 
+                    {
+                        kvp= player.playing ===1? 1 : 0 
+                    }
                     left_team_players.push({
                         name: player.name,
                         image: getPlayerImage(player.image),
-                        playing: player.playing ===1? 1 : 0,
+                        playing: kvp,
                         role: getRoleId(category_list,sport_category_id_list,player.position),
                         credits: Number(player.cost)/10,
                         points: player.points,
@@ -291,10 +330,23 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                 }
                 else 
                 {
+                    let kvp = 0;
+                    if(player.playing === null)
+                    {
+                        let jp = player.last_match_playing_info
+                        if(jp!==null && jp=== 'Announced')
+                        {
+                            kvp =1;
+                        }
+                    }
+                    else 
+                    {
+                        kvp= player.playing ===1? 1 : 0 
+                    }
                     right_team_players.push({
                         name: player.name,
                         image: getPlayerImage(player.image),
-                        playing: player.playing ===1? 1 : 0,
+                        playing: kvp,
                         role: getRoleId(category_list,sport_category_id_list,player.position),
                         credits: Number(player.cost)/10,
                         points: player.points,
@@ -311,10 +363,23 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
     else {
         //left team data 
         response.data.game.home_team.players.forEach((player,index)=>{
+            let kvp = 0;
+            if(player.playing === null)
+            {
+                let jp = player.last_match_playing_info
+                if(jp!==null && jp=== 'Announced')
+                {
+                    kvp =1;
+                }
+            }
+            else 
+            {
+                kvp= player.playing ===1? 1 : 0 
+            }
             left_team_players.push({
                 name: player.name,
                 image: getPlayerImage(player.image),
-                playing: player.playing ===1? 1 : 0,
+                playing: kvp,
                 role: getRoleId(category_list,sport_category_id_list,player.position),  
                 credits: Number(player.cost)/10,
                 points: player.points,
@@ -327,10 +392,23 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
         })
         //right team data 
         response.data.game.away_team.players.forEach((player,index)=>{
+            let kvp = 0;
+            if(player.playing === null)
+            {
+                let jp = player.last_match_playing_info
+                if(jp!==null && jp=== 'Announced')
+                {
+                    kvp =1;
+                }
+            }
+            else 
+            {
+                kvp= player.playing ===1? 1 : 0 
+            }
             right_team_players.push({
                 name: player.name,
                 image: getPlayerImage(player.image),
-                playing: player.playing ===1? 1 : 0,
+                playing: kvp,
                 role: getRoleId(category_list,sport_category_id_list,player.position),
                 credits: Number(player.cost)/10,
                 points: player.points,
