@@ -8,7 +8,7 @@ const router = express.Router()
 router.post('/api/expert/postteams',async (req,res)=>{
     try{
          // delete some teams if needed
-        let obj = team.create({
+        let obj = await team.create({
             matchId:req.body.matchId,
             numberOfTeams: req.body.numberOfTeams,
             typeOfTeams:req.body.typeOfTeams,
@@ -19,7 +19,7 @@ router.post('/api/expert/postteams',async (req,res)=>{
             sportIndex:req.body.sportIndex,
             sectionUsed:req.body.sectionUsed 
         })
-       
+        
         if(obj!==null)
         {
             res.status(200).json({
@@ -50,8 +50,8 @@ let getExpert = (data_list,expert_number)=>
 
 router.get('/api/expert/getteams/:id',async (req,res)=>{
     try{
-        let req_data = team.find({matchId:req.params.id}).sort({createdAt:-1})
-        let expert_data = expert.find({})
+        let req_data = await team.find({matchId:req.params.id}).sort({createdAt:-1})
+        let expert_data = await  expert.find({})
         if(req_data.length>0)
         {
             let new_data = []
@@ -100,7 +100,7 @@ router.get('/api/expert/getteams/:id',async (req,res)=>{
 
 router.get('/api/expert/teamlist',async (req,res)=>{
     try{
-        let req_data = team.find({}).sort({createdAt:-1}).limit(50)
+        let req_data = await team.find({}).sort({createdAt:-1}).limit(50)
         if(req_data.length>0)
         {
             let match_id_list = []
