@@ -27,7 +27,7 @@ const TeamsSchema =  new mongoose.Schema({
         require:true
     },
     teamData:{
-        type:String,
+        type:Array,
         require:true
     },
     sportIndex:{
