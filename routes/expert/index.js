@@ -17,7 +17,8 @@ router.post('/api/expert/postteams',async (req,res)=>{
             teamUse:req.body.teamUse,
             teamData:req.body.teamData,
             sportIndex:req.body.sportIndex,
-            sectionUsed:req.body.sectionUsed 
+            sectionUsed:req.body.sectionUsed,
+            expertNumber:req.body.expertNumber
         })
         
         if(obj!==null)
@@ -29,6 +30,7 @@ router.post('/api/expert/postteams',async (req,res)=>{
         }
     }
     catch(e){
+     //   console.log(e)
         res.status(404).json({
             status:'fail',
             messsage:'Something Went Wrong!'
