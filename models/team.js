@@ -26,7 +26,7 @@ const TeamsSchema =  new mongoose.Schema({
         type:String,
         require:true
     },
-    teamsData:{
+    teamData:{
         type:String,
         require:true
     },

@@ -8,6 +8,7 @@ const router = express.Router()
 router.post('/api/expert/postteams',async (req,res)=>{
     try{
          // delete some teams if needed
+       //  console.log(req.body.teamData)
          let temp = {
             matchId:req.body.matchId,
             numberOfTeams: req.body.numberOfTeams,
@@ -20,8 +21,9 @@ router.post('/api/expert/postteams',async (req,res)=>{
             sectionUsed:req.body.sectionUsed,
             expertNumber:req.body.expertNumber
         }
+       // console.log(req.body.teamsData)
         let obj = await team.create(temp)
-        console.log(obj)
+       // console.log(obj)
         if(obj!==null)
         {
             res.status(200).json({
