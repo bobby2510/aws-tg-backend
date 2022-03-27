@@ -1,6 +1,7 @@
 const express = require('express')
 const user = require('./../../models/user')
 const team = require('./../../models/team')
+const expert = require('./../../models/expert')
 
 const router = express.Router()
 
@@ -35,14 +36,48 @@ router.post('/api/expert/postteams',async (req,res)=>{
     }
 })
 
+let getExpert = (data_list,expert_number)=>
+{
+    for(let i=0;i<data_list.length;i++)
+    {
+        if(data_list[i].phoneNumber.toString() === expert_number.toString())
+        {
+            return data_list[i];
+        }
+    }
+    return null;
+}
+
 router.get('/api/expert/getteams/:id',async (req,res)=>{
     try{
         let req_data = team.find({matchId:req.params.id}).sort({createdAt:-1})
+        let expert_data = expert.find({})
         if(req_data.length>0)
         {
+            let new_data = []
+            for(let i=0;i<req_data.length;i++)
+            {
+                let vp = req_data[i]
+                let user_expert = getExpert(expert_data,vp.expertNumber)
+                if(user_expert!==null)
+                {
+                    let temp = {...vp}
+                    temp.expertName = user_expert.name 
+                    team.expertAvatar = user_expert.avatar
+                    new_data.push(temp)
+                }
+                else 
+                {
+                    res.status(404).json({
+                        status:'fail',
+                        message:'No teams are given by experts!'
+                    })
+                    return;
+                }
+            }
             res.status(200).json({
                 status:'success',
-                data: req_data,
+                data: new_data,
                 message:'expert teams fetched successfully!' 
             })
         }
