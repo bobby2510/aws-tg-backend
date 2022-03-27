@@ -8,7 +8,7 @@ const router = express.Router()
 router.post('/api/expert/postteams',async (req,res)=>{
     try{
          // delete some teams if needed
-       //  console.log(req.body.teamData)
+    
          let temp = {
             matchId:req.body.matchId,
             numberOfTeams: req.body.numberOfTeams,
@@ -21,9 +21,7 @@ router.post('/api/expert/postteams',async (req,res)=>{
             sectionUsed:req.body.sectionUsed,
             expertNumber:req.body.expertNumber
         }
-       // console.log(req.body.teamsData)
         let obj = await team.create(temp)
-       // console.log(obj)
         if(obj!==null)
         {
             res.status(200).json({
@@ -33,7 +31,6 @@ router.post('/api/expert/postteams',async (req,res)=>{
         }
     }
     catch(e){
-     //   console.log(e)
         res.status(404).json({
             status:'fail',
             messsage:'Something Went Wrong!'
@@ -57,44 +54,12 @@ router.get('/api/expert/getteams/:id',async (req,res)=>{
     try{
         let req_data = await team.find({matchId:req.params.id}).sort({createdAt:-1})
         let expert_data = await  expert.find({})
-        if(req_data.length>0)
-        {
-            let new_data = []
-            for(let i=0;i<req_data.length;i++)
-            {
-                let vp = req_data[i]
-                let user_expert = getExpert(expert_data,vp.expertNumber)
-                if(user_expert!==null)
-                {
-                    let temp = {...vp}
-                    temp.expertName = user_expert.name 
-                    team.expertAvatar = user_expert.avatar
-                    new_data.push(temp)
-                    
-                }
-                else 
-                {
-                    res.status(404).json({
-                        status:'fail',
-                        message:'No teams are given by experts!'
-                    })
-                    return;
-                }
-            }
-            console.log(new_data)
-            res.status(200).json({
-                status:'success',
-                data: new_data,
-                message:'expert teams fetched successfully!' 
-            })
-        }
-        else 
-        {
-            res.status(404).json({
-                status:'fail',
-                message:'No teams are given by experts!'
-            })
-        }
+       res.status(200).json({
+        status:'success',
+        data: req_data,
+        expertData:expert_data,
+        message:'expert teams fetched successfully!' 
+    })
     }
     catch(e)
     {
@@ -114,7 +79,8 @@ router.get('/api/expert/teamlist',async (req,res)=>{
             for(let i=0;i<req_data.length;i++)
             {
                 let vp = req_data[i] 
-                match_id_list.push(vp.matchId)
+                if(match_id_list.indexOf(vp.matchId) === -1)
+                    match_id_list.push(vp.matchId)
             }
             res.status(200).json({
                 status:'success',

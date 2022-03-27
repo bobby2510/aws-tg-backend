@@ -12,11 +12,11 @@ const NotifySchema =  new mongoose.Schema({
     },
     duration:{
         type:Number,
-        require:true
+        required:true
     },
     notifyType:{
         type:String,
-        require:true
+        required:true
     },
     createdAt:{
         type:Date,

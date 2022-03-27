@@ -14,7 +14,7 @@ const userSchema =  new mongoose.Schema({
     },
     password:{
         type:String,
-        require:true
+        required:true
     },
     role:{
         type:String,
@@ -30,12 +30,12 @@ const userSchema =  new mongoose.Schema({
     },
     changedPassword:{
         type:Boolean,
-        require:true,
+        required:true,
         default:false
     },
     accountBlocked:{
         type:Boolean,
-        require:true,
+        required:true,
         default:false
     }
 })

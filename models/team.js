@@ -12,23 +12,23 @@ const TeamsSchema =  new mongoose.Schema({
     },
     typeOfTeams:{
         type:String,
-        require:true
+        required:true
     },
     fantasyApp:{
         type:String,
-        require:true
+        required:true
     },
     tossData:{
         type:String,
-        require:true
+        required:true
     },
     teamUse:{
         type:String,
-        require:true
+        required:true
     },
     teamData:{
         type:Array,
-        require:true
+        required:true
     },
     sportIndex:{
         type:Number,

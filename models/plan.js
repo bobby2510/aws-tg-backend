@@ -13,11 +13,11 @@ const planSchema = new mongoose.Schema({
     },
     active:{
         type:Boolean,
-        require:true
+        required:true
     },
     user:{
         type:mongoose.Schema.Types.ObjectId,
-        require:true,
+        required:true,
         ref:'user'
     }
 })

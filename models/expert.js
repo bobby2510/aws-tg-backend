@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 
 const ExpertSchema =  new mongoose.Schema({
     name:{
-        type:String
+        type:String,
+        required:true
     },
     phoneNumber:{
         type:String,
