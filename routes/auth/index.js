@@ -333,6 +333,55 @@ router.post('/api/auth/removelimit/:userid/:adminid',async (req,res)=>{
     }
 })
 
+// router.get('/api/auth/allremove',async (req,res)=>{
+//     try{
+       
+      
+//             user_obj_list = await user.find({})
+//             if(user_obj_list !=null && user_obj_list.length>0)
+//             {
+//                let cnt =0;
+//                 // do some stuff here
+//                 for(let i=0;i<user_obj_list.length;i++)
+//                 {
+//                     console.log(cnt)
+//                     let user_obj = user_obj_list[i]
+//                     if(user_obj === null || user_obj === undefined)
+//                     continue
+//                     if(user_obj._id === '62131b89846675415c242ce1' || user_obj._id === '624acedb70d0605318b9b44c')
+//                     continue;
+//                     if(user_obj.loginHistory === undefined || user_obj.loginHistory === null) 
+//                         continue;
+//                     let arr = user_obj.loginHistory 
+//                     if(arr.length>0)
+//                         arr.splice(-1);
+//                     if(arr.length>0)
+//                         arr.splice(-1);
+//                     user_obj.loginHistory = arr;
+//                     user_obj.markModified('loginHistory')
+//                     user_obj.accountBlocked = false;
+//                     await user_obj.save()
+//                     cnt++;
+                   
+//                 }
+//                 res.status(200).json({
+//                     status:'success',
+//                     count: cnt,
+//                     message:'user login limit removed!'
+//                 })
+
+//             }
+//     }
+//     catch(e)
+//     {
+//         console.log(e)
+//         res.status(404).json({
+//             status:'fail',
+//             message:'Something Went Wrong!'
+//         })
+//     }
+// })
+
 router.get('/api/auth/superuser/:superuserid',async (req,res)=>{
     try{
        // console.log(req.params.superuserid)
