@@ -346,10 +346,7 @@ router.post('/api/auth/removelimit/:userid/:adminid',async (req,res)=>{
 //                 {
 //                     console.log(cnt)
 //                     let user_obj = user_obj_list[i]
-//                     if(user_obj === null || user_obj === undefined)
-//                     continue
-//                     if(user_obj._id === '62131b89846675415c242ce1' || user_obj._id === '624acedb70d0605318b9b44c')
-//                     continue;
+                 
 //                     if(user_obj.loginHistory === undefined || user_obj.loginHistory === null) 
 //                         continue;
 //                     let arr = user_obj.loginHistory 
