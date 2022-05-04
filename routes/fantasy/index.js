@@ -50,61 +50,61 @@ let get_req_scorecard_url = (match_id,sport_type) =>{
 }
 
 router.get('/api/fantasy/scorecard/:sport/:id',async (req,res)=>{
-    let match_id = req.params.id 
-    let sport_type = req.params.sport 
-    let req_url = get_req_scorecard_url(match_id,sport_type)
-    // temp here
-    // const vp = await fetch(req_url);
-    // const data = await vp.json();
-    // let response = await axios.get(req_url,{
-    //     headers: {
-    //       'Cache-Control': 'no-cache',
-    //       'Pragma': 'no-cache',
-    //       'Expires': '0',
-    //     },
-    //   })
-    //console.log(data.players[0])
-    let response = await axios.get(req_url)
-    let data = response.data
-    if(data.players.length>0 && data.players[0].game !== null)
-    {
-        match_status  = data.players[0].game.status 
-        let players_data = data.players
-        let req_list = []
-        for(let i=0;i<players_data.length;i++)
+   
+        let match_id = req.params.id 
+        let sport_type = req.params.sport 
+        let req_url = get_req_scorecard_url(match_id,sport_type)
+        // temp here
+        // const vp = await fetch(req_url);
+        // const data = await vp.json();
+        // let response = await axios.get(req_url,{
+        //     headers: {
+        //       'Cache-Control': 'no-cache',
+        //       'Pragma': 'no-cache',
+        //       'Expires': '0',
+        //     },
+        //   })
+        //console.log(data.players[0])
+        let response = await axios.get(req_url)
+        let data = response.data
+        if(data.players.length>0 && data.players[0].game !== null)
         {
-            req_list.push({
-                player_fixed_id: players_data[i].player_id,
-                player_points: players_data[i].points,
-                player_name: players_data[i].player.name,
-                player_team_code: players_data[i].player.team_code
+            match_status  = data.players[0].game.status 
+            let players_data = data.players
+            let req_list = []
+            for(let i=0;i<players_data.length;i++)
+            {
+                req_list.push({
+                    player_fixed_id: players_data[i].player_id,
+                    player_points: players_data[i].points,
+                    player_name: players_data[i].player.name,
+                    player_team_code: players_data[i].player.team_code
+                })
+            }
+             res.status(200).json({
+                status:'success',
+                data: {
+                    match_status: match_status,
+                    player_data : req_list,
+                    sport: sport_type,
+                    match_id: match_id,
+                    match_time: data.players[0].game.game_date
+                }
             })
         }
-         res.status(200).json({
-            status:'success',
-            data: {
-                match_status: match_status,
-                player_data : req_list,
-                sport: sport_type,
-                match_id: match_id,
-                match_time: data.players[0].game.game_date
-            }
-        })
-    }
-    else 
-    {
-        res.status(200).json({
-            status:'success',
-            data: {
-                match_status: 'active',
-                player_data : [],
-                sport: sport_type,
-                match_id: match_id,
-                match_time: Date.now() 
-            }
-        })
-    }
-    
+        else 
+        {
+            res.status(200).json({
+                status:'success',
+                data: {
+                    match_status: 'active',
+                    player_data : [],
+                    sport: sport_type,
+                    match_id: match_id,
+                    match_time: Date.now() 
+                }
+            })
+        } 
 })
 
 

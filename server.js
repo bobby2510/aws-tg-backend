@@ -18,6 +18,7 @@ const authRouter = require('./routes/auth/index')
 const planRouter = require('./routes/plan/index')
 const fantasyRouter = require('./routes/fantasy/index')
 const expertRouter = require('./routes/expert/index')
+const primePlanRouter = require('./routes/prime/index')
 
 app.use(cors())
 app.use(express.json())
@@ -26,6 +27,7 @@ app.use('/',authRouter)
 app.use('/',planRouter)
 app.use('/',fantasyRouter)
 app.use('/',expertRouter)
+app.use('/',primePlanRouter)
 
 app.listen(port,()=>{
     console.log('server is up and running at port :'+port+' !')

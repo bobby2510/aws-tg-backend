@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const user = require('../../models/user')
 const plan = require('../../models/plan')
+const primeuser = require('../../models/primeuser')
+const primeplan = require('../../models/primeplan')
 const notify = require('../../models/notify')
 
 
@@ -437,14 +439,27 @@ router.post('/api/auth/details/:adminid',async (req,res)=>{
             user_obj = await user.findOne({phoneNumber:req.body.phoneNumber})
             if(user_obj!=null)
             {
+                let prime_user = await primeuser.findOne({phoneNumber:user_obj.phoneNumber})
                 let plan_obj = await plan.findOne({user:user_obj._id,active:true})
                 let activePlan = (plan_obj!=null)? true : false;
                 let previous_plans = await plan.find({user:user_obj._id,active:false})
                 let previous_public_plans = []
+
+                let primeplan_obj = await primeplan.findOne({user:user_obj._id,active:true})
+                let primeplan_previous_plans = await primeplan.find({user:user_obj._id,active:false})
+                let primeplan_previous_public_plans = []
+                let current_prime_plan = primeplan_obj !=null? get_plan_obj(primeplan_obj) : null;
+
+
                 let current_plan = plan_obj!=null? get_plan_obj(plan_obj) : null;
                 previous_plans.forEach((p)=>{
                     previous_public_plans.push(get_plan_obj(p))
                 })
+
+                primeplan_previous_plans.forEach(p => {
+                    primeplan_previous_public_plans.push(get_plan_obj(p))
+                })
+
                 res.status(200).json({
                     status:'success',
                     data:{
@@ -454,7 +469,11 @@ router.post('/api/auth/details/:adminid',async (req,res)=>{
                         previous_plans:previous_public_plans,
                         userId:user_obj._id,
                         password:user_obj.password,
-                        phoneNumber:user_obj.phoneNumber
+                        phoneNumber:user_obj.phoneNumber,
+                        current_prime_plan: current_prime_plan,
+                        previous_prime_plans: primeplan_previous_public_plans,
+                        prime_user: prime_user === null ? false : true,
+                        prime_plan: primeplan_obj === null? false : true
                     },
                     message:'user data successfully fetched!'
                 })
@@ -515,6 +534,54 @@ router.put('/api/auth/change_password/:userid',async(req,res)=>{
     }
 })
 
+router.post('/api/auth/registerprime',async(req,res)=>{
+    try{
+        //console.log('hi')
+        let user_obj = await user.findOne({phoneNumber:req.body.phoneNumber})
+        if(user_obj === null)
+        {
+            res.status(201).json({
+                status:'fail',
+                message:'TG account does not exist!'
+            })
+            return
+        }
+        let primeuser_obj = await primeuser.findOne({phoneNumber:req.body.phoneNumber})
+        if(primeuser_obj!=null)
+        {
+            res.status(201).json({
+                status:'fail',
+                message:'Mobile nubmer Already Registered!'
+            })
+            return 
+        }
+        let user_data = {
+            phoneNumber:req.body.phoneNumber,
+        }
+        if(req.body.phoneNumber === '9848579715')
+        user_data.role = 'admin'
+        created_user = await primeuser.create(user_data)
+        if(created_user!=null)
+        {
+            res.status(200).json({
+                status:'success',
+                message:'Prime Account Created successfully!'
+            })
+        }
+        else{
+            res.status(201).json({
+                status:'fail',
+                message:'Failed to create your account!'
+            })
+        }
+    }
+    catch(e){
+        res.status(404).json({
+            status:'fail',
+            message:'Some Error Occured!'
+        })
+    }
+})
 
 
 router.post('/api/auth/register4642',async(req,res)=>{
