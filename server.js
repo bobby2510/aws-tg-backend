@@ -6,12 +6,12 @@ const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
 const cors = require('cors')
-const port = process.env.PORT || 5000;
+const port = 5000;
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }
-mongoose.connect(process.env.DATABASE_URL || 'mongodb://127.0.0.1:27017/TG',options)
+mongoose.connect('mongodb+srv://user:6PHXJbAyQPw09Cvv@tg.94gva.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',options)
 .then(()=> console.log('connected to the database!'))
 
 const authRouter = require('./routes/auth/index')
