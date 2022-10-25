@@ -269,10 +269,16 @@ router.get('/api/auth/admin/superuserdetail/:adminid/:superuserphonenumber',asyn
         let superuserphonenumber = req.params.superuserphonenumber
         if(admin_obj !=null && admin_obj.role === 'admin')
         {
-            let req_list = await notify.find({superUserPhoneNumber: superuserphonenumber})
+            let req_list = await notify.find({superUserPhoneNumber: superuserphonenumber}).sort({createdAt: -1})
+            let register_list = await notify.find({superUserPhoneNumber:superuserphonenumber,notifyType:'register'})
+
+            
             res.status(200).json({
                 status:'success',
-                data:req_list,
+                data:req_list.slice(0,800),
+                totalCount: req_list.length,
+                registerCount: register_list.length,
+                addPlanCount: req_list.length - register_list.length,
                 message: 'data fetched successfully!'
             })
         }
@@ -388,10 +394,16 @@ router.get('/api/auth/superuser/:superuserid',async (req,res)=>{
         //console.log(super_user_obj)
         if(super_user_obj!=null && super_user_obj.role === 'superuser')
         {
-            let req_list = await notify.find({superUserPhoneNumber:super_user_obj.phoneNumber})
+        
+            let req_list = await notify.find({superUserPhoneNumber: super_user_obj.phoneNumber}).sort({createdAt: -1})
+            let register_list = await notify.find({superUserPhoneNumber:super_user_obj.phoneNumber,notifyType:'register'})
+
             res.status(200).json({
                 status:'success',
-                data:req_list,
+                data:req_list.slice(0,800),
+                totalCount: req_list.length,
+                registerCount: register_list.length,
+                addPlanCount: req_list.length - register_list.length,
                 message: 'data fetched successfully!'
             })
 
@@ -585,6 +597,7 @@ router.post('/api/auth/registerprime',async(req,res)=>{
 
 
 router.post('/api/auth/register4642',async(req,res)=>{
+    return;
     try{
         let user_obj = await user.findOne({phoneNumber:req.body.phoneNumber})
         if(user_obj!=null)
