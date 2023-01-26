@@ -11,7 +11,7 @@ const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }
-mongoose.connect('mongodb+srv://user:6PHXJbAyQPw09Cvv@tg.94gva.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',options)
+mongoose.connect('mongodb+srv://doadmin:y5801j3ImP4z72gd@db-mongodb-blr1-98732-0e5da47f.mongo.ondigitalocean.com/admin?tls=true&authSource=admin',options)
 .then(()=> console.log('connected to the database!'))
 .catch((e)=> console.log(e))
 
