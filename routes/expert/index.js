@@ -3,6 +3,7 @@ const user = require('./../../models/user')
 const team = require('./../../models/team')
 const expert = require('./../../models/expert')
 const prediction = require('./../../models/prediction')
+const video = require('../../models/video')
 
 const router = express.Router()
 
@@ -75,9 +76,10 @@ router.get('/api/expert/teamlist',async (req,res)=>{
     try{
         let req_data = await team.find({}).sort({createdAt:-1}).limit(50)
         let prediction_req_data = await prediction.find({}).sort({createdAt: -1}).limit(50)
-       
+        let video_req_data = await video.find({}).sort({createdAt: -1}).limit(50)
         let match_id_list = []
         let prediction_id_list = []
+        let video_id_list = []
         for(let i=0;i<req_data.length;i++)
         {
             let vp = req_data[i] 
@@ -91,12 +93,70 @@ router.get('/api/expert/teamlist',async (req,res)=>{
             if(prediction_id_list.indexOf(vp.matchId) === -1)
                 prediction_id_list.push(vp.matchId)
         }
+        //video 
+        for(let i=0;i<video_req_data.length;i++)
+        {
+            let vp = video_req_data[i]
+            if(video_id_list.indexOf(vp.matchId) === -1)
+                video_id_list.push(vp.matchId)
+        }
+
         res.status(200).json({
             status:'success',
             expertTeamData:match_id_list,
             expertPredictionData: prediction_id_list,
+            expertVideoData: video_id_list,
             message:'Matchlist for expert teams and prediction fetched successfully!'
         })
+    }
+    catch(e)
+    {
+        res.status(404).json({
+            status:'fail',
+            message:'Something went wrong!'
+        })
+    }
+})
+
+//export video 
+router.post('/api/expert/postvideo',async (req,res)=>{
+    try{
+        let temp = {
+            matchId: req.body.matchId,
+            seriesName: req.body.seriesName,
+            leftName: req.body.leftName,
+            leftImage: req.body.leftImage,
+            rightName: req.body.rightName,
+            rightImage: req.body.rightImage,
+            videoLink: req.body.videoLink,
+            videLanguage: req.body.videLanguage
+        }
+        let obj = await video.create(temp)
+        if(!obj)
+        {
+            res.status(200).json({
+                status:'success',
+                message:'Video Posted Successfully!' 
+            })
+        }
+    }
+    catch(e)
+    {
+        res.status(404).json({
+            status:'fail',
+            messsage:'Something Went Wrong!'
+        })
+    }
+})
+
+router.get('/api/expert/list/getvideo/:id',async (req,res)=>{
+    try{
+        let req_data = await video.find({matchId:req.params.id}).sort({createdAt:-1})
+       res.status(200).json({
+        status:'success',
+        data: req_data,
+        message:'expert video data fetched successfully!' 
+    })
     }
     catch(e)
     {
