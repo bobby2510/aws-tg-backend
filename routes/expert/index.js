@@ -129,19 +129,27 @@ router.post('/api/expert/postvideo',async (req,res)=>{
             rightName: req.body.rightName,
             rightImage: req.body.rightImage,
             videoLink: req.body.videoLink,
-            videLanguage: req.body.videLanguage
+            videoLanguage: Number(req.body.videoLanguage)
         }
+        //console.log(temp)
         let obj = await video.create(temp)
-        if(!obj)
+        if(obj!== null)
         {
             res.status(200).json({
                 status:'success',
                 message:'Video Posted Successfully!' 
             })
         }
+        else{
+            res.status(201).json({
+                status:'failed',
+                message:'Error while saving video!' 
+            })
+        }
     }
     catch(e)
     {
+        console.log(e)
         res.status(404).json({
             status:'fail',
             messsage:'Something Went Wrong!'

@@ -30,7 +30,7 @@ const VideoSchema =  new mongoose.Schema({
         type:String,
         required:true
     },
-    videLanguage:{
+    videoLanguage:{
         type:Number,
         required:true
     },
