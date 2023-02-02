@@ -14,6 +14,40 @@ let basketball_scorecard = 'https://api.cricpick.in//nba-game-players/scorecard/
 let kabaddi_scorecard = 'https://api.cricpick.in//kabaddi-game-players/scorecard/'
 let generic_scorecard_end = '.json'
 
+// temporery fix
+let extra_data = [
+    {
+    id: 88630,
+    left_team_name: "SIX",
+    right_team_name: "HEA",
+    left_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/SDS-CR2@2x-BIG.png",
+    right_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/BRH-CR2@2x-BIG.png",
+    series_name: "Big Bash League 2023",
+    match_time: "2023-02-02T08:15:00+00:00",
+    lineup_out: 0
+    },
+    {
+    id: 88657,
+    left_team_name: "SA-W",
+    right_team_name: "IN-W",
+    left_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/SA-W-CR1@2x-BIG.png",
+    right_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/IN-W-CR1@2x-BIG.png",
+    series_name: "Womens T20I Tri Series",
+    match_time: "2023-02-02T13:00:00+00:00",
+    lineup_out: 0
+    },
+    {
+    id: 88708,
+    left_team_name: "VIP",
+    right_team_name: "DUB",
+    left_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/VIP-CR1@2x-BIG.png",
+    right_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/DUB-CR2@2x-BIG.png",
+    series_name: "UAE T20",
+    match_time: "2023-02-02T14:00:00+00:00",
+    lineup_out: 0
+    }
+    ]
+
 
 //helper function to calculate difference between the times 
 function timeDifference(date1,date2) {
@@ -145,6 +179,16 @@ router.get('/api/fantasy/matches',async (req,res)=>{
             }
         })
     })
+    //extra data temporery
+    let tm = extra_data.filter(d =>{
+        let mt = new Date(d.match_time);
+        let pt = new Date(Date.now());
+        if(mt>pt) return true;
+        else return false;
+    })
+    for(let i=0;i<tm.length;i++)
+    req_data[0].push(tm[i]);
+
      //sorting the matches based on the time
     req_data.forEach((sport_array)=>{
         sport_array.sort((x,y)=>{
