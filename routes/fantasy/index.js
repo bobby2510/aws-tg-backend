@@ -17,33 +17,33 @@ let generic_scorecard_end = '.json'
 // temporery fix
 let extra_data = [
     {
-    id: 88630,
-    left_team_name: "SIX",
-    right_team_name: "HEA",
-    left_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/SDS-CR2@2x-BIG.png",
-    right_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/BRH-CR2@2x-BIG.png",
-    series_name: "Big Bash League 2023",
-    match_time: "2023-02-02T08:15:00+00:00",
+    id: 88649,
+    left_team_name: "FBA",
+    right_team_name: "KHT",
+    left_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/FOB-CR1@2x-BIG.png",
+    right_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/KHT-CR3@2x-BIG.png",
+    series_name: "Bangladesh League",
+    match_time: "2023-02-03T08:00:00+00:00",
     lineup_out: 0
     },
     {
-    id: 88657,
-    left_team_name: "SA-W",
-    right_team_name: "IN-W",
-    left_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/SA-W-CR1@2x-BIG.png",
-    right_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/IN-W-CR1@2x-BIG.png",
-    series_name: "Womens T20I Tri Series",
-    match_time: "2023-02-02T13:00:00+00:00",
+    id: 88663,
+    left_team_name: "DD",
+    right_team_name: "RAN",
+    left_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/DHA-CR2@2x-BIG.png",
+    right_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/RAR-CR2@2x-BIG.png",
+    series_name: "Bangladesh League",
+    match_time: "2023-02-03T13:00:00+00:00",
     lineup_out: 0
     },
     {
-    id: 88708,
-    left_team_name: "VIP",
-    right_team_name: "DUB",
-    left_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/VIP-CR1@2x-BIG.png",
-    right_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/DUB-CR2@2x-BIG.png",
+    id: 88709,
+    left_team_name: "EMI",
+    right_team_name: "ABD",
+    left_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/EMI-CR1@2x-BIG.png",
+    right_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/ABD-CR2@2x-BIG.png",
     series_name: "UAE T20",
-    match_time: "2023-02-02T14:00:00+00:00",
+    match_time: "2023-02-03T14:00:00+00:00",
     lineup_out: 0
     }
     ]
