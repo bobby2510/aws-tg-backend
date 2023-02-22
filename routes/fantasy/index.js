@@ -15,38 +15,7 @@ let kabaddi_scorecard = 'https://api.cricpick.in//kabaddi-game-players/scorecard
 let generic_scorecard_end = '.json'
 
 // temporery fix
-let extra_data = [
-    {
-    id: 88649,
-    left_team_name: "FBA",
-    right_team_name: "KHT",
-    left_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/FOB-CR1@2x-BIG.png",
-    right_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/KHT-CR3@2x-BIG.png",
-    series_name: "Bangladesh League",
-    match_time: "2023-02-03T08:00:00+00:00",
-    lineup_out: 0
-    },
-    {
-    id: 88663,
-    left_team_name: "DD",
-    right_team_name: "RAN",
-    left_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/DHA-CR2@2x-BIG.png",
-    right_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/RAR-CR2@2x-BIG.png",
-    series_name: "Bangladesh League",
-    match_time: "2023-02-03T13:00:00+00:00",
-    lineup_out: 0
-    },
-    {
-    id: 88709,
-    left_team_name: "EMI",
-    right_team_name: "ABD",
-    left_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/EMI-CR1@2x-BIG.png",
-    right_team_image: "https://d13ir53smqqeyp.cloudfront.net/flags/cr-flags/ABD-CR2@2x-BIG.png",
-    series_name: "UAE T20",
-    match_time: "2023-02-03T14:00:00+00:00",
-    lineup_out: 0
-    }
-    ]
+let extra_data = []
 
 
 //helper function to calculate difference between the times 

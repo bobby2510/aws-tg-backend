@@ -4,6 +4,8 @@ const user = require('../../models/user')
 const primeplan = require('../../models/primeplan')
 const primeuser = require('../../models/primeuser')
 const notify = require('../../models/notify')
+const promotion = require('../../models/promotion')
+const utildb = require('../../models/Utility')
 const router = express.Router()
 
 
@@ -130,8 +132,9 @@ router.get('/api/plan/status/:userid', async (req,res)=>{
         try{
             let user_obj = await user.findById(req.params.userid)
             if(user_obj!=null)
-            {
+            { 
               //  console.log(user_obj)
+                //calling utils here as well for getting notifcation info
                 let prime_user = await primeuser.findOne({phoneNumber:user_obj.phoneNumber})
                 let plan_expired = false 
                 let primeplan_expired = false 
