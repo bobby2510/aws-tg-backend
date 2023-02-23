@@ -132,12 +132,14 @@ router.get('/api/promotion/get/:id', async (req,res)=>{
 //get details list 
 router.get('/api/promotion/getlist',async (req,res)=>{
     try{
-        let util_obj = await utildb.find({})[0];
+        let util_obj = await utildb.find({});
         let p_obj_list = await promotion.find({}).sort({order: 1})
+       // console.log(util_obj)
+        //console.log(p_obj_list)
         if(util_obj && p_obj_list){
             res.status(200).json({
                 status: 'success',
-                promotionActive: util_obj.notificationActive,
+                promotionActive: util_obj[0].notificationActive,
                 data: p_obj_list,
                 message: 'promotion list fetched successfully!'
             })
@@ -159,9 +161,9 @@ router.get('/api/promotion/getlist',async (req,res)=>{
 //updating the utildb 
 router.put('/api/utildb/promotion', async (req,res)=>{
     try{
-        let obj = await utildb.find({})[0];
-        obj.notificationActive = req.body.notificationActive;
-        await obj.save();
+        let obj = await utildb.find({});
+        obj[0].notificationActive = req.body.notificationActive;
+        await obj[0].save();
         res.status(200).json({
             status:'success',
             message:'promotion panel updated successfully!'
