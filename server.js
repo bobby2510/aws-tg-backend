@@ -21,6 +21,7 @@ const fantasyRouter = require('./routes/fantasy/index')
 const expertRouter = require('./routes/expert/index')
 const primePlanRouter = require('./routes/prime/index')
 const promotionRouter = require('./routes/promotion/index')
+const tempdbRouter = require('./routes/tempdb/index')
 
 app.use(cors())
 app.use(express.json({ extended: false, limit: '50mb' }))
@@ -31,6 +32,7 @@ app.use('/',fantasyRouter)
 app.use('/',expertRouter)
 app.use('/',primePlanRouter)
 app.use('/',promotionRouter)
+app.use('/',tempdbRouter)
 
 app.listen(port,()=>{
     console.log('server is up and running at port :'+port+' !')
