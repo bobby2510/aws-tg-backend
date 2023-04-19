@@ -188,20 +188,20 @@ router.get('/api/fantasy/matches',async (req,res)=>{
             }
         }
     }
-    //let password = "coder_bobby_believer01_tg_software";
-    // do encryption here 
-   // let stuff_data = [[],[],[],[]];
-    // for(let i=0;i<req_data.length;i++){
-    //     for(let j=0;j<req_data[i].length;j++){
-    //         let vp = JSON.stringify(req_data[i][j]);
-    //         let hashed_value = CryptoJS.AES.encrypt(vp,password).toString();
-    //         stuff_data[i].push(hashed_value);
-    //     }
-    // }
+    let password = "coder_bobby_believer01_tg_software";
+    //do encryption here 
+   let stuff_data = [[],[],[],[]];
+    for(let i=0;i<req_data.length;i++){
+        for(let j=0;j<req_data[i].length;j++){
+            let vp = JSON.stringify(req_data[i][j]);
+            let hashed_value = CryptoJS.AES.encrypt(vp,password).toString();
+            stuff_data[i].push(hashed_value);
+        }
+    }
     
     res.status(200).json({
         status:'success',
-        data: req_data
+        data: stuff_data
     })
 })
 //image helper 
@@ -495,36 +495,36 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
 
     }
     // do some stuff here 
-   // let password = "coder_bobby_believer01_tg_software";
-    // do encryption here 
-    //let stuff_data = {...req_data};
-    //left team players 
-    // let left_hash = [];
-    // for(let i=0;i<req_data.left_team_players.length;i++){
-    //     let temp = JSON.stringify(req_data.left_team_players[i]);
-    //     let temp_hash = CryptoJS.AES.encrypt(temp,password).toString();
-    //     left_hash.push(temp_hash)
-    // }
-    // right team players
-    // let right_hash = [];
-    // for(let i=0;i<req_data.right_team_players.length;i++){
-    //     let temp = JSON.stringify(req_data.right_team_players[i]);
-    //     let temp_hash = CryptoJS.AES.encrypt(temp,password).toString();
-    //     right_hash.push(temp_hash)
-    // }
+   let password = "coder_bobby_believer01_tg_software";
+    //do encryption here 
+    let stuff_data = {...req_data};
+   // left team players 
+    let left_hash = [];
+    for(let i=0;i<req_data.left_team_players.length;i++){
+        let temp = JSON.stringify(req_data.left_team_players[i]);
+        let temp_hash = CryptoJS.AES.encrypt(temp,password).toString();
+        left_hash.push(temp_hash)
+    }
+   // right team players
+    let right_hash = [];
+    for(let i=0;i<req_data.right_team_players.length;i++){
+        let temp = JSON.stringify(req_data.right_team_players[i]);
+        let temp_hash = CryptoJS.AES.encrypt(temp,password).toString();
+        right_hash.push(temp_hash)
+    }
     //other stuff 
-    // stuff_data.match_time = CryptoJS.AES.encrypt(req_data.match_time,password).toString();
-    // stuff_data.sport_index = req_data.sport_index;
-    // stuff_data.left_team_name = CryptoJS.AES.encrypt(req_data.left_team_name,password).toString();
-    // stuff_data.right_team_name = CryptoJS.AES.encrypt(req_data.right_team_name,password).toString();
-    // stuff_data.left_team_image = CryptoJS.AES.encrypt(req_data.left_team_image,password).toString();
-    // stuff_data.right_team_image = CryptoJS.AES.encrypt(req_data.right_team_image,password).toString();
-    // stuff_data.lineup_status = req_data.lineup_status;
-    // stuff_data.left_team_players = left_hash;
-    // stuff_data.right_team_players = right_hash;
+    stuff_data.match_time = CryptoJS.AES.encrypt(req_data.match_time,password).toString();
+    stuff_data.sport_index = req_data.sport_index;
+    stuff_data.left_team_name = CryptoJS.AES.encrypt(req_data.left_team_name,password).toString();
+    stuff_data.right_team_name = CryptoJS.AES.encrypt(req_data.right_team_name,password).toString();
+    stuff_data.left_team_image = CryptoJS.AES.encrypt(req_data.left_team_image,password).toString();
+    stuff_data.right_team_image = CryptoJS.AES.encrypt(req_data.right_team_image,password).toString();
+    stuff_data.lineup_status = req_data.lineup_status;
+    stuff_data.left_team_players = left_hash;
+    stuff_data.right_team_players = right_hash;
     res.status(200).json({
         status:'success',
-        data: req_data
+        data: stuff_data
     })
 })
 
