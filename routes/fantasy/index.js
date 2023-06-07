@@ -82,7 +82,8 @@ router.get('/api/fantasy/scorecard/:sport/:id',async (req,res)=>{
                     player_fixed_id: players_data[i].player_id,
                     player_points: players_data[i].points,
                     player_name: players_data[i].player.name,
-                    player_team_code: players_data[i].player.team_code
+                    player_team_code: players_data[i].player.team_code,
+                    playing: players_data[i].playing ? 1 : 0
                 })
             }
              res.status(200).json({
