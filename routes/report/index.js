@@ -50,12 +50,42 @@ router.post('/api/series/create', async (req,res)=>{
         })
     }
 })
-router.get('/api/series/getlist', async (req,res)=>{
+router.post('/api/series/getlist', async (req,res)=>{
     try{
         let obj_list = await series.find({}).sort({createdAt: -1})
+        //filterig stuff here 
+        let tempList = [...obj_list]
+        //series Name
+        if(req.body.seriesName){
+            tempList = tempList.filter(d=> d.seriesName.toLowerCase().includes(req.body.seriesName.toLowerCase()))
+        }
+        if(req.body.seriesYear){
+            tempList = tempList.filter(d=> d.seriesYear.toString()===req.body.seriesYear);
+        }
+        if(req.body.seriesMonth){
+            tempList = tempList.filter(d=> d.seriesMonth.toString()===req.body.seriesMonth.toString())
+        }
+        if(req.body.seriesCountry){
+            tempList = tempList.filter(d=>d.seriesCountry.toString()===req.body.seriesCountry)
+        }
+        let totalPages = 0;
+        //pagination here 
+        if(req.body.page !== undefined && req.body.size !== undefined){
+            let page = parseInt(req.body.page)
+            let size = parseInt(req.body.size)
+            let totalSize = tempList.length;
+            totalPages = parseInt(totalSize/size);
+            if(totalSize%size!== 0)
+                totalPages++;
+            let first = page*size;
+            let second = first + size;
+            tempList = tempList.slice(first,second); 
+            
+        }
         res.status(200).json({
             status:'success',
-            data: obj_list,
+            data: tempList,
+            totalPages: totalPages,
             message: 'series list fetched successfully!'
         })
     }
@@ -350,29 +380,78 @@ router.post('/api/matchreport/create', async (req,res)=>{
         })
     }
 })
-//fetch match report list 
-router.get('/api/matchreport/matchlist', async (req,res)=>{
+
+router.delete('/api/matchreport/delete/:id', async (req,res)=>{
     try{
-        let matchreport_list = await matchreport.find({}).sort({createdAt: -1}).limit(50);
+        let match_obj = matchreport.findById(req.params.id)
+        if(match_obj!== null){
+            await match_obj.remove();
+            res.status(200).json({
+                status: 'success',
+                message: 'Match report deleted!'
+            })
+        }
+        else{
+            res.status(201).json({
+                status: 'fail',
+                message: 'Error while deleting the report!'
+            })
+        }
+    }
+    catch(e){
+        res.status(404).json({
+            status: 'fail',
+            message:'Something went wrong!'
+        })
+    }
+})
+//fetch match report list 
+router.post('/api/matchreport/matchlist', async (req,res)=>{
+    try{
+        let matchreport_list = await matchreport.find({}).sort({createdAt: -1})
         let req_list = [];
-        for(let i=0;i<matchreport_list.length;i++){
+        let tempList = [...matchreport_list]
+        let seriesData = req.body.seriesData;
+        if(seriesData){
+                tempList = tempList.filter(d =>{ 
+                if(seriesData.includes(d.series)) return true;
+                else return false;
+            })
+        }
+       // console.log(tempList.length)
+        let totalPages = 0;
+        //pagination here 
+        if(req.body.page !== undefined && req.body.size !== undefined){
+            let page = parseInt(req.body.page)
+            let size = parseInt(req.body.size)
+            let totalSize = tempList.length;
+            totalPages = parseInt(totalSize/size);
+           // console.log(totalPages,page,size)
+            if(totalSize%size!== 0)
+                totalPages++;
+            let first = page*size;
+            let second = first + size;
+            tempList = tempList.slice(first,second); 
+        }
+        for(let i=0;i<tempList.length;i++){
             req_list.push({
-                matchReportId: matchreport_list[i]._id,
-                leftTeamName: matchreport_list[i].data.leftTeamName,
-                leftTeamImage: matchreport_list[i].data.leftTeamImage,
-                rightTeamName: matchreport_list[i].data.rightTeamName,
-                rightTeamImage: matchreport_list[i].data.rightTeamImage,
-                seriesName: matchreport_list[i].data.seriesName,
-                matchMonth: matchreport_list[i].data.matchMonth,
-                matchYear: matchreport_list[i].data.matchYear,
-                gender: matchreport_list[i].gender,
-                format: matchreport_list[i].format,
-                matchTime: matchreport_list[i].data.matchTime
+                matchReportId: tempList[i]._id,
+                leftTeamName: tempList[i].data.leftTeamName,
+                leftTeamImage: tempList[i].data.leftTeamImage,
+                rightTeamName: tempList[i].data.rightTeamName,
+                rightTeamImage: tempList[i].data.rightTeamImage,
+                seriesName: tempList[i].data.seriesName,
+                matchMonth: tempList[i].data.matchMonth,
+                matchYear: tempList[i].data.matchYear,
+                gender: tempList[i].gender,
+                format: tempList[i].format,
+                matchTime: tempList[i].data.matchTime
             })
         }
         res.status(200).json({
             status: 'success',
             data: req_list,
+            totalPages:totalPages,
             message:'match report list is fetched successfully!'
         })
     }
@@ -431,10 +510,18 @@ let calc_avg = (value,value_count)=>{
     return result.toFixed(2);
 }
 // main stuff
-router.get('/api/matchreport/overview', async (req,res)=>{
+router.post('/api/matchreport/overview', async (req,res)=>{
     try{
         let reportList = await matchreport.find({});
         if(reportList.length>0){
+             // filters here 
+            let seriesData = req.body.seriesData;
+            if(seriesData){
+                reportList = reportList.filter(d =>{ 
+                    if(seriesData.includes(d.series)) return true;
+                    else return false;
+                })
+            }
             let req_data = {};
             req_data["total_matches"] = reportList.length;
             let toss_result_type = ["batting","bowling"];
