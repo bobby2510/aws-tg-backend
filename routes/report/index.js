@@ -57,7 +57,7 @@ router.post('/api/series/getlist', async (req,res)=>{
         let tempList = [...obj_list]
         //series Name
         if(req.body.seriesName){
-            tempList = tempList.filter(d=> d.seriesName.toLowerCase().includes(req.body.seriesName.toLowerCase()))
+            tempList = tempList.filter(d=> d.seriesName.toLowerCase().trim().includes(req.body.seriesName.toLowerCase().trim()))
         }
         if(req.body.seriesYear){
             tempList = tempList.filter(d=> d.seriesYear.toString()===req.body.seriesYear);
@@ -183,13 +183,40 @@ router.post('/api/pitch/create', async (req,res)=>{
         })
     }
 })
-router.get('/api/pitch/getlist', async (req,res)=>{
+router.post('/api/pitch/getlist', async (req,res)=>{
     try{
         let obj_list = await pitch.find({}).sort({createdAt: -1})
+        //filterig stuff here o
+        let tempList = [...obj_list]
+        //series Name
+        if(req.body.pitchName){
+            tempList = tempList.filter(d=> d.pitchName.toLowerCase().trim().includes(req.body.pitchName.toLowerCase().trim()))
+        }
+        if(req.body.pitchCity){
+            tempList = tempList.filter(d=> d.pitchCity.toLowerCase().trim().includes(req.body.pitchCity.toLowerCase().trim()))
+        }
+        if(req.body.pitchCountry){
+            tempList = tempList.filter(d=>d.pitchCountry.toString()===req.body.pitchCountry)
+        }
+        let totalPages = 0;
+        //pagination here 
+        if(req.body.page !== undefined && req.body.size !== undefined){
+            let page = parseInt(req.body.page)
+            let size = parseInt(req.body.size)
+            let totalSize = tempList.length;
+            totalPages = parseInt(totalSize/size);
+            if(totalSize%size!== 0)
+                totalPages++;
+            let first = page*size;
+            let second = first + size;
+            tempList = tempList.slice(first,second); 
+            
+        }
         res.status(200).json({
             status:'success',
-            data: obj_list,
-            message: 'series list fetched successfully!'
+            data: tempList,
+            totalPages: totalPages,
+            message: 'pitch list fetched successfully!'
         })
     }
     catch(e){
@@ -283,13 +310,40 @@ router.post('/api/sportteam/create', async (req,res)=>{
         })
     }
 })
-router.get('/api/sportteam/getlist', async (req,res)=>{
+router.post('/api/sportteam/getlist', async (req,res)=>{
     try{
         let obj_list = await sportteam.find({}).sort({createdAt: -1})
+        //filterig stuff here o mmmmmmmmmmmmmvvvvvmmvmvvvcmccmvvnnbnnvnvnnbnbnbnbnbnbnbnbbnbnbnbnb
+        let tempList = [...obj_list]
+        //series bvbnbnbn
+        if(req.body.teamName){
+            tempList = tempList.filter(d=> d.sportTeamName.toLowerCase().trim().includes(req.body.teamName.toLowerCase().trim()))
+        }
+        if(req.body.teamCode){
+            tempList = tempList.filter(d=> d.sportTeamCode.toLowerCase().trim().includes(req.body.teamCode.toLowerCase().trim()))
+        }
+        if(req.body.teamCountry){
+            tempList = tempList.filter(d=>d.sportTeamCountry.toString()===req.body.teamCountry)
+        }
+        let totalPages = 0;
+        //pagination here 
+        if(req.body.page !== undefined && req.body.size !== undefined){
+            let page = parseInt(req.body.page)
+            let size = parseInt(req.body.size)
+            let totalSize = tempList.length;
+            totalPages = parseInt(totalSize/size);
+            if(totalSize%size!== 0)
+                totalPages++;
+            let first = page*size;
+            let second = first + size;
+            tempList = tempList.slice(first,second); 
+            
+        }
         res.status(200).json({
             status:'success',
-            data: obj_list,
-            message: 'sportteam list fetched successfully!'
+            data: tempList,
+            totalPages: totalPages,
+            message: 'team list fetched successfully!'
         })
     }
     catch(e){
@@ -412,12 +466,26 @@ router.post('/api/matchreport/matchlist', async (req,res)=>{
         let req_list = [];
         let tempList = [...matchreport_list]
         let seriesData = req.body.seriesData;
+        let pitchData =req.body.pitchData;
+        let teamData = req.body.teamData;
         if(seriesData){
                 tempList = tempList.filter(d =>{ 
                 if(seriesData.includes(d.series)) return true;
                 else return false;
             })
         }
+        if(pitchData){
+        tempList = tempList.filter(d =>{ 
+                if(pitchData.includes(d.pitch)) return true;
+                else return false;
+            })
+        }
+        if(teamData){
+            tempList = tempList.filter(d =>{ 
+                    if(teamData.includes(d.teamOne) || teamData.includes(d.teamTwo)) return true;
+                    else return false;
+                })
+            }
        // console.log(tempList.length)
         let totalPages = 0;
         //pagination here 
@@ -516,12 +584,26 @@ router.post('/api/matchreport/overview', async (req,res)=>{
         if(reportList.length>0){
              // filters here 
             let seriesData = req.body.seriesData;
+            let pitchData = req.body.pitchData;
+            let teamData = req.body.teamData;
             if(seriesData){
                 reportList = reportList.filter(d =>{ 
                     if(seriesData.includes(d.series)) return true;
                     else return false;
                 })
             }
+            if(pitchData){
+                reportList = reportList.filter(d =>{ 
+                    if(pitchData.includes(d.pitch)) return true;
+                    else return false;
+                })
+            }
+            if(teamData){
+                reportList = reportList.filter(d =>{ 
+                    if(teamData.includes(d.teamOne) || teamData.includes(d.teamTwo)) return true;
+                        else return false;
+                    })
+                }
             let req_data = {};
             req_data["total_matches"] = reportList.length;
             let toss_result_type = ["batting","bowling"];
