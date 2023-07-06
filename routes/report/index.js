@@ -468,6 +468,9 @@ router.post('/api/matchreport/matchlist', async (req,res)=>{
         let seriesData = req.body.seriesData;
         let pitchData =req.body.pitchData;
         let teamData = req.body.teamData;
+        let formatData =req.body.formatData;
+        let genderData = req.body.genderData;
+        let matchNumberData = req.body.matchNumberData;
         if(seriesData){
                 tempList = tempList.filter(d =>{ 
                 if(seriesData.includes(d.series)) return true;
@@ -486,6 +489,21 @@ router.post('/api/matchreport/matchlist', async (req,res)=>{
                     else return false;
                 })
             }
+        if(formatData){
+            tempList = tempList.filter(d =>{
+                if(formatData.toString() === d.format.toString()) return true;
+                else return false;
+            })
+        }
+        if(genderData){
+            tempList = tempList.filter(d =>{
+                if(genderData.toString() === d.gender.toString()) return true;
+                else return false;
+            })
+        }
+        if(matchNumberData){
+            tempList = tempList.slice(0,parseInt(matchNumberData))
+        }
        // console.log(tempList.length)
         let totalPages = 0;
         //pagination here 
@@ -586,6 +604,9 @@ router.post('/api/matchreport/overview', async (req,res)=>{
             let seriesData = req.body.seriesData;
             let pitchData = req.body.pitchData;
             let teamData = req.body.teamData;
+            let formatData =req.body.formatData;
+        let genderData = req.body.genderData;
+        let matchNumberData = req.body.matchNumberData;
             if(seriesData){
                 reportList = reportList.filter(d =>{ 
                     if(seriesData.includes(d.series)) return true;
@@ -603,6 +624,21 @@ router.post('/api/matchreport/overview', async (req,res)=>{
                     if(teamData.includes(d.teamOne) || teamData.includes(d.teamTwo)) return true;
                         else return false;
                     })
+                }
+                if(formatData){
+                    reportList = reportList.filter(d =>{
+                        if(formatData.toString() === d.format.toString()) return true;
+                        else return false;
+                    })
+                }
+                if(genderData){
+                    reportList = reportList.filter(d =>{
+                        if(genderData.toString() === d.gender.toString()) return true;
+                        else return false;
+                    })
+                }
+                if(matchNumberData){
+                    reportList = reportList.slice(0,parseInt(matchNumberData))
                 }
             let req_data = {};
             req_data["total_matches"] = reportList.length;
