@@ -176,5 +176,38 @@ router.put('/api/utildb/promotion', async (req,res)=>{
         })
     }
 })
+router.put('/api/utildb/dream11', async (req,res)=>{
+    try{
+        let obj = await utildb.find({});
+        obj[0].dream11Hash = req.body.dream11Hash;
+        await obj[0].save();
+        res.status(200).json({
+            status:'success',
+            message:'Dream11 hash updated successfully!'
+        })
+    }
+    catch(e){
+        res.status(404).json({
+            status:'fail',
+            message:'Something Went Wrong!'
+        })
+    }
+})
+router.get('/api/utildb/fetch/dream11hash', async (req,res)=>{
+    try{
+        let obj = await utildb.find({});
+        res.status(200).json({
+            status:'success',
+            currentHash: obj[0].dream11Hash,
+            message:'Dream11 hash fetched successfully!'
+        })
+    }
+    catch(e){
+        res.status(404).json({
+            status:'fail',
+            message:'Something Went Wrong!'
+        })
+    }
+})
 
 module.exports = router 

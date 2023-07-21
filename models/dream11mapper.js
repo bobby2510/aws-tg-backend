@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 
 
-const UtilsSchema =  new mongoose.Schema({
-    notificationActive:{
-        type:Boolean,
+const  Dream11MapperSchema=  new mongoose.Schema({
+    tgMatchId:{
+        type:String,
         required:true
     },
-    dream11Hash:{
+    dream11MatchId:{
         type: String,
         required: true
     },
@@ -16,4 +16,4 @@ const UtilsSchema =  new mongoose.Schema({
     },
 })
 
-module.exports = new mongoose.model('utildb',UtilsSchema)
+module.exports = new mongoose.model('dream11Mapper',Dream11MapperSchema)

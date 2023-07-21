@@ -4,6 +4,7 @@ const team = require('./../../models/team')
 const expert = require('./../../models/expert')
 const prediction = require('./../../models/prediction')
 const video = require('../../models/video')
+const dream11mapper = require('../../models/dream11mapper')
 
 const router = express.Router()
 
@@ -77,9 +78,11 @@ router.get('/api/expert/teamlist',async (req,res)=>{
         let req_data = await team.find({}).sort({createdAt:-1}).limit(50)
         let prediction_req_data = await prediction.find({}).sort({createdAt: -1}).limit(50)
         let video_req_data = await video.find({}).sort({createdAt: -1}).limit(50)
+        let dream11mapper_req_data = await dream11mapper.find({}).sort({createdAt: -1}).limit(50);
         let match_id_list = []
         let prediction_id_list = []
         let video_id_list = []
+        let dream11_id_list = []
         for(let i=0;i<req_data.length;i++)
         {
             let vp = req_data[i] 
@@ -100,12 +103,21 @@ router.get('/api/expert/teamlist',async (req,res)=>{
             if(video_id_list.indexOf(vp.matchId) === -1)
                 video_id_list.push(vp.matchId)
         }
+        //video 
+        //console.log(dream11mapper_req_data)
+        for(let i=0;i<dream11mapper_req_data.length;i++)
+        {
+            let vp = dream11mapper_req_data[i]
+            if(dream11_id_list.indexOf(vp.tgMatchId) === -1)
+                dream11_id_list.push(vp.tgMatchId)
+        }
 
         res.status(200).json({
             status:'success',
             expertTeamData:match_id_list,
             expertPredictionData: prediction_id_list,
             expertVideoData: video_id_list,
+            dream11MapperData: dream11_id_list,
             message:'Matchlist for expert teams and prediction fetched successfully!'
         })
     }
