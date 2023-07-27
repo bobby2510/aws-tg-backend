@@ -157,8 +157,13 @@ router.post('/api/dream11/teams/:sport/:matchId',async (req,res)=>{
         let matchId = req.params.matchId;
         let matchObj = await dream11mapper.find({tgMatchId: matchId});
         let obj = await utildb.find({});
+        
+      
         if(obj.length>0 && obj[0].dream11Hash && matchObj.length === 1){
             let req_match_obj = matchObj[0];
+            let leftName = req_match_obj.leftName;
+            let rightName = req_match_obj.rightName;
+            let team_string = `${leftName}-vs-${rightName}`
             let req_hash = obj[0].dream11Hash;
             let response = null;
             let favour = 'equal';
@@ -172,12 +177,13 @@ router.post('/api/dream11/teams/:sport/:matchId',async (req,res)=>{
             let sport_index = 0;
             if(req.params.sport === 'cricket'){
                 //console.log(`${cricket_teams_one}${req_hash}${cricket_teams_two}${req.params.matchId}${cricket_teams_three}${req.params.matchId}`)
-                response = await axios.get(`${cricket_teams_one}${req_hash}${cricket_teams_two}${req_match_obj.dream11MatchId}${cricket_teams_three}${req.params.matchId}`);
+                response = await axios.get(`${cricket_teams_one}${req_hash}${cricket_teams_two}${team_string}/${req_match_obj.dream11MatchId}${cricket_teams_three}${req.params.matchId}&team_names=${team_string}`);
             }
             else{
                 sport_index = 1;
-                //console.log(`${football_teams_one}${req_hash}${football_teams_two}${req.params.matchId}${football_teams_three}${req.params.matchId}`)
-                response = await axios.get(`${football_teams_one}${req_hash}${football_teams_two}${req_match_obj.dream11MatchId}${football_teams_three}${req.params.matchId}`);
+                console.log(`${football_teams_one}${req_hash}${football_teams_two}${team_string}/${req_match_obj.dream11MatchId}${football_teams_three}${req.params.matchId}&team_names=${team_string}`)
+
+                response = await axios.get(`${football_teams_one}${req_hash}${football_teams_two}${team_string}/${req_match_obj.dream11MatchId}${football_teams_three}${req.params.matchId}&team_names=${team_string}`);
                 console.log(response)
             }
             let role_name = [['WK','BAT','AR','BOWL'],['GK','DEF','MID','ST']]

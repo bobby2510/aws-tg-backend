@@ -10,6 +10,14 @@ const  Dream11MapperSchema=  new mongoose.Schema({
         type: String,
         required: true
     },
+    leftName:{
+        type: String,
+        required: true
+    },
+    rightName:{
+        type: String,
+        required: true
+    },
     createdAt:{
         type:Date,
         default:Date.now
