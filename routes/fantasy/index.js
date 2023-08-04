@@ -8,6 +8,10 @@ let base_url_one = 'https://api.cricpick.in/games/view/'
 let base_url_two = '/1.1.json'
 let all_matches_api = 'https://api.cricpick.in/games/listing/active/safe.json'
 
+//myfab11 backup stuff here 
+let backup_url_one = 'https://json.myfab11.com/fantasy/game/playerlist-'
+let backup_url_two = '.json';
+
 
 let cricket_scorecard = 'https://api.cricpick.in//game-players/scorecard/'
 let football_scorecard = 'https://api.cricpick.in//football-game-players/scorecard/'
@@ -113,6 +117,15 @@ router.get('/api/fantasy/scorecard/:sport/:id',async (req,res)=>{
 })
 
 
+let get_base_second_url = (match_id)=>{
+    let old = false;
+    if(old){
+        return `${base_url_one}${match_id}${base_url_two}`
+    }
+    else{
+        return `${backup_url_one}${match_id}${backup_url_two}`
+    }
+}
 
 
 //cricket = 1,2,3,4 
@@ -120,90 +133,99 @@ router.get('/api/fantasy/scorecard/:sport/:id',async (req,res)=>{
 //basketball = 7
 //lineupStatus: "LINEUP_ANNOUNCED"
 router.get('/api/fantasy/matches',async (req,res)=>{
-    let response = await axios.post(all_matches_api)
-    let data = response.data
-    console.log(data)
-    // 0 -> cricket, 1 -> football , 2 -> basketball 
-    let category_list = [
-        [1,2,3,4],
-        [5],
-        [7],
-        [6]
-    ]
-    let req_data = []
-    for(let i =0;i<category_list.length;i++)
-        req_data.push([])
-    data.result.games.forEach((match)=>{
-        category_list.forEach((array,index)=>{
-            if(array.includes(match.tournament.sport_category_id) && match.mode === 'regular')
-            {
-                req_data[index].push({
-                    id:match.id,
-                    left_team_name:match.home_team_code,
-                    right_team_name:match.away_team_code,
-                    left_team_image:match.home_team.logo,
-                    right_team_image:match.away_team.logo,
-                    series_name: match.tournament.name,
-                    match_time: match.game_date,
-                    lineup_out:match.lineup_out
-                })
-            }
+    try{
+        let response = await axios.post(all_matches_api)
+        let data = response.data
+      //  console.log(data)
+        // 0 -> cricket, 1 -> football , 2 -> basketball 
+        let category_list = [
+            [1,2,3,4],
+            [5],
+            [7],
+            [6]
+        ]
+        let req_data = []
+        for(let i =0;i<category_list.length;i++)
+            req_data.push([])
+        data.result.games.forEach((match)=>{
+            category_list.forEach((array,index)=>{
+                if(array.includes(match.tournament.sport_category_id) && match.mode === 'regular')
+                {
+                    req_data[index].push({
+                        id:match.id,
+                        left_team_name:match.home_team_code,
+                        right_team_name:match.away_team_code,
+                        left_team_image:match.home_team.logo,
+                        right_team_image:match.away_team.logo,
+                        series_name: match.tournament.name,
+                        match_time: match.game_date,
+                        lineup_out:match.lineup_out
+                    })
+                }
+            })
         })
-    })
-    //extra data temporery
-    let tm = extra_data.filter(d =>{
-        let mt = new Date(d.match_time);
-        let pt = new Date(Date.now());
-        if(mt>pt) return true;
-        else return false;
-    })
-    for(let i=0;i<tm.length;i++)
-    req_data[0].push(tm[i]);
-
-     //sorting the matches based on the time
-    req_data.forEach((sport_array)=>{
-        sport_array.sort((x,y)=>{
-            let first = new Date(x.match_time)
-            let second = new Date(y.match_time)
-            if(first<second)
-            return -1
-            else 
-            return 1 
+        //extra data temporery
+        let tm = extra_data.filter(d =>{
+            let mt = new Date(d.match_time);
+            let pt = new Date(Date.now());
+            if(mt>pt) return true;
+            else return false;
         })
-    })
-
-    for(let i=0;i<req_data.length;i++)
-    {
-        let sport_array = req_data[i]
-        let present_time = new Date(Date.now())
-        for(let j=0;j<sport_array.length;j++)
-        {
-            let match = sport_array[j]
-            let current_match_time = new Date(match.match_time)
-            let time_obj = timeDifference(current_match_time,present_time)
-            if(time_obj.days ==0 && time_obj.hours==0 && time_obj.minutes<=45 )
-            {
-                let new_response = await axios.post(`${base_url_one}${match.id}${base_url_two}`)
-                if(new_response.data.game.lineupStatus === 'LINEUP_ANNOUNCED')
-                    match.lineup_out = 1 
-            }
-        }
-    }
-    let password = "coder_bobby_believer01_tg_software";
-    //do encryption here 
-   let stuff_data = [[],[],[],[]];
-    for(let i=0;i<req_data.length;i++){
-        for(let j=0;j<req_data[i].length;j++){
-            let vp = JSON.stringify(req_data[i][j]);
-            let hashed_value = CryptoJS.AES.encrypt(vp,password).toString();
-            stuff_data[i].push(hashed_value);
-        }
-    }
+        for(let i=0;i<tm.length;i++)
+        req_data[0].push(tm[i]);
     
-    res.status(200).json({
-        status:'success',
-        data: stuff_data
-    })
+         //sorting the matches based on the time
+        req_data.forEach((sport_array)=>{
+            sport_array.sort((x,y)=>{
+                let first = new Date(x.match_time)
+                let second = new Date(y.match_time)
+                if(first<second)
+                return -1
+                else 
+                return 1 
+            })
+        })
+    
+        for(let i=0;i<req_data.length;i++)
+        {
+            let sport_array = req_data[i]
+            let present_time = new Date(Date.now())
+            for(let j=0;j<sport_array.length;j++)
+            {
+                let match = sport_array[j]
+                let current_match_time = new Date(match.match_time)
+                let time_obj = timeDifference(current_match_time,present_time)
+                if(time_obj.days ==0 && time_obj.hours==0 && time_obj.minutes<=45 )
+                {
+                    let req_url = get_base_second_url(match.id)
+                    console.log(req_url)
+                    let new_response = await axios.get(req_url)
+                    console.log(new_response)
+                    if(new_response.data.game.lineupStatus === 'LINEUP_ANNOUNCED')
+                        match.lineup_out = 1 
+                }
+            }
+        }
+        let password = "coder_bobby_believer01_tg_software";
+        //do encryption here 
+       let stuff_data = [[],[],[],[]];
+        for(let i=0;i<req_data.length;i++){
+            for(let j=0;j<req_data[i].length;j++){
+                let vp = JSON.stringify(req_data[i][j]);
+                let hashed_value = CryptoJS.AES.encrypt(vp,password).toString();
+                stuff_data[i].push(hashed_value);
+            }
+        }
+        
+        res.status(200).json({
+            status:'success',
+            data: stuff_data
+        })
+    }
+    catch(e){
+        console.log('hi here')
+        console.log(e)
+    }
 })
 //image helper 
 let getPlayerImage = (img)=>{
@@ -238,7 +260,8 @@ let getRoleId = (category_list,sport_category_id,position)=>{
 }
 
 router.get('/api/fantasy/match/:id',async (req,res)=>{
-    let response = await axios.post(`${base_url_one}${req.params.id}${base_url_two}`)
+    let req_url = get_base_second_url(req.params.id)
+    let response = await axios.get(req_url)
     let left_team_players = []
     let right_team_players = []
     let category_list = [
