@@ -7,6 +7,8 @@ const video = require('../../models/video')
 const promotion = require('../../models/promotion')
 const utildb = require('../../models/Utility')
 const tempdb = require('../../models/tempdb')
+const rp = require('request-promise');
+const $ = require('cheerio');
 
 
 const router = express.Router()
@@ -145,4 +147,31 @@ router.get('/api/tempdb/match/:id',async (req,res)=>{
     }
 })
 
-module.exports = router 
+
+
+async function getDream11Hash(){
+    const url = 'https://www.beatfantasy.com';
+    rp(url)
+  .then(async function(html) {
+   let $html = $.load(html);
+   let head = $html('head');
+   let lastIndex = head.children().length - 1;
+   let headChildren = head.children().get(lastIndex);
+   let childAttribute = headChildren.attributes
+    let reqLine =  childAttribute[0].value;
+    if(reqLine.includes('_ssgManifest')){
+        let sub_req_line = reqLine.split('static/')[1];
+        let final_req_hash = sub_req_line.split('/')[0];
+        let obj = await utildb.find({});
+        obj[0].dream11Hash = final_req_hash;
+        await obj[0].save();
+       // console.log(final_req_hash)
+    }
+  })
+  .catch(function(err) {
+   // console.log(err)
+    //console.log('error here!')
+  });
+}
+
+module.exports = {router: router, getDream11Hash : getDream11Hash}

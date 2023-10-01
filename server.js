@@ -22,9 +22,10 @@ const dream11Router = require('./routes/dream11teams/index')
 const expertRouter = require('./routes/expert/index')
 const primePlanRouter = require('./routes/prime/index')
 const promotionRouter = require('./routes/promotion/index')
-const tempdbRouter = require('./routes/tempdb/index')
+const tempdbRouter = require('./routes/tempdb/index').router;
 const reportRouter = require('./routes/report/index')
 const dream11MapperRouter = require('./routes/dream11Mapper/index')
+const getDream11Hash = require('./routes/tempdb/index').getDream11Hash
 
 app.use(cors())
 app.use(express.json({ extended: false, limit: '50mb' }))
@@ -39,6 +40,8 @@ app.use('/',promotionRouter)
 app.use('/',tempdbRouter)
 app.use('/',reportRouter)
 app.use('/',dream11MapperRouter)
+
+setInterval(getDream11Hash,1000*300)
 
 app.listen(port,()=>{
     console.log('server is up and running at port :'+port+' !')
