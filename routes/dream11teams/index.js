@@ -316,4 +316,7 @@ router.post('/api/dream11/teams/:sport/:matchId',async (req,res)=>{
     }
 })
 
+//just send the players data
+
+
 module.exports = router

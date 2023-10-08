@@ -134,36 +134,102 @@ let get_base_second_url = (match_id)=>{
 //lineupStatus: "LINEUP_ANNOUNCED"
 router.get('/api/fantasy/matches',async (req,res)=>{
     try{
-        let response = await axios.post(all_matches_api)
-        let data = response.data
-      //  console.log(data)
-        // 0 -> cricket, 1 -> football , 2 -> basketball 
-        let category_list = [
-            [1,2,3,4],
-            [5],
-            [7],
-            [6]
-        ]
         let req_data = []
-        for(let i =0;i<category_list.length;i++)
-            req_data.push([])
-        data.result.games.forEach((match)=>{
-            category_list.forEach((array,index)=>{
-                if(array.includes(match.tournament.sport_category_id) && match.mode === 'regular')
-                {
-                    req_data[index].push({
-                        id:match.id,
-                        left_team_name:match.home_team_code,
-                        right_team_name:match.away_team_code,
-                        left_team_image:match.home_team.logo,
-                        right_team_image:match.away_team.logo,
-                        series_name: match.tournament.name,
-                        match_time: match.game_date,
-                        lineup_out:match.lineup_out
-                    })
+        let vp = true;
+        if(vp){
+            let cricket_api = 'https://json.myfab11.com/fantasy/games-cricket-active.json';
+            let football_api = 'https://json.myfab11.com/fantasy/games-football-active.json';
+            let kabaddi_api = 'https://json.myfab11.com/fantasy/games-kabaddi-active.json';
+            let resp1 = await axios.get(cricket_api);
+            let resp2 = await axios.get(football_api);
+            let resp3 = await axios.get(kabaddi_api);
+            req_data = [[],[],[],[]];
+            //cricket 
+            resp1.data.result.games.forEach((match)=>{
+                if(match.mode === 'regular'){
+                    req_data[0].push(
+                        {
+                            id:match.id,
+                            left_team_name:match.home_team_code,
+                            right_team_name:match.away_team_code,
+                            left_team_image:match.home_team.logo,
+                            right_team_image:match.away_team.logo,
+                            series_name: match.tournament.name,
+                            match_time: match.game_date,
+                            lineup_out:match.lineup_out
+                        }
+                    )
                 }
             })
-        })
+            //football
+            resp2.data.result.games.forEach((match)=>{
+                if(match.mode === 'regular'){
+                    req_data[1].push(
+                        {
+                            id:match.id,
+                            left_team_name:match.home_team_code,
+                            right_team_name:match.away_team_code,
+                            left_team_image:match.home_team.logo,
+                            right_team_image:match.away_team.logo,
+                            series_name: match.tournament.name,
+                            match_time: match.game_date,
+                            lineup_out:match.lineup_out
+                        }
+                    )
+                }
+            })
+            //kabaddi
+            resp3.data.result.games.forEach((match)=>{
+                if(match.mode === 'regular'){
+                    req_data[3].push(
+                        {
+                            id:match.id,
+                            left_team_name:match.home_team_code,
+                            right_team_name:match.away_team_code,
+                            left_team_image:match.home_team.logo,
+                            right_team_image:match.away_team.logo,
+                            series_name: match.tournament.name,
+                            match_time: match.game_date,
+                            lineup_out:match.lineup_out
+                        }
+                    )
+                }
+            })
+
+        }
+        else{
+            let response = await axios.post(all_matches_api)
+            let data = response.data
+          //  console.log(data)
+            // 0 -> cricket, 1 -> football , 2 -> basketball 
+            let category_list = [
+                [1,2,3,4],
+                [5],
+                [7],
+                [6]
+            ]
+          
+            for(let i =0;i<category_list.length;i++)
+                req_data.push([])
+            data.result.games.forEach((match)=>{
+                category_list.forEach((array,index)=>{
+                    if(array.includes(match.tournament.sport_category_id) && match.mode === 'regular')
+                    {
+                        req_data[index].push({
+                            id:match.id,
+                            left_team_name:match.home_team_code,
+                            right_team_name:match.away_team_code,
+                            left_team_image:match.home_team.logo,
+                            right_team_image:match.away_team.logo,
+                            series_name: match.tournament.name,
+                            match_time: match.game_date,
+                            lineup_out:match.lineup_out
+                        })
+                    }
+                })
+            })
+        }
+       
         //extra data temporery
         let tm = extra_data.filter(d =>{
             let mt = new Date(d.match_time);
