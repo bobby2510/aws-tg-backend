@@ -135,7 +135,7 @@ let get_base_second_url = (match_id)=>{
 router.get('/api/fantasy/matches',async (req,res)=>{
     try{
         let req_data = []
-        let vp = true;
+        let vp = false;
         if(vp){
             let cricket_api = 'https://json.myfab11.com/fantasy/games-cricket-active.json';
             let football_api = 'https://json.myfab11.com/fantasy/games-football-active.json';
