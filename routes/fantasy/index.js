@@ -198,7 +198,7 @@ router.get('/api/fantasy/matches',async (req,res)=>{
 
         }
         else{
-            let response = await axios.post(all_matches_api)
+            let response = await axios.get(all_matches_api)
             let data = response.data
           //  console.log(data)
             // 0 -> cricket, 1 -> football , 2 -> basketball 
@@ -208,7 +208,7 @@ router.get('/api/fantasy/matches',async (req,res)=>{
                 [7],
                 [6]
             ]
-          
+           // console.log(data)
             for(let i =0;i<category_list.length;i++)
                 req_data.push([])
             data.result.games.forEach((match)=>{
@@ -326,37 +326,196 @@ let getRoleId = (category_list,sport_category_id,position)=>{
 }
 
 router.get('/api/fantasy/match/:id',async (req,res)=>{
-    let req_url = get_base_second_url(req.params.id)
-    let response = await axios.get(req_url)
-    let left_team_players = []
-    let right_team_players = []
-    let category_list = [
-        [1,2,3,4],
-        [5],
-        [7],
-        [6]
-    ]
-    let sport_category_id_list = response.data.game.tournament.sport_category_id
-    let sport_index = -1 
-    for(let i=0;i<category_list.length;i++)
-    {
-        if(category_list[i].includes(sport_category_id_list))
-            sport_index = i
-    }
-   // console.log(response.data.game.home_team.players)
-    if(response.data.game.home_team.players.length === 0 || response.data.game.away_team.players.length ===0)
-    {
-        if(response.data.game.home_team.players.length === 0)
-        {
-            //right team having player data
-            response.data.game.away_team.players.forEach((player,index)=>{
-                if(response.data.game.home_team_code === player.team_code)
+        try{
+            let req_url = get_base_second_url(req.params.id)
+            let response = await axios.get(req_url)
+            let left_team_players = []
+            let right_team_players = []
+            let category_list = [
+                [1,2,3,4],
+                [5],
+                [7],
+                [6]
+            ]
+            let sport_category_id_list = response.data.game.tournament.sport_category_id
+            let sport_index = -1 
+            for(let i=0;i<category_list.length;i++)
+            {
+                if(category_list[i].includes(sport_category_id_list))
+                    sport_index = i
+            }
+           // console.log(response.data.game.home_team.players)
+            if(response.data.game.home_team.players.length === 0 || response.data.game.away_team.players.length ===0)
+            {
+                if(response.data.game.home_team.players.length === 0)
                 {
+                    //right team having player data
+                    response.data.game.away_team.players.forEach((player,index)=>{
+                        if(response.data.game.home_team_code === player.team_code)
+                        {
+                            let kvp = 0;
+                            if(player.playing === null || player.playing === undefined)
+                            {
+                                let jp = player.last_match_playing_info
+                                if(jp!==null && jp=== 'Announced')
+                                {
+                                    kvp =1;
+                                }
+                            }
+                            else 
+                            {
+                                kvp= player.playing ===1? 1 : 0 
+                            }
+                            //last match played
+                            let last_play = 0;
+                            if(player.last_match_playing_info === "Played last match"){
+                                last_play = 1;
+                            }
+                            left_team_players.push({
+                                name: player.name,
+                                image: getPlayerImage(player.image),
+                                playing: kvp,
+                                last_play: last_play,
+                                role: getRoleId(category_list,sport_category_id_list,player.position),
+                                credits: Number(player.cost)/10,
+                                points: player.points,
+                                selected_by: player.selected_by,
+                                captain_percentage: player.captain_percentage,
+                                vice_captain_percentage: player.vice_captain_percentage,
+                                team_index:0,
+                                team_name: response.data.game.home_team_code,
+                                player_index:index+1,
+                                player_fixed_id: player.id
+                            })
+                        }
+                        else 
+                        {
+                            let kvp = 0;
+                            if(player.playing === null || player.playing === undefined)
+                            {
+                                let jp = player.last_match_playing_info
+                                if(jp!==null && jp=== 'Announced')
+                                {
+                                    kvp =1;
+                                }
+                            }
+                            else 
+                            {
+                                kvp= player.playing ===1? 1 : 0 
+                            }
+                             //last match played
+                             let last_play = 0;
+                             if(player.last_match_playing_info === "Played last match"){
+                                 last_play = 1;
+                             }
+                            right_team_players.push({
+                                name: player.name,
+                                image: getPlayerImage(player.image),
+                                playing: kvp,
+                                last_play: last_play,
+                                role: getRoleId(category_list,sport_category_id_list,player.position),
+                                credits: Number(player.cost)/10,
+                                points: player.points,
+                                selected_by: player.selected_by,
+                                captain_percentage: player.captain_percentage,
+                                vice_captain_percentage: player.vice_captain_percentage,
+                                team_index:1,
+                                team_name: response.data.game.away_team_code,
+                                player_index:index+1,
+                                player_fixed_id: player.id
+                            })
+                        }
+                    })
+                }
+                else 
+                {
+                    // left team having player data 
+                    response.data.game.home_team.players.forEach((player,index)=>{
+                        if(response.data.game.home_team_code === player.team_code)
+                        {
+                            let kvp = 0;
+                            if(player.playing === null || player.playing === undefined)
+                            {
+                                let jp = player.last_match_playing_info
+                                if(jp!==null && jp=== 'Announced')
+                                {
+                                    kvp =1;
+                                }
+                            }
+                            else 
+                            {
+                                kvp= player.playing ===1? 1 : 0 
+                            }
+                             //last match played
+                             let last_play = 0;
+                             if(player.last_match_playing_info === "Played last match"){
+                                 last_play = 1;
+                             }
+                            left_team_players.push({
+                                name: player.name,
+                                image: getPlayerImage(player.image),
+                                playing: kvp,
+                                last_play: last_play,
+                                role: getRoleId(category_list,sport_category_id_list,player.position),
+                                credits: Number(player.cost)/10,
+                                points: player.points,
+                                selected_by: player.selected_by,
+                                captain_percentage: player.captain_percentage,
+                                vice_captain_percentage: player.vice_captain_percentage,
+                                team_index:0,
+                                team_name: response.data.game.home_team_code,
+                                player_index:index+1,
+                                player_fixed_id: player.id
+                            })
+                        }
+                        else 
+                        {
+                            let kvp = 0;
+                            if(player.playing === null || player.playing === undefined)
+                            {
+                                let jp = player.last_match_playing_info
+                                if(jp!==null && jp=== 'Announced')
+                                {
+                                    kvp =1;
+                                }
+                            }
+                            else 
+                            {
+                                kvp= player.playing ===1? 1 : 0 
+                            }
+                             //last match played
+                             let last_play = 0;
+                             if(player.last_match_playing_info === "Played last match"){
+                                 last_play = 1;
+                             }
+                            right_team_players.push({
+                                name: player.name,
+                                image: getPlayerImage(player.image),
+                                playing: kvp,
+                                last_play: last_play,
+                                role: getRoleId(category_list,sport_category_id_list,player.position),
+                                credits: Number(player.cost)/10,
+                                points: player.points,
+                                selected_by: player.selected_by,
+                                captain_percentage: player.captain_percentage,
+                                vice_captain_percentage: player.vice_captain_percentage,
+                                team_index:1,
+                                team_name: response.data.game.away_team_code,
+                                player_index:index+1,
+                                player_fixed_id: player.id
+                            })
+                        }
+                    })
+                }
+            }
+            else {
+                //left team data 
+                response.data.game.home_team.players.forEach((player,index)=>{
                     let kvp = 0;
                     if(player.playing === null || player.playing === undefined)
                     {
                         let jp = player.last_match_playing_info
-                        if(jp!==null && jp=== 'Announced')
+                        if(jp!==null && jp === 'Announced')
                         {
                             kvp =1;
                         }
@@ -365,17 +524,18 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                     {
                         kvp= player.playing ===1? 1 : 0 
                     }
-                    //last match played
-                    let last_play = 0;
-                    if(player.last_match_playing_info === "Played last match"){
-                        last_play = 1;
-                    }
+                     //last match played
+                     let last_play = 0;
+                     if(player.last_match_playing_info === "Played last match"){
+                         last_play = 1;
+                     }
+                    console.log(kvp)
                     left_team_players.push({
                         name: player.name,
                         image: getPlayerImage(player.image),
                         playing: kvp,
                         last_play: last_play,
-                        role: getRoleId(category_list,sport_category_id_list,player.position),
+                        role: getRoleId(category_list,sport_category_id_list,player.position),  
                         credits: Number(player.cost)/10,
                         points: player.points,
                         selected_by: player.selected_by,
@@ -386,9 +546,9 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                         player_index:index+1,
                         player_fixed_id: player.id
                     })
-                }
-                else 
-                {
+                })
+                //right team data 
+                response.data.game.away_team.players.forEach((player,index)=>{
                     let kvp = 0;
                     if(player.playing === null || player.playing === undefined)
                     {
@@ -420,214 +580,63 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                         vice_captain_percentage: player.vice_captain_percentage,
                         team_index:1,
                         team_name: response.data.game.away_team_code,
-                        player_index:index+1,
+                        player_index:left_team_players.length+index+1,
                         player_fixed_id: player.id
                     })
-                }
+                })
+            }
+            let req_data ={
+                match_time: response.data.game.game_date,
+                sport_index:sport_index,
+                left_team_name:response.data.game.home_team_code,
+                right_team_name:response.data.game.away_team_code,
+                left_team_image:response.data.game.home_team.logo,
+                right_team_image:response.data.game.away_team.logo,
+                lineup_status: response.data.game.lineupStatus ==='LINEUP_ANNOUNCED' ? 1 : 0,
+                left_team_players:left_team_players,
+                right_team_players:right_team_players
+        
+            }
+            // do some stuff here 
+           let password = "coder_bobby_believer01_tg_software";
+            //do encryption here 
+            let stuff_data = {...req_data};
+           // left team players 
+            let left_hash = [];
+            for(let i=0;i<req_data.left_team_players.length;i++){
+                let temp = JSON.stringify(req_data.left_team_players[i]);
+                let temp_hash = CryptoJS.AES.encrypt(temp,password).toString();
+                left_hash.push(temp_hash)
+            }
+           // right team players
+            let right_hash = [];
+            for(let i=0;i<req_data.right_team_players.length;i++){
+                let temp = JSON.stringify(req_data.right_team_players[i]);
+                let temp_hash = CryptoJS.AES.encrypt(temp,password).toString();
+                right_hash.push(temp_hash)
+            }
+            //other stuff 
+            stuff_data.match_time = CryptoJS.AES.encrypt(req_data.match_time,password).toString();
+            stuff_data.sport_index = req_data.sport_index;
+            stuff_data.left_team_name = CryptoJS.AES.encrypt(req_data.left_team_name,password).toString();
+            stuff_data.right_team_name = CryptoJS.AES.encrypt(req_data.right_team_name,password).toString();
+            stuff_data.left_team_image = CryptoJS.AES.encrypt(req_data.left_team_image,password).toString();
+            stuff_data.right_team_image = CryptoJS.AES.encrypt(req_data.right_team_image,password).toString();
+            stuff_data.lineup_status = req_data.lineup_status;
+            stuff_data.left_team_players = left_hash;
+            stuff_data.right_team_players = right_hash;
+            res.status(200).json({
+                status:'success',
+                data: stuff_data
             })
         }
-        else 
-        {
-            // left team having player data 
-            response.data.game.home_team.players.forEach((player,index)=>{
-                if(response.data.game.home_team_code === player.team_code)
-                {
-                    let kvp = 0;
-                    if(player.playing === null || player.playing === undefined)
-                    {
-                        let jp = player.last_match_playing_info
-                        if(jp!==null && jp=== 'Announced')
-                        {
-                            kvp =1;
-                        }
-                    }
-                    else 
-                    {
-                        kvp= player.playing ===1? 1 : 0 
-                    }
-                     //last match played
-                     let last_play = 0;
-                     if(player.last_match_playing_info === "Played last match"){
-                         last_play = 1;
-                     }
-                    left_team_players.push({
-                        name: player.name,
-                        image: getPlayerImage(player.image),
-                        playing: kvp,
-                        last_play: last_play,
-                        role: getRoleId(category_list,sport_category_id_list,player.position),
-                        credits: Number(player.cost)/10,
-                        points: player.points,
-                        selected_by: player.selected_by,
-                        captain_percentage: player.captain_percentage,
-                        vice_captain_percentage: player.vice_captain_percentage,
-                        team_index:0,
-                        team_name: response.data.game.home_team_code,
-                        player_index:index+1,
-                        player_fixed_id: player.id
-                    })
-                }
-                else 
-                {
-                    let kvp = 0;
-                    if(player.playing === null || player.playing === undefined)
-                    {
-                        let jp = player.last_match_playing_info
-                        if(jp!==null && jp=== 'Announced')
-                        {
-                            kvp =1;
-                        }
-                    }
-                    else 
-                    {
-                        kvp= player.playing ===1? 1 : 0 
-                    }
-                     //last match played
-                     let last_play = 0;
-                     if(player.last_match_playing_info === "Played last match"){
-                         last_play = 1;
-                     }
-                    right_team_players.push({
-                        name: player.name,
-                        image: getPlayerImage(player.image),
-                        playing: kvp,
-                        last_play: last_play,
-                        role: getRoleId(category_list,sport_category_id_list,player.position),
-                        credits: Number(player.cost)/10,
-                        points: player.points,
-                        selected_by: player.selected_by,
-                        captain_percentage: player.captain_percentage,
-                        vice_captain_percentage: player.vice_captain_percentage,
-                        team_index:1,
-                        team_name: response.data.game.away_team_code,
-                        player_index:index+1,
-                        player_fixed_id: player.id
-                    })
-                }
+        catch(e){
+            console.log(e)
+            res.status(404).json({
+                status:'fail',
+                message:'Something went wrong!'
             })
         }
-    }
-    else {
-        //left team data 
-        response.data.game.home_team.players.forEach((player,index)=>{
-            let kvp = 0;
-            if(player.playing === null || player.playing === undefined)
-            {
-                let jp = player.last_match_playing_info
-                if(jp!==null && jp === 'Announced')
-                {
-                    kvp =1;
-                }
-            }
-            else 
-            {
-                kvp= player.playing ===1? 1 : 0 
-            }
-             //last match played
-             let last_play = 0;
-             if(player.last_match_playing_info === "Played last match"){
-                 last_play = 1;
-             }
-            console.log(kvp)
-            left_team_players.push({
-                name: player.name,
-                image: getPlayerImage(player.image),
-                playing: kvp,
-                last_play: last_play,
-                role: getRoleId(category_list,sport_category_id_list,player.position),  
-                credits: Number(player.cost)/10,
-                points: player.points,
-                selected_by: player.selected_by,
-                captain_percentage: player.captain_percentage,
-                vice_captain_percentage: player.vice_captain_percentage,
-                team_index:0,
-                team_name: response.data.game.home_team_code,
-                player_index:index+1,
-                player_fixed_id: player.id
-            })
-        })
-        //right team data 
-        response.data.game.away_team.players.forEach((player,index)=>{
-            let kvp = 0;
-            if(player.playing === null || player.playing === undefined)
-            {
-                let jp = player.last_match_playing_info
-                if(jp!==null && jp=== 'Announced')
-                {
-                    kvp =1;
-                }
-            }
-            else 
-            {
-                kvp= player.playing ===1? 1 : 0 
-            }
-             //last match played
-             let last_play = 0;
-             if(player.last_match_playing_info === "Played last match"){
-                 last_play = 1;
-             }
-            right_team_players.push({
-                name: player.name,
-                image: getPlayerImage(player.image),
-                playing: kvp,
-                last_play: last_play,
-                role: getRoleId(category_list,sport_category_id_list,player.position),
-                credits: Number(player.cost)/10,
-                points: player.points,
-                selected_by: player.selected_by,
-                captain_percentage: player.captain_percentage,
-                vice_captain_percentage: player.vice_captain_percentage,
-                team_index:1,
-                team_name: response.data.game.away_team_code,
-                player_index:left_team_players.length+index+1,
-                player_fixed_id: player.id
-            })
-        })
-    }
-    let req_data ={
-        match_time: response.data.game.game_date,
-        sport_index:sport_index,
-        left_team_name:response.data.game.home_team_code,
-        right_team_name:response.data.game.away_team_code,
-        left_team_image:response.data.game.home_team.logo,
-        right_team_image:response.data.game.away_team.logo,
-        lineup_status: response.data.game.lineupStatus ==='LINEUP_ANNOUNCED' ? 1 : 0,
-        left_team_players:left_team_players,
-        right_team_players:right_team_players
-
-    }
-    // do some stuff here 
-   let password = "coder_bobby_believer01_tg_software";
-    //do encryption here 
-    let stuff_data = {...req_data};
-   // left team players 
-    let left_hash = [];
-    for(let i=0;i<req_data.left_team_players.length;i++){
-        let temp = JSON.stringify(req_data.left_team_players[i]);
-        let temp_hash = CryptoJS.AES.encrypt(temp,password).toString();
-        left_hash.push(temp_hash)
-    }
-   // right team players
-    let right_hash = [];
-    for(let i=0;i<req_data.right_team_players.length;i++){
-        let temp = JSON.stringify(req_data.right_team_players[i]);
-        let temp_hash = CryptoJS.AES.encrypt(temp,password).toString();
-        right_hash.push(temp_hash)
-    }
-    //other stuff 
-    stuff_data.match_time = CryptoJS.AES.encrypt(req_data.match_time,password).toString();
-    stuff_data.sport_index = req_data.sport_index;
-    stuff_data.left_team_name = CryptoJS.AES.encrypt(req_data.left_team_name,password).toString();
-    stuff_data.right_team_name = CryptoJS.AES.encrypt(req_data.right_team_name,password).toString();
-    stuff_data.left_team_image = CryptoJS.AES.encrypt(req_data.left_team_image,password).toString();
-    stuff_data.right_team_image = CryptoJS.AES.encrypt(req_data.right_team_image,password).toString();
-    stuff_data.lineup_status = req_data.lineup_status;
-    stuff_data.left_team_players = left_hash;
-    stuff_data.right_team_players = right_hash;
-    res.status(200).json({
-        status:'success',
-        data: stuff_data
-    })
 })
 
 module.exports = router
