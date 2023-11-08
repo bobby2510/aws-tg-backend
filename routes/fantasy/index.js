@@ -199,7 +199,31 @@ router.get('/api/fantasy/matches',async (req,res)=>{
         }
         else{
             let response = await axios.get(all_matches_api)
+            let cricket_api = 'https://json.myfab11.com/fantasy/games-cricket-active.json';
+            let resp1 = await axios.get(cricket_api);
             let data = response.data
+
+            //extra cricket data 
+               //cricket 
+               let cricket_list  = []
+               resp1.data.result.games.forEach((match)=>{
+                if(match.mode === 'regular'){
+                    cricket_list.push(
+                        {
+                            id:match.id,
+                            left_team_name:match.home_team_code,
+                            right_team_name:match.away_team_code,
+                            left_team_image:match.home_team.logo,
+                            right_team_image:match.away_team.logo,
+                            series_name: match.tournament.name,
+                            match_time: match.game_date,
+                            lineup_out:match.lineup_out
+                        }
+                    )
+                }
+            })
+
+            //end 
           //  console.log(data)
             // 0 -> cricket, 1 -> football , 2 -> basketball 
             let category_list = [
@@ -228,6 +252,9 @@ router.get('/api/fantasy/matches',async (req,res)=>{
                     }
                 })
             })
+
+            req_data[0] = cricket_list;
+
         }
        
         //extra data temporery
