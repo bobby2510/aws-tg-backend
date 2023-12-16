@@ -117,6 +117,54 @@ router.get('/api/fantasy/scorecard/:sport/:id',async (req,res)=>{
 })
 
 
+//backup scorecard 
+
+router.get('/api/fantasy/scorecard/backup/:sport/:id',async (req,res)=>{
+   
+    try{
+        let match_id = req.params.id 
+    let sport_type = req.params.sport 
+    let req_url = 'https://api.fantasyteamcreator.online/getMatchPoints'
+    let req_obj = {
+        match_key: match_id,
+        team_type: sport_type
+    }
+    // temp here
+    // const vp = await fetch(req_url);
+    // const data = await vp.json();
+    // let response = await axios.get(req_url,{
+    //     headers: {
+    //       'Cache-Control': 'no-cache',
+    //       'Pragma': 'no-cache',
+    //       'Expires': '0',
+    //     },
+    //   })
+    //console.log(data.players[0])
+    let response = await axios.post(req_url,req_obj)
+    let data = response.data
+    
+         res.status(200).json({
+            status:'success',
+            data: {
+                match_status: data.match_status,
+                player_data : data.player_data,
+                sport: sport_type,
+                match_id: match_id,
+                match_time: Date.now()
+            }
+        })
+    }
+    catch(e){
+        res.status(404).json({
+            status:'fail',
+            message:'Something went wrong!'
+        })
+    }
+})
+
+
+
+
 let get_base_second_url = (match_id)=>{
     let old = false;
     if(old){
