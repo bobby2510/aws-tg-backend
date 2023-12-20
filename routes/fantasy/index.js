@@ -17,6 +17,8 @@ let cricket_scorecard = 'https://api.cricpick.in//game-players/scorecard/'
 let football_scorecard = 'https://api.cricpick.in//football-game-players/scorecard/'
 let basketball_scorecard = 'https://api.cricpick.in//nba-game-players/scorecard/'
 let kabaddi_scorecard = 'https://api.cricpick.in//kabaddi-game-players/scorecard/'
+//https://dev.myfab11.in/team-players/scorecard/111689.json
+//https://api.cricpick.in/team-players/scorecard/111689.json
 let generic_scorecard_end = '.json'
 
 // temporery fix
