@@ -337,6 +337,8 @@ router.post('/api/automatic/addteam', async(req,res)=>{
                     }
                 }
                 if(flag_index === -1){
+                    load_obj[0].loadArray[flag_index]=0;
+                    await load_obj[0].save();
                     res.status(403).json({
                         status:'fail',
                         message:'Please try again!!'
@@ -367,7 +369,7 @@ router.post('/api/automatic/addteam', async(req,res)=>{
                           Moduleaccess: 7
                         }
                     }
-                ).then((pl_res) => {
+                ).then(async (pl_res) => {
                      //  console.log('hi hello')
                         // now call the beatfantasy here get the share link
                       //  console.log(req_automatic_obj.beatfantasyMatchId)
@@ -400,12 +402,16 @@ router.post('/api/automatic/addteam', async(req,res)=>{
                                     return;
                                 }
                             }
+                            load_obj[0].loadArray[flag_index]=0;
+                            await load_obj[0].save();
                             res.status(201).json({
                                 status:'fail',
                                 message:'Error while fetching the data!'
                             })
                         })
-                        .catch(e=>{
+                        .catch(async a=>{
+                            load_obj[0].loadArray[flag_index]=0;
+                            await load_obj[0].save();
                             res.status(201).json({
                                 status:'fail',
                                 message:'Error while shfiting the team!'
@@ -414,7 +420,9 @@ router.post('/api/automatic/addteam', async(req,res)=>{
                         })
                   
                   })
-                .catch((err) => {
+                .catch(async (err) => {
+                    load_obj[0].loadArray[flag_index]=0;
+                    await load_obj[0].save();
                     res.status(201).json({
                         status:'fail',
                         message:'Error while shfiting the team!'
@@ -424,6 +432,8 @@ router.post('/api/automatic/addteam', async(req,res)=>{
             }
         }
         else{
+            load_obj[0].loadArray[flag_index]=0;
+            await load_obj[0].save();
             res.status(201).json({
                 status:'fail',
                 message:'Error while shfiting the team!'
@@ -432,6 +442,8 @@ router.post('/api/automatic/addteam', async(req,res)=>{
         }
     }
     catch(e){
+        load_obj[0].loadArray[flag_index]=0;
+        await load_obj[0].save();
         res.status(404).json({
             status:'fail',
             message:'Something went wrong!'
