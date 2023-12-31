@@ -12,7 +12,7 @@ const series = require('../../models/series')
 const pitch = require('../../models/pitch')
 const sportteam = require('../../models/sportteam')
 const matchreport = require('../../models/matchreport')
-
+const kabaddimatchreport = require('../../models/kabaddimatchreport')
 const router = express.Router() 
  
 // report routes starts here
@@ -435,6 +435,34 @@ router.post('/api/matchreport/create', async (req,res)=>{
     }
 })
 
+//kabaddi match report 
+router.post('/api/kabaddimatchreport/create', async (req,res)=>{
+    try{
+        let obj = {
+            series: req.body.seriesId,
+            pitch: req.body.pitchId,
+            teamOne: req.body.teamOneId,
+            teamTwo: req.body.teamTwoId,
+            gender: req.body.gender,
+            data: req.body.data,
+            sportIndex: req.body.sportIndex
+        }
+        await kabaddimatchreport.create(obj);
+        res.status(200).json({
+            status: 'success',
+            message:'kabaddi match report added successfully!'
+        })
+    }
+    catch(e){
+        res.status(404).json({
+            status: 'fail',
+            message: 'something went wrong!'
+        })
+    }
+})
+
+  
+
 router.delete('/api/matchreport/delete/:id', async (req,res)=>{
     try{
         let match_obj = matchreport.findById(req.params.id)
@@ -459,6 +487,33 @@ router.delete('/api/matchreport/delete/:id', async (req,res)=>{
         })
     }
 })
+
+//kabaddi 
+router.delete('/api/kabaddimatchreport/delete/:id', async (req,res)=>{
+    try{
+        let match_obj = kabaddimatchreport.findById(req.params.id)
+        if(match_obj!== null){
+            await match_obj.remove();
+            res.status(200).json({
+                status: 'success',
+                message: 'Kabaddi Match report deleted!'
+            })
+        }
+        else{
+            res.status(201).json({
+                status: 'fail',
+                message: 'Error while deleting the report!'
+            })
+        }
+    }
+    catch(e){
+        res.status(404).json({
+            status: 'fail',
+            message:'Something went wrong!'
+        })
+    }
+})
+
 //fetch match report list 
 router.post('/api/matchreport/matchlist', async (req,res)=>{
     try{
@@ -548,6 +603,73 @@ router.post('/api/matchreport/matchlist', async (req,res)=>{
         })
     } 
 })
+
+//kabaddi match report list 
+router.post('/api/kabaddimatchreport/matchlist', async (req,res)=>{
+    try{
+        let matchreport_list = await kabaddimatchreport.find({}).sort({createdAt: -1})
+        let req_list = [];
+        let tempList = [...matchreport_list]
+        let seriesData = req.body.seriesData;
+        let teamData = req.body.teamData;
+        if(seriesData){
+                tempList = tempList.filter(d =>{ 
+                if(seriesData.includes(d.series)) return true;
+                else return false;
+            })
+        }
+        if(teamData){
+            tempList = tempList.filter(d =>{ 
+                    if(teamData.includes(d.teamOne) || teamData.includes(d.teamTwo)) return true;
+                    else return false;
+                })
+            }
+       // console.log(tempList.length)
+        let totalPages = 0;
+        //pagination here 
+        if(req.body.page !== undefined && req.body.size !== undefined){
+            let page = parseInt(req.body.page)
+            let size = parseInt(req.body.size)
+            let totalSize = tempList.length;
+            totalPages = parseInt(totalSize/size);
+           // console.log(totalPages,page,size)
+            if(totalSize%size!== 0)
+                totalPages++;
+            let first = page*size;
+            let second = first + size;
+            tempList = tempList.slice(first,second); 
+        }
+        for(let i=0;i<tempList.length;i++){
+            req_list.push({
+                matchReportId: tempList[i]._id,
+                leftTeamName: tempList[i].data.leftTeamName,
+                leftTeamImage: tempList[i].data.leftTeamImage,
+                rightTeamName: tempList[i].data.rightTeamName,
+                rightTeamImage: tempList[i].data.rightTeamImage,
+                seriesName: tempList[i].data.seriesName,
+                matchMonth: tempList[i].data.matchMonth,
+                matchYear: tempList[i].data.matchYear,
+                gender: tempList[i].gender,
+                matchTime: tempList[i].data.matchTime
+            })
+        }
+        res.status(200).json({
+            status: 'success',
+            data: req_list,
+            totalPages:totalPages,
+            message:'kabaddi match report list is fetched successfully!'
+        })
+    }
+    catch(e){
+        res.status(404).json({
+            status: 'fail',
+            message: 'something went wrong!'
+        })
+    } 
+})
+
+
+
 // individual match report 
 router.get('/api/matchreport/match/:matchReportId', async (req,res)=>{
     try{

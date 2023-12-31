@@ -40,4 +40,4 @@ const kabaddiMatchReportSchema =  new mongoose.Schema({
     },
 })
 
-module.exports = new mongoose.model('matchreport',kabaddiMatchReportSchema)
+module.exports = new mongoose.model('kabaddimatchreport',kabaddiMatchReportSchema)

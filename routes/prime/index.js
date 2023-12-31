@@ -275,6 +275,7 @@ router.get('/api/primeteam/getdata/:matchid/:phonenumber',async (req,res)=>{
                         req_teams.push(req_data.teamData[j])
                     res.status(200).json({
                         status:'success',
+                        matchId: req.params.matchid,
                         phoneNumber:req.params.phonenumber,
                         primeTeams:true, 
                         teamData: req_teams, 

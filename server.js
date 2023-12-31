@@ -25,6 +25,7 @@ const promotionRouter = require('./routes/promotion/index')
 const tempdbRouter = require('./routes/tempdb/index').router;
 const reportRouter = require('./routes/report/index')
 const dream11MapperRouter = require('./routes/dream11Mapper/index')
+const automaticMapperRouter = require('./routes/automaticmapper/index')
 const getDream11Hash = require('./routes/tempdb/index').getDream11Hash
 
 app.use(cors())
@@ -40,6 +41,7 @@ app.use('/',promotionRouter)
 app.use('/',tempdbRouter)
 app.use('/',reportRouter)
 app.use('/',dream11MapperRouter)
+app.use('/',automaticMapperRouter)
 
 setInterval(getDream11Hash,1000*300)
 

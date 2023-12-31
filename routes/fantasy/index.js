@@ -1,6 +1,7 @@
 const express = require('express')
 const axios = require('axios')
 var CryptoJS = require("crypto-js");
+const automaticmapper = require('../../models/automaticmapper');
 //temp here
 //const fetch = (url) => import('node-fetch').then(({default: fetch}) => fetch(url));
 const router = express.Router()
@@ -184,6 +185,12 @@ let get_base_second_url = (match_id)=>{
 //lineupStatus: "LINEUP_ANNOUNCED"
 router.get('/api/fantasy/matches',async (req,res)=>{
     try{
+        let automatic_list = await automaticmapper.find({}).sort({createdAt:-1}).limit(50)
+        let tg_match_ids = []
+        for(let i=0;i<automatic_list.length;i++){
+            tg_match_ids.push(automatic_list[i].tgMatchId.toString())
+        }
+       // console.log(tg_match_ids)
         let req_data = []
         let vp = false;
         if(vp){
@@ -206,7 +213,8 @@ router.get('/api/fantasy/matches',async (req,res)=>{
                             right_team_image:match.away_team.logo,
                             series_name: match.tournament.name,
                             match_time: match.game_date,
-                            lineup_out:match.lineup_out
+                            lineup_out:match.lineup_out,
+                            automatic: tg_match_ids.includes(match.id.toString()) ? true : false
                         }
                     )
                 }
@@ -223,7 +231,8 @@ router.get('/api/fantasy/matches',async (req,res)=>{
                             right_team_image:match.away_team.logo,
                             series_name: match.tournament.name,
                             match_time: match.game_date,
-                            lineup_out:match.lineup_out
+                            lineup_out:match.lineup_out,
+                            automatic: tg_match_ids.includes(match.id.toString()) ? true : false
                         }
                     )
                 }
@@ -240,7 +249,8 @@ router.get('/api/fantasy/matches',async (req,res)=>{
                             right_team_image:match.away_team.logo,
                             series_name: match.tournament.name,
                             match_time: match.game_date,
-                            lineup_out:match.lineup_out
+                            lineup_out:match.lineup_out,
+                            automatic: tg_match_ids.includes(match.id.toString()) ? true : false
                         }
                     )
                 }
@@ -252,7 +262,7 @@ router.get('/api/fantasy/matches',async (req,res)=>{
             let cricket_api = 'https://json.myfab11.com/fantasy/games-cricket-active.json';
             let resp1 = await axios.get(cricket_api);
             let data = response.data
-
+     
             //extra cricket data 
                //cricket 
                let cricket_list  = []
@@ -267,7 +277,8 @@ router.get('/api/fantasy/matches',async (req,res)=>{
                             right_team_image:match.away_team.logo,
                             series_name: match.tournament.name,
                             match_time: match.game_date,
-                            lineup_out:match.lineup_out
+                            lineup_out:match.lineup_out,
+                            automatic: tg_match_ids.includes(match.id.toString()) ? true : false
                         }
                     )
                 }
@@ -297,7 +308,8 @@ router.get('/api/fantasy/matches',async (req,res)=>{
                             right_team_image:match.away_team.logo,
                             series_name: match.tournament.name,
                             match_time: match.game_date,
-                            lineup_out:match.lineup_out
+                            lineup_out:match.lineup_out,
+                            automatic: tg_match_ids.includes(match.id.toString()) ? true : false
                         })
                     }
                 })
@@ -341,9 +353,9 @@ router.get('/api/fantasy/matches',async (req,res)=>{
                 if(time_obj.days ==0 && time_obj.hours==0 && time_obj.minutes<=45 )
                 {
                     let req_url = get_base_second_url(match.id)
-                    console.log(req_url)
+                   // console.log(req_url)
                     let new_response = await axios.get(req_url)
-                    console.log(new_response)
+                    //console.log(new_response)
                     if(new_response.data.game.lineupStatus === 'LINEUP_ANNOUNCED')
                         match.lineup_out = 1 
                 }
@@ -366,8 +378,8 @@ router.get('/api/fantasy/matches',async (req,res)=>{
         })
     }
     catch(e){
-        console.log('hi here')
-        console.log(e)
+     //   console.log('hi here')
+      //  console.log(e)
     }
 })
 //image helper 
@@ -404,8 +416,13 @@ let getRoleId = (category_list,sport_category_id,position)=>{
 
 router.get('/api/fantasy/match/:id',async (req,res)=>{
         try{
+            let automatic_list = await automaticmapper.find({tgMatchId: req.params.id.toString()});
+            let automatic_obj = null;
+            if(automatic_list.length>0){
+                automatic_obj = automatic_list[0];
+            }
             let req_url = get_base_second_url(req.params.id)
-            let response = await axios.get(req_url)
+            let response = await axios.get(req_url) 
             let left_team_players = []
             let right_team_players = []
             let category_list = [
@@ -674,6 +691,60 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                 right_team_players:right_team_players
         
             }
+            //add perfectLineups ids here 
+            let temp_left_players = [];
+            let temp_right_players = [];
+            //left
+            for(let i=0;i<req_data.left_team_players.length;i++){
+                let p = req_data.left_team_players[i];
+                if(automatic_obj){
+                    let flag = false;
+                   for(let j=0;j<automatic_obj.playerMapperData.length;j++){
+                    if(automatic_obj.playerMapperData[j].tgMatchId.toString() === p.player_fixed_id.toString()){
+                        p["pl_id"] = automatic_obj.playerMapperData[j].perfectLineupMatchId;
+                        flag = true;
+                        break;
+                    }
+                   }
+                   if(!flag){
+                    p["pl_id"] = null;
+                   }
+                }
+                else{
+                    p["pl_id"] = null;
+                }
+                temp_left_players.push(p);
+            }
+            //right
+            for(let i=0;i<req_data.right_team_players.length;i++){
+                let p = req_data.right_team_players[i];
+                if(automatic_obj){
+                    let flag = false;
+                   for(let j=0;j<automatic_obj.playerMapperData.length;j++){
+                    if(automatic_obj.playerMapperData[j].tgMatchId.toString() === p.player_fixed_id.toString()){
+                        p["pl_id"] = automatic_obj.playerMapperData[j].perfectLineupMatchId;
+                        flag = true;
+                        break;
+                    }
+                   }
+                   if(!flag){
+                    p["pl_id"] = null;
+                   }
+                }
+                else{
+                    p["pl_id"] = null;
+                }
+                temp_right_players.push(p);
+            }
+            req_data.left_team_players = temp_left_players;
+            req_data.right_team_players = temp_right_players;
+            if(automatic_obj){
+                req_data["automatic"] = true;
+            }
+            else{
+                req_data["automatic"] = false;
+            }
+
             // do some stuff here 
            let password = "coder_bobby_believer01_tg_software";
             //do encryption here 

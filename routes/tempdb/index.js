@@ -147,6 +147,61 @@ router.get('/api/tempdb/match/:id',async (req,res)=>{
     }
 })
 
+//perfect lineup hash post method
+router.post('/api/automatic/create/hash',async (req,res)=>{
+    try{
+        let obj_list  = await utildb.find({})
+        if(obj_list.length > 0){
+            obj_list[0].perfectLineupHash = req.body.automaticHash
+            await obj_list[0].save()
+            res.status(200).json({
+                status:'success',
+                message:'Automatic Hash Updated Successfully!'
+            })
+        }
+        else{
+            res.status(201).json({
+                status: 'fail',
+                message:'error while fetching the data!'
+            })
+        } 
+    }
+    catch(e){
+        res.status(404).json({
+            status:'fail',
+            message:'Something Went Wrong!'
+        })
+    }
+})
+
+//perfect lineup hash get method 
+router.get('/api/automatic/get/hash', async (req,res)=>{
+    try{
+        let obj_list = await utildb.find({})
+        if(obj_list.length>0){
+            res.status(200).json({
+                status:'success',
+                automatic_hash: obj_list[0].perfectLineupHash,
+                message:'Automatic Hash Fetched Successfully!'
+            })
+        }
+        else{
+            res.status(201).json({
+                status:'fail',
+                message:'Error while feting hash value!'
+            })
+        }
+        
+    }
+    catch(e){
+        res.status(404).json({
+            status:'fail',
+            message:"something went wrong!"
+        })
+    }
+})
+
+
 
 
 async function getDream11Hash(){
