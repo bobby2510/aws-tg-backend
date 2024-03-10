@@ -141,7 +141,7 @@ router.get('/api/automatic/first_stage/list',async (req,res)=>{
         })
     }
 })
-// api to get perfectlineup match ids 
+// api to get perfectlineup match ids    
 router.get('/api/automatic/second_stage/list',async (req,res)=>{
     try{
        
@@ -286,9 +286,15 @@ router.post('/api/automatic/add_mapping', async (req,res)=>{
             let req_obj = await automaticdb.create(obj);
             let load_obj = await loadbalancedb.create({
                 tgMatchId: tg_id,
-                loadArray: loadArr
+                loadArray: loadArr,
+                mobileNumber: '9848579715'
             })
-            if(req_obj && load_obj){
+            let load_obj_two = await loadbalancedb.create({
+                tgMatchId: tg_id,
+                loadArray: loadArr,
+                mobileNumber: '6281735219'
+            })
+            if(req_obj && load_obj && load_obj_two){
                 res.status(200).json({
                     status:'success',
                     message:'Mapping created successfully!'
@@ -315,18 +321,66 @@ router.post('/api/automatic/add_mapping', async (req,res)=>{
 router.post('/api/automatic/addteam', async(req,res)=>{
     try{
         let tg_id = req.body.tgMatchId.toString();
+        let generateLinkFlag = req.body.generateLinkFlag;
+        let current_lines = ['9848579715','6281735219']
+        let line_index = 0;
         let player_data = req.body.playerData;
         let captain_data = req.body.captainData;
         let vice_captain_data = req.body.vicecaptainData;
         let automatic_obj = await automaticdb.find({tgMatchId: tg_id})
         let pl_hash_obj_list = await utildb.find({})
         let pl_hash = pl_hash_obj_list[0].perfectLineupHash;
+        let transferLine = pl_hash_obj_list[0].transferLine;
         // console.log(automatic_obj[0], pl_hash)
         if(automatic_obj.length>0){
-            let load_obj  = await loadbalancedb.find({tgMatchId: tg_id})
-            if(load_obj.length>0){
+            let load_obj_one_list  = await loadbalancedb.find({tgMatchId: tg_id, mobileNumber: current_lines[0]})
+            let load_obj_two_list  = await loadbalancedb.find({tgMatchId: tg_id,  mobileNumber: current_lines[1]})
+            let load_obj_one = load_obj_one_list[0]
+            let load_obj_two = load_obj_two_list[0]
+           // console.log(load_obj_one,load_obj_two)
+            let load_obj = [load_obj_one,];
+            //console.log(load_obj)
+            if(load_obj_one && load_obj_two){
+                //do some decisions here 
+                if(transferLine === 'all-lines' && generateLinkFlag === 'general'){
+                    let cnt_one=0,cnt_two=0;
+                    for(let i=0;i<load_obj_one.loadArray.length;i++)
+                    {
+                        if(load_obj_one.loadArray[i]===1) cnt_one++;
+                    }
+                    for(let i=0;i<load_obj_two.loadArray.length;i++)
+                    {
+                        if(load_obj_two.loadArray[i]===1) cnt_two++;
+                    }
+                    if(cnt_one<=cnt_two){
+                        load_obj = [load_obj_one,];
+                        line_index=0;
+                    }
+                    else{
+                        load_obj = [load_obj_two,];
+                        line_index = 1;
+                    }
+                    //console.log('we are here')
+                }
+                else if(transferLine === 'main-line' && generateLinkFlag === 'general'){
+                    load_obj = [load_obj_one,];
+                    line_index = 0;
+                }
+                else if(transferLine === 'all-lines' && generateLinkFlag === 'prime'){
+                    load_obj = [load_obj_two,];
+                    line_index = 1;
+                }
+                else{
+                    load_obj = [load_obj_two,];
+                    line_index = 1;
+                }
+                if(line_index === 1)
+                pl_hash =  pl_hash_obj_list[0].perfectLineupHashTwo;
+
+              //  console.log(transferLine,generateLinkFlag,line_index)
                 let req_automatic_obj = automatic_obj[0];
                 let req_load_obj = load_obj[0];
+              //  console.log(pl_hash)
                 //find the load balancer team no 
                 let flag_index = -1;
                 for(let i=1;i<=20;i++){
@@ -376,7 +430,7 @@ router.post('/api/automatic/addteam', async(req,res)=>{
                         let bf_url = `https://w3u2jlhyj6.execute-api.us-east-1.amazonaws.com/prod/experts/sync-teams`
                         let bf_obj = {
                             match_id: req_automatic_obj.beatfantasyMatchId,
-                            mobile_number: 9848579715,
+                            mobile_number: parseInt(current_lines[line_index]),
                             source: 'dream-xi',
                             sport: 'cricket',
                             teams:[]
@@ -432,8 +486,8 @@ router.post('/api/automatic/addteam', async(req,res)=>{
             }
         }
         else{
-            load_obj[0].loadArray[flag_index]=0;
-            await load_obj[0].save();
+           // load_obj[0].loadArray[flag_index]=0;
+           // await load_obj[0].save();
             res.status(201).json({
                 status:'fail',
                 message:'Error while shfiting the team!'
@@ -442,8 +496,9 @@ router.post('/api/automatic/addteam', async(req,res)=>{
         }
     }
     catch(e){
-        load_obj[0].loadArray[flag_index]=0;
-        await load_obj[0].save();
+      //  load_obj[0].loadArray[flag_index]=0;
+      //  await load_obj[0].save();
+      console.log(e)
         res.status(404).json({
             status:'fail',
             message:'Something went wrong!'

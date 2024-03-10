@@ -6,6 +6,11 @@ const  LoaderBalanceMapper=  new mongoose.Schema({
         type:String,
         required:true
     },
+    mobileNumber:{
+        type: String,
+        required: true,
+        default: '9848579715'
+    },
     loadArray: {
         type: Array,
         required: true

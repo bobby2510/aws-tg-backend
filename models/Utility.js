@@ -14,6 +14,16 @@ const UtilsSchema =  new mongoose.Schema({
         type: String,
         required: true
     },
+    perfectLineupHashTwo:{
+        type: String,
+        required: true,
+        default:'empty'
+    },
+    transferLine:{
+        type:String,
+        required: true,
+        default: 'all-lines'
+    },
     createdAt:{
         type:Date,
         default:Date.now
