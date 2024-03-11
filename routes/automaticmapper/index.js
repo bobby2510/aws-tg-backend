@@ -317,6 +317,34 @@ router.post('/api/automatic/add_mapping', async (req,res)=>{
     }
 })
 
+router.post('/api/automatic/prime-line', async (req,res)=>{
+    try{
+        let lineStatus = req.body.lineStatus;
+        let obj_list = await utildb.find({});
+        if(obj_list.length>0){
+            let obj = obj_list[0];
+            obj.transferLine = lineStatus;
+            await obj.save();
+            res.status(200).json({
+                status:'success',
+                message:'Transfer Lines Updated Successfully!'
+            })
+        }
+        else{
+            res.status(404).json({
+                status:'fail',
+                message:'Something went wrong!'
+            })
+        }
+    }
+    catch(e){
+        res.status(404).json({
+            status:'fail',
+            message:'Something went wrong!'
+        })
+    }
+})
+
 //add team to the dream11
 router.post('/api/automatic/addteam', async(req,res)=>{
     try{

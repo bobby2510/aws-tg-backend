@@ -217,7 +217,7 @@ router.get('/api/primeteam/teamlist',async (req,res)=>{
     try{
         //console.log('hi')
         let req_data = await primeteam.find({}).sort({createdAt:-1}).limit(50)
-        let prime_booking_data = await primebooking.find({}).sort({createdAt:-1}).limit(50)
+        let prime_booking_data = await primebooking.find({bookingOpenFLag: true}).sort({createdAt:-1}).limit(50)
        // console.log(req_data)
         let match_id_list = []
         let prime_booking_list = []
@@ -371,6 +371,7 @@ router.post('/api/admin/primebooking/create', async (req,res)=>{
             let obj = await primebooking.create({
                 matchId: req.body.matchId.toString(),
                 sportIndex: req.body.sportIndex,
+                bookingOpenFLag: true,
                 primeUserData: []
             })
 
@@ -427,6 +428,38 @@ router.post('/api/primebooking/book', async (req,res)=>{
                 })
                 return;
             }
+        }
+        else 
+        {
+            res.status(201).json({
+                status:'fail',
+                message:'Match is not opened for prime team booking!'
+            })
+        }
+    }
+    catch(e)
+    {
+        res.status(404).json({
+            status:'fail',
+            message:'Something Went Wrong!'
+        })
+    }
+})
+
+//close booking api 
+router.post('/api/primebookig/modify', async (req,res)=>{
+    try{
+        let req_obj = await primebooking.findOne({matchId: req.body.matchId.toString()})
+        let primeBookingFlag = req.body.primeBookingFlag.toString();
+        let primeBookingBooleanFlag = primeBookingFlag === 'false'  ? false : true;
+        if(req_obj !== null)
+        {
+            req_obj.bookingOpenFLag = primeBookingBooleanFlag;
+            await req_obj.save();
+            res.status(200).json({
+                status:'success',
+                message:'Prime booking updated successfully!'
+            })
         }
         else 
         {
@@ -504,6 +537,7 @@ router.get('/api/primebooking/booked/userdata/:matchid', async(req,res)=>{
             res.status(200).json({
                 status:'success',
                 primeUserData: req_prime_user_data,
+                bookingOpenFLag: req_obj.bookingOpenFLag,
                 message:'Prime Booked User Data Fetched Successfully!'
             })
         }

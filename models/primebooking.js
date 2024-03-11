@@ -14,6 +14,11 @@ const PrimeBookingSchema =  new mongoose.Schema({
         type:Array,
         required:true 
     },
+    bookingOpenFLag:{
+        type:Boolean,
+        required: true,
+        default: true
+    },
     createdAt:{
         type:Date,
         default:Date.now
