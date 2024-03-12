@@ -533,7 +533,6 @@ router.post('/api/automatic/addteam', async(req,res)=>{
         })
     }
 })
- 
 
 
 // router.get('/api/mapper/getdata/:tgMatchId', async (req,res)=>{

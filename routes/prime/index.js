@@ -4,6 +4,7 @@ const primeplan = require('../../models/primeplan')
 const primeuser = require('../../models/primeuser')
 const primeteam = require('../../models/primeteam')
 const primebooking = require('../../models/primebooking')
+const utildb = require('../../models/Utility')
 const user = require('../../models/user')
 const notify = require('../../models/notify')
 const router = express.Router()
@@ -523,8 +524,10 @@ router.get('/api/primebooking/status/:matchid/:phonenumber', async (req,res)=>{
 router.get('/api/primebooking/booked/userdata/:matchid', async(req,res)=>{
     try{
         let req_obj = await primebooking.findOne({matchId: req.params.matchid})
-        if(req_obj !== null)
+        let util_obj_list = await utildb.find({})
+        if(req_obj !== null && util_obj_list.length>0)
         {
+            let util_obj = util_obj_list[0]
             let primeUserData = req_obj.primeUserData 
             let req_prime_user_data = []
             for(let i=0;i<primeUserData.length;i++)
@@ -538,6 +541,7 @@ router.get('/api/primebooking/booked/userdata/:matchid', async(req,res)=>{
                 status:'success',
                 primeUserData: req_prime_user_data,
                 bookingOpenFLag: req_obj.bookingOpenFLag,
+                transferLineStatus: util_obj.transferLine,
                 message:'Prime Booked User Data Fetched Successfully!'
             })
         }
@@ -554,6 +558,35 @@ router.get('/api/primebooking/booked/userdata/:matchid', async(req,res)=>{
         res.status(404).json({
             status:'fail',
             message:'Something Went Wrong!'
+        })
+    }
+})
+
+router.post('/api/primebooking/transferline/modify', async (req,res)=>{
+    try{
+        let util_obj_list = await utildb.find({})
+        if(util_obj_list.length>0){
+            let util_obj = util_obj_list[0];
+            util_obj.transferLine = req.body.transferLineStatus;
+            await util_obj.save();
+            res.status(200).json({
+                status:'success',
+                transferLineStatus: req.body.transferLineStatus,
+                message:'Transfer line updated successfully!'
+            })
+        }
+        else{
+            res.status(404).json({
+                status:'fail',
+                message:'Something went wrong!'
+            })
+        }
+
+    }
+    catch(e){
+        res.status(404).json({
+            status:'fail',
+            message:'Something went wrong!'
         })
     }
 })
