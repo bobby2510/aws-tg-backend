@@ -383,6 +383,12 @@ router.post('/api/automatic/prime-line', async (req,res)=>{
     }
 })
 
+router.get('/api/automatic/getloaddata', async (req,res)=>{
+    res.status(200).json({
+        status:'success',
+        data: [mainLoadBalance,mainLoadMatchId,secondLoadBalance,secondLoadMatchId]
+    })
+})
 //add team to the dream11
 //main line
 router.post('/api/automatic/addteam/main', async(req,res)=>{
