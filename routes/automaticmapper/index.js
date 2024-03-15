@@ -9,6 +9,21 @@ var CryptoJS = require("crypto-js");
 
 const router = express.Router();
 
+let vp_array=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+//static stuff 
+let mainLoadBalance = []
+let mainLoadMatchId = []
+//second
+let secondLoadBalance = []
+let secondLoadMatchId = []
+
+let create_load = (matchId)=>{
+    mainLoadBalance.push({ matchId: matchId, loadArray:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],createdAt: Date.now()})
+    secondLoadBalance.push({ matchId: matchId, loadArray:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],createdAt: Date.now()})
+    mainLoadMatchId.push(matchId)
+    secondLoadMatchId.push(matchId)
+}
+
 let getActualDate = (date_value)=>{
     let first = date_value.split(" ")[0];
     let second = date_value.split(" ")[1];
@@ -49,6 +64,29 @@ router.post('/api/automaticmapper/create', async (req,res)=>{
         }
         else{
             let req_obj = await automaticMapper.create({tgMatchId:tgMatchId,beatfantasyMatchId:beatfantasyMatchId,perfectlineupMatchId:perfectlineupMatchId, playerMapperData: playerMapperData})
+            
+            //updating the older load objects
+            //delete older ones 
+            mainLoadBalance = mainLoadBalance.filter(d =>{
+                let left = new Date(d.createdAt)
+                let right = new Date(Date.now())
+                let hours = (right-left)/3600000;
+                if(hours<24) return true;
+                else return false;
+            })
+            secondLoadBalance = secondLoadBalance.filter(d =>{
+                let left = new Date(d.createdAt)
+                let right = new Date(Date.now())
+                let hours = (right-left)/3600000;
+                if(hours<24) return true;
+                else return false;
+            })
+            mainLoadMatchId = mainLoadBalance.map(d=> d.matchId)
+            secondLoadMatchId = secondLoadBalance.map(d=> d.matchId)
+            //create new if needed
+            if(!mainLoadMatchId.includes(tgMatchId)){
+                create_load(tgMatchId)
+            }
             res.status(200).json({
                 status:'success',
                 data: { tgMatchId:tgMatchId},
@@ -346,90 +384,38 @@ router.post('/api/automatic/prime-line', async (req,res)=>{
 })
 
 //add team to the dream11
-router.post('/api/automatic/addteam', async(req,res)=>{
+//main line
+router.post('/api/automatic/addteam/main', async(req,res)=>{
     try{
         let tg_id = req.body.tgMatchId.toString();
-        let generateLinkFlag = req.body.generateLinkFlag;
-        let current_lines = ['9848579715','6281735219']
-        let line_index = 0;
+        let index = mainLoadMatchId.indexOf(tg_id)
+        if(index===-1){
+            create_load(tg_id);
+            index = mainLoadMatchId.indexOf(tg_id)
+        }
         let player_data = req.body.playerData;
         let captain_data = req.body.captainData;
         let vice_captain_data = req.body.vicecaptainData;
         let automatic_obj = await automaticdb.find({tgMatchId: tg_id})
         let pl_hash_obj_list = await utildb.find({})
         let pl_hash = pl_hash_obj_list[0].perfectLineupHash;
-        let transferLine = pl_hash_obj_list[0].transferLine;
-        // console.log(automatic_obj[0], pl_hash)
         if(automatic_obj.length>0){
-            let load_obj_one_list  = await loadbalancedb.find({tgMatchId: tg_id, mobileNumber: current_lines[0]})
-            let load_obj_two_list  = await loadbalancedb.find({tgMatchId: tg_id,  mobileNumber: current_lines[1]})
-            let load_obj_one = load_obj_one_list[0]
-            let load_obj_two = load_obj_two_list[0]
-           // console.log(load_obj_one,load_obj_two)
-            let load_obj = [load_obj_one,];
-            //console.log(load_obj)
-            if(load_obj_one && load_obj_two){
-                //do some decisions here 
-                if(transferLine === 'all-lines' && generateLinkFlag === 'general'){
-                    let cnt_one=0,cnt_two=0;
-                    for(let i=0;i<load_obj_one.loadArray.length;i++)
-                    {
-                        if(load_obj_one.loadArray[i]===1) cnt_one++;
-                    }
-                    for(let i=0;i<load_obj_two.loadArray.length;i++)
-                    {
-                        if(load_obj_two.loadArray[i]===1) cnt_two++;
-                    }
-                    if(cnt_one<=cnt_two){
-                        load_obj = [load_obj_one,];
-                        line_index=0;
-                    }
-                    else{
-                        load_obj = [load_obj_two,];
-                        line_index = 1;
-                    }
-                    //console.log('we are here')
-                }
-                else if(transferLine === 'main-line' && generateLinkFlag === 'general'){
-                    load_obj = [load_obj_one,];
-                    line_index = 0;
-                }
-                else if(transferLine === 'all-lines' && generateLinkFlag === 'prime'){
-                    load_obj = [load_obj_two,];
-                    line_index = 1;
-                }
-                else{
-                    load_obj = [load_obj_two,];
-                    line_index = 1;
-                }
-                if(line_index === 1)
-                pl_hash =  pl_hash_obj_list[0].perfectLineupHashTwo;
-
-              //  console.log(transferLine,generateLinkFlag,line_index)
                 let req_automatic_obj = automatic_obj[0];
-                let req_load_obj = load_obj[0];
-              //  console.log(pl_hash)
-                //find the load balancer team no 
                 let flag_index = -1;
                 for(let i=1;i<=20;i++){
-                    if(load_obj[0].loadArray[i]===0){
+                    if(mainLoadBalance[index].loadArray[i]===0){
                         flag_index = i;
-                        load_obj[0].loadArray[i] = 1;
+                        mainLoadBalance[index].loadArray[i] = 1;
                         break;
                     }
                 }
                 if(flag_index === -1){
-                    load_obj[0].loadArray[flag_index]=0;
-                    await load_obj[0].save();
                     res.status(403).json({
                         status:'fail',
                         message:'Please try again!!'
                     })
                     return;
                 }
-                await load_obj[0].save();
-                //console.log(flag_index)
-                //console.log('hi')
                 let url = `https://plapi.perfectlineup.in/fantasy/api/save_team`;
                 let pl_obj = {
                     website_id: "1",
@@ -442,7 +428,6 @@ router.post('/api/automatic/addteam', async(req,res)=>{
                     tp_team_id: flag_index,
                     tname: `T${flag_index}`
                 }
-                //console.log(pl_obj)
                 axios.post(
                     url, pl_obj,
                     {
@@ -452,30 +437,21 @@ router.post('/api/automatic/addteam', async(req,res)=>{
                         }
                     }
                 ).then(async (pl_res) => {
-                     //  console.log('hi hello')
-                        // now call the beatfantasy here get the share link
-                      //  console.log(req_automatic_obj.beatfantasyMatchId)
                         let bf_url = `https://w3u2jlhyj6.execute-api.us-east-1.amazonaws.com/prod/experts/sync-teams`
                         let bf_obj = {
                             match_id: req_automatic_obj.beatfantasyMatchId,
-                            mobile_number: parseInt(current_lines[line_index]),
+                            mobile_number: 9848579715,
                             source: 'dream-xi',
                             sport: 'cricket',
                             teams:[]
                         }
-                       // console.log('hi hello')
                         axios.post(bf_url,bf_obj).then(async bf_res=>{
                             let req_teams = bf_res.data.teams;
-                          //  console.log(req_teams)
                             for(let i=0;i<req_teams.length;i++){
-
-                              //  console.log(req_teams[i].unique_key.toString(),flag_index.toString())
                                 if(req_teams[i].unique_key.toString() === flag_index.toString()){
-                                    load_obj[0].loadArray[flag_index]=0;
-                                    await load_obj[0].save();
+                                    mainLoadBalance[index].loadArray[flag_index]=0;
                                     let password = "coder_bobby_believer01_tg_software";
                                     let stuff_data = CryptoJS.AES.encrypt(JSON.stringify({"link": req_teams[i].link}),password).toString();
-                                   // console.log(req_teams[i].link)
                                     res.status(200).json({
                                         status:'success',      
                                         data: stuff_data,
@@ -484,38 +460,31 @@ router.post('/api/automatic/addteam', async(req,res)=>{
                                     return;
                                 }
                             }
-                            load_obj[0].loadArray[flag_index]=0;
-                            await load_obj[0].save();
+                            mainLoadBalance[index].loadArray[flag_index]=0;
                             res.status(201).json({
                                 status:'fail',
                                 message:'Error while fetching the data!'
                             })
                         })
                         .catch(async a=>{
-                            load_obj[0].loadArray[flag_index]=0;
-                            await load_obj[0].save();
+                            mainLoadBalance[index].loadArray[flag_index]=0;
                             res.status(201).json({
                                 status:'fail',
                                 message:'Error while shfiting the team!'
                             })
                             return;
                         })
-                  
                   })
                 .catch(async (err) => {
-                    load_obj[0].loadArray[flag_index]=0;
-                    await load_obj[0].save();
+                    mainLoadBalance[index].loadArray[flag_index]=0;
                     res.status(201).json({
                         status:'fail',
                         message:'Error while shfiting the team!'
                     })
                     return;
                   })
-            }
         }
         else{
-           // load_obj[0].loadArray[flag_index]=0;
-           // await load_obj[0].save();
             res.status(201).json({
                 status:'fail',
                 message:'Error while shfiting the team!'
@@ -524,8 +493,6 @@ router.post('/api/automatic/addteam', async(req,res)=>{
         }
     }
     catch(e){
-      //  load_obj[0].loadArray[flag_index]=0;
-      //  await load_obj[0].save();
       console.log(e)
         res.status(404).json({
             status:'fail',
@@ -534,6 +501,311 @@ router.post('/api/automatic/addteam', async(req,res)=>{
     }
 })
 
+//second
+router.post('/api/automatic/addteam/second', async(req,res)=>{
+    try{
+        let tg_id = req.body.tgMatchId.toString();
+        let index = secondLoadMatchId.indexOf(tg_id)
+        if(index===-1){
+            create_load(tg_id);
+            index = secondLoadMatchId.indexOf(tg_id)
+        }
+        let player_data = req.body.playerData;
+        let captain_data = req.body.captainData;
+        let vice_captain_data = req.body.vicecaptainData;
+        let automatic_obj = await automaticdb.find({tgMatchId: tg_id})
+        let pl_hash_obj_list = await utildb.find({})
+        let pl_hash = pl_hash_obj_list[0].perfectLineupHashTwo;
+        if(automatic_obj.length>0){
+                let req_automatic_obj = automatic_obj[0];
+                let flag_index = -1;
+                for(let i=1;i<=20;i++){
+                    if(secondLoadBalance[index].loadArray[i]===0){
+                        flag_index = i;
+                        secondLoadBalance[index].loadArray[i] = 1;
+                        break;
+                    }
+                }
+                if(flag_index === -1){
+                    res.status(403).json({
+                        status:'fail',
+                        message:'Please try again!!'
+                    })
+                    return;
+                }
+                let url = `https://plapi.perfectlineup.in/fantasy/api/save_team`;
+                let pl_obj = {
+                    website_id: "1",
+                    season_game_uid: req_automatic_obj.perfectLineupMatchId.toString(),
+                    league_id: req_automatic_obj.leagueId.toString(),
+                    player_ids:  player_data.map(p=> p.toString()),
+                    c_id: captain_data.toString(),
+                    vc_id: vice_captain_data.toString(),
+                    is_replace: 1,
+                    tp_team_id: flag_index,
+                    tname: `T${flag_index}`
+                }
+                axios.post(
+                    url, pl_obj,
+                    {
+                        headers: {
+                          Sessionkey: pl_hash,
+                          Moduleaccess: 7
+                        }
+                    }
+                ).then(async (pl_res) => {
+                        let bf_url = `https://w3u2jlhyj6.execute-api.us-east-1.amazonaws.com/prod/experts/sync-teams`
+                        let bf_obj = {
+                            match_id: req_automatic_obj.beatfantasyMatchId,
+                            mobile_number: 6281735219,
+                            source: 'dream-xi',
+                            sport: 'cricket',
+                            teams:[]
+                        }
+                        axios.post(bf_url,bf_obj).then(async bf_res=>{
+                            let req_teams = bf_res.data.teams;
+                            for(let i=0;i<req_teams.length;i++){
+                                if(req_teams[i].unique_key.toString() === flag_index.toString()){
+                                    secondLoadBalance[index].loadArray[flag_index]=0;
+                                    let password = "coder_bobby_believer01_tg_software";
+                                    let stuff_data = CryptoJS.AES.encrypt(JSON.stringify({"link": req_teams[i].link}),password).toString();
+                                    res.status(200).json({
+                                        status:'success',      
+                                        data: stuff_data,
+                                        message:"team fetched successfully!"
+                                    })
+                                    return;
+                                }
+                            }
+                            secondLoadBalance[index].loadArray[flag_index]=0;
+                            res.status(201).json({           
+                                status:'fail',
+                                message:'Error while fetching the data!'
+                            })
+                        })
+                        .catch(async a=>{
+                            secondLoadBalance[index].loadArray[flag_index]=0;
+                            res.status(201).json({
+                                status:'fail',
+                                message:'Error while shfiting the team!'
+                            })
+                            return;
+                        })
+                  })
+                .catch(async (err) => {
+                    secondLoadBalance[index].loadArray[flag_index]=0;
+                    res.status(201).json({
+                        status:'fail',
+                        message:'Error while shfiting the team!'
+                    })
+                    return;
+                  })
+        }
+        else{
+            res.status(201).json({
+                status:'fail',
+                message:'Error while shfiting the team!'
+            })
+            return;
+        }
+    }
+    catch(e){
+      console.log(e)
+        res.status(404).json({
+            status:'fail',
+            message:'Something went wrong!'
+        })
+    }
+})
+
+//old
+// router.post('/api/automatic/addteam', async(req,res)=>{
+//     try{
+//         let tg_id = req.body.tgMatchId.toString();
+//         let generateLinkFlag = req.body.generateLinkFlag;
+//         let current_lines = ['9848579715','6281735219']
+//         let line_index = 0;
+//         let player_data = req.body.playerData;
+//         let captain_data = req.body.captainData;
+//         let vice_captain_data = req.body.vicecaptainData;
+//         let automatic_obj = await automaticdb.find({tgMatchId: tg_id})
+//         let pl_hash_obj_list = await utildb.find({})
+//         let pl_hash = pl_hash_obj_list[0].perfectLineupHash;
+//         let transferLine = pl_hash_obj_list[0].transferLine;
+//         // console.log(automatic_obj[0], pl_hash)
+//         if(automatic_obj.length>0){
+//             let load_obj_one_list  = await loadbalancedb.find({tgMatchId: tg_id, mobileNumber: current_lines[0]})
+//             let load_obj_two_list  = await loadbalancedb.find({tgMatchId: tg_id,  mobileNumber: current_lines[1]})
+//             let load_obj_one = load_obj_one_list[0]
+//             let load_obj_two = load_obj_two_list[0]
+//            // console.log(load_obj_one,load_obj_two)
+//             let load_obj = [load_obj_one,];
+//             //console.log(load_obj)
+//             if(load_obj_one && load_obj_two){
+//                 //do some decisions here 
+//                 if(transferLine === 'all-lines' && generateLinkFlag === 'general'){
+//                     let cnt_one=0,cnt_two=0;
+//                     for(let i=0;i<load_obj_one.loadArray.length;i++)
+//                     {
+//                         if(load_obj_one.loadArray[i]===1) cnt_one++;
+//                     }
+//                     for(let i=0;i<load_obj_two.loadArray.length;i++)
+//                     {
+//                         if(load_obj_two.loadArray[i]===1) cnt_two++;
+//                     }
+//                     if(cnt_one<=cnt_two){
+//                         load_obj = [load_obj_one,];
+//                         line_index=0;
+//                     }
+//                     else{
+//                         load_obj = [load_obj_two,];
+//                         line_index = 1;
+//                     }
+//                     //console.log('we are here')
+//                 }
+//                 else if(transferLine === 'main-line' && generateLinkFlag === 'general'){
+//                     load_obj = [load_obj_one,];
+//                     line_index = 0;
+//                 }
+//                 else if(transferLine === 'all-lines' && generateLinkFlag === 'prime'){
+//                     load_obj = [load_obj_two,];
+//                     line_index = 1;
+//                 }
+//                 else{
+//                     load_obj = [load_obj_two,];
+//                     line_index = 1;
+//                 }
+//                 if(line_index === 1)
+//                 pl_hash =  pl_hash_obj_list[0].perfectLineupHashTwo;
+
+//               //  console.log(transferLine,generateLinkFlag,line_index)
+//                 let req_automatic_obj = automatic_obj[0];
+//                 let req_load_obj = load_obj[0];
+//               //  console.log(pl_hash)
+//                 //find the load balancer team no 
+//                 let flag_index = -1;
+//                 for(let i=1;i<=20;i++){
+//                     if(load_obj[0].loadArray[i]===0){
+//                         flag_index = i;
+//                         load_obj[0].loadArray[i] = 1;
+//                         break;
+//                     }
+//                 }
+//                 if(flag_index === -1){
+//                     load_obj[0].loadArray[flag_index]=0;
+//                     await load_obj[0].save();
+//                     res.status(403).json({
+//                         status:'fail',
+//                         message:'Please try again!!'
+//                     })
+//                     return;
+//                 }
+//                 await load_obj[0].save();
+//                 //console.log(flag_index)
+//                 //console.log('hi')
+//                 let url = `https://plapi.perfectlineup.in/fantasy/api/save_team`;
+//                 let pl_obj = {
+//                     website_id: "1",
+//                     season_game_uid: req_automatic_obj.perfectLineupMatchId.toString(),
+//                     league_id: req_automatic_obj.leagueId.toString(),
+//                     player_ids:  player_data.map(p=> p.toString()),
+//                     c_id: captain_data.toString(),
+//                     vc_id: vice_captain_data.toString(),
+//                     is_replace: 1,
+//                     tp_team_id: flag_index,
+//                     tname: `T${flag_index}`
+//                 }
+//                 //console.log(pl_obj)
+//                 axios.post(
+//                     url, pl_obj,
+//                     {
+//                         headers: {
+//                           Sessionkey: pl_hash,
+//                           Moduleaccess: 7
+//                         }
+//                     }
+//                 ).then(async (pl_res) => {
+//                      //  console.log('hi hello')
+//                         // now call the beatfantasy here get the share link
+//                       //  console.log(req_automatic_obj.beatfantasyMatchId)
+//                         let bf_url = `https://w3u2jlhyj6.execute-api.us-east-1.amazonaws.com/prod/experts/sync-teams`
+//                         let bf_obj = {
+//                             match_id: req_automatic_obj.beatfantasyMatchId,
+//                             mobile_number: parseInt(current_lines[line_index]),
+//                             source: 'dream-xi',
+//                             sport: 'cricket',
+//                             teams:[]
+//                         }
+//                        // console.log('hi hello')
+//                         axios.post(bf_url,bf_obj).then(async bf_res=>{
+//                             let req_teams = bf_res.data.teams;
+//                           //  console.log(req_teams)
+//                             for(let i=0;i<req_teams.length;i++){
+
+//                               //  console.log(req_teams[i].unique_key.toString(),flag_index.toString())
+//                                 if(req_teams[i].unique_key.toString() === flag_index.toString()){
+//                                     load_obj[0].loadArray[flag_index]=0;
+//                                     await load_obj[0].save();
+//                                     let password = "coder_bobby_believer01_tg_software";
+//                                     let stuff_data = CryptoJS.AES.encrypt(JSON.stringify({"link": req_teams[i].link}),password).toString();
+//                                    // console.log(req_teams[i].link)
+//                                     res.status(200).json({
+//                                         status:'success',      
+//                                         data: stuff_data,
+//                                         message:"team fetched successfully!"
+//                                     })
+//                                     return;
+//                                 }
+//                             }
+//                             load_obj[0].loadArray[flag_index]=0;
+//                             await load_obj[0].save();
+//                             res.status(201).json({
+//                                 status:'fail',
+//                                 message:'Error while fetching the data!'
+//                             })
+//                         })
+//                         .catch(async a=>{
+//                             load_obj[0].loadArray[flag_index]=0;
+//                             await load_obj[0].save();
+//                             res.status(201).json({
+//                                 status:'fail',
+//                                 message:'Error while shfiting the team!'
+//                             })
+//                             return;
+//                         })
+                  
+//                   })
+//                 .catch(async (err) => {
+//                     load_obj[0].loadArray[flag_index]=0;
+//                     await load_obj[0].save();
+//                     res.status(201).json({
+//                         status:'fail',
+//                         message:'Error while shfiting the team!'
+//                     })
+//                     return;
+//                   })
+//             }
+//         }
+//         else{
+//            // load_obj[0].loadArray[flag_index]=0;
+//            // await load_obj[0].save();
+//             res.status(201).json({
+//                 status:'fail',
+//                 message:'Error while shfiting the team!'
+//             })
+//             return;
+//         }
+//     }
+//     catch(e){
+//       //  load_obj[0].loadArray[flag_index]=0;
+//       //  await load_obj[0].save();
+//       console.log(e)
+//         res.status(404).json({
+//             status:'fail',
+//             message:'Something went wrong!'
+//         })
+//     }
+// })
 
 // router.get('/api/mapper/getdata/:tgMatchId', async (req,res)=>{
 //     try{

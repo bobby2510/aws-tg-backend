@@ -5,6 +5,7 @@ const expert = require('./../../models/expert')
 const prediction = require('./../../models/prediction')
 const video = require('../../models/video')
 const dream11mapper = require('../../models/dream11mapper')
+const utildb = require('../../models/Utility')
 
 const router = express.Router()
 
@@ -76,6 +77,8 @@ router.get('/api/expert/getteams/:id',async (req,res)=>{
 router.get('/api/expert/teamlist',async (req,res)=>{
     try{
         let req_data = await team.find({}).sort({createdAt:-1}).limit(50)
+        let util_db_list = await utildb.find({})
+        let util_db_obj = util_db_list[0]
         let prediction_req_data = await prediction.find({}).sort({createdAt: -1}).limit(50)
         let video_req_data = await video.find({}).sort({createdAt: -1}).limit(50)
         let dream11mapper_req_data = await dream11mapper.find({}).sort({createdAt: -1}).limit(50);
@@ -118,6 +121,7 @@ router.get('/api/expert/teamlist',async (req,res)=>{
             expertPredictionData: prediction_id_list,
             expertVideoData: video_id_list,
             dream11MapperData: dream11_id_list,
+            transferLine: util_db_obj.transferLine,
             message:'Matchlist for expert teams and prediction fetched successfully!'
         })
     }
