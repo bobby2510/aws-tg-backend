@@ -111,16 +111,21 @@ router.get('/api/automatic/first_stage/list',async (req,res)=>{
        
        if(obj.length>0 && obj[0].dream11Hash){
         let first_part = 'https://www.beatfantasy.com/_next/data/'
-        let second_part = '/experts/activate-matches/cricket.json?sport=cricket'
-        let req_url = `${first_part}${obj[0].dream11Hash}${second_part}`
+        let second_part = '/experts/Beatfantasy/cricket.json'
+        //temp stuff
+        let first_temp_part = 'https://www.beatfantasy.com/_next/data/'
+        let second_temp_part = '/experts/Beatfantasy/cricket.json?expert_name=Beatfantasy&sport=cricket'
+        let req_url = `${first_temp_part}${obj[0].dream11Hash}${second_temp_part}`
         let response = await axios.get(req_url, {
             headers: {
-              Cookie: 'userData=%7B%22mobile%22%3A%229848579715%22%7D'
+             // Cookie: 'userData=%7B%22mobile%22%3A%229848579715%22%7D'
             }
            })
        // console.log(response)
-        let req_list = response.data.pageProps.matchDetailsAPIResponse;
+        let req_list = response.data.pageProps.matchDetailsAPIResponse.matches; //extra matches
+        req_list = req_list.filter(d=> d.status === 'NOT_STARTED') // extra
         let req_data = []
+      //  console.log(req_list)
       //  console.log(req_list)
         req_list.forEach(match=>{
             req_data.push({
