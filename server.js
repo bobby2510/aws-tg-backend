@@ -26,6 +26,7 @@ const tempdbRouter = require('./routes/tempdb/index').router;
 const reportRouter = require('./routes/report/index')
 const dream11MapperRouter = require('./routes/dream11Mapper/index')
 const automaticMapperRouter = require('./routes/automaticmapper/index')
+const dream11ClassicRouter  = require('./routes/classicDream11/index')
 const getDream11Hash = require('./routes/tempdb/index').getDream11Hash
 
 app.use(cors())
@@ -42,6 +43,7 @@ app.use('/',tempdbRouter)
 app.use('/',reportRouter)
 app.use('/',dream11MapperRouter)
 app.use('/',automaticMapperRouter)
+app.use('/',dream11ClassicRouter)
 
 setInterval(getDream11Hash,1000*300)
 
