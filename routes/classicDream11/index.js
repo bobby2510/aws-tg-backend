@@ -3,24 +3,28 @@ const automaticMapper = require('./../../models/automaticmapper')
 const utildb = require('./../../models/Utility')
 const axios = require('axios')
 var CryptoJS = require("crypto-js");
-
 const router = express.Router();
-
-
-//function to fetch the match list by sport flag 
-
-
 router.get('/api/classic/dream11/match-list/:sport', async (req,res)=>{
     try{
         let sport = req.params.sport;
         let class_dream11_match_list_url = 'https://www.dream11.com/graphql/query/react-native/shme-upcoming-matches';
         let util_db_list = await utildb.find({})
         let auth_token = util_db_list[0].classic_dream11_token_one;
-     //   console.log(auth_token)
         let header_data =  {
             headers: {
-              authorization: `Bearer ${auth_token}`,
-              version: `1337`,
+              "Authorization": `Bearer eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImdqZDNkektfdW1CN0dFYllJa0RWaDBfdkt2WSJ9.eyJhdWQiOlsiYXBpLmRyZWFtMTEuY29tIiwiZ3VhcmRpYW4iXSwiZXhwIjoxNzI2Mzk0MTEyLCJpYXQiOjE3MTA4NDIxMTIsImlzcyI6ImRyZWFtMTEuY29tIiwic3ViIjoiMTQxMjIyNDcwIiwiYXpwIjoiMiIsInJmdCI6IjEifQ.DmHN-W2ljDsbp0ZeeJ9RXfpyhKgXKuy4kmwWa49CaT7kw6qMi9F_kHX6jyu5Cn7e2VjO7iipABgGmqnf4VgNNV3Db-JYeuwz3UsIhn_R2c0YWN4eNAPMs8Ix1mJJm5xHfIqXCea-KM8YZXyde7ys-F56Ndvc_IbdWyicTYtDt8ZhmQBKAqrDCQbiUY17fIqUqCYo1BxtQL32eaz6pQgca5Uot_eG-trdF-v0ic0NM8MTLCdISfpCykL3iKwLHUsMgeWiKdtwNsceGkfWGi2DSZn3ovhX1M0M3b4uydnE17isl_xoqtwQ7WNv-09Z6F5FECGh2g4LwZTKCC0YM3Jx7w`,
+              'Content-Type': 'application/json',
+                "guest-id": "14c3cb3c-5093-463d-a5a3-c1bbbb631565",
+                "app_version":"5.21.2",
+                "device": "androidfull",
+                "deviceid":"2d3ea3da5cc24097",
+                "locale":"en-US",
+                "siteid":"1",
+                "user-agent":"Dalvik/2.1.0 (Linux; U; Android 9; SM-G977N Build/LMY48Z)",
+                "a1":"thmG6ty/YjwvaSxJjnrUBX0wxTkPx1dSoAytzrOiLXY2E7ApiLiQMv9cA90Zyd6P25si46bw/8aI1YcMlAzcRAjof+WxYXOqYaBzJQawgVGs9Hy+/xeXQdmCeb+p+eTUnUQEkGBY9KkS4V9B+cYeqa/uLp+CdR7XfTmBUEQHV+I=",
+                "ek1":"0gBwPxY/tGPOUkphuqAKzA==",
+                "ek2":"thmG6ty/YjwvaSxJjnrUBef3IMF1L3fMQtB0JiLya/o=",
+                "version":1337
             }
         }
         let req_obj = {
@@ -40,29 +44,65 @@ router.get('/api/classic/dream11/match-list/:sport', async (req,res)=>{
                 "excludedTourIdsForSuggestedTourMatches": []
             }
         }
-       // console.log(req_obj,auth_token)
-        //calling the api 
         await axios.post(class_dream11_match_list_url,req_obj,header_data)
-        .then(res=>{
-            res.status(404).json({
-                status:'success',
-                data:res.data,
-                message:'Error while fetching data'
-            })
+        .then(response=>{
+              res.status(200).json({
+            status:'success',
+            data:response.data,
+            message:'Error while fetching data'
+        })
         })
         .catch(e=>{
+            console.log(e)
             res.status(404).json({
                 status:'fail',
                 message:'Something went wrong'
             })
         })
-      
     }
     catch(e){
         res.status(404).json({
             status:'fail',
             message:'Error while fetching data'
         })
+    }
+})
+
+router.get('/api/getotp',async (req,res)=>{
+    try{
+        let auth_url = 'https://api.dream11.com/auth/passwordless/init'
+        let auth_vp_data = {
+            "phoneNumber": "6281735219",
+            "channel": "sms"
+        }
+        
+        axios.post(auth_url, auth_vp_data,{
+            headers: {
+                'Content-Type': 'application/json',
+                "guest-id": "14c3cb3c-5093-463d-a5a3-c1bbbb631565",
+                "app_version":"5.21.2",
+                "device": "androidfull",
+                "deviceid":"2d3ea3da5cc24097",
+                "locale":"en-US",
+                "siteid":"1",
+                "user-agent":"Dalvik/2.1.0 (Linux; U; Android 9; SM-G977N Build/LMY48Z)",
+                "a1":"thmG6ty/YjwvaSxJjnrUBX0wxTkPx1dSoAytzrOiLXY2E7ApiLiQMv9cA90Zyd6P25si46bw/8aI1YcMlAzcRAjof+WxYXOqYaBzJQawgVGs9Hy+/xeXQdmCeb+p+eTUnUQEkGBY9KkS4V9B+cYeqa/uLp+CdR7XfTmBUEQHV+I=",
+                "ek1":"0gBwPxY/tGPOUkphuqAKzA==",
+                "ek2":"thmG6ty/YjwvaSxJjnrUBef3IMF1L3fMQtB0JiLya/o=",
+                "version":1337
+            },
+           
+        })      
+        .then((response) => {
+            console.log(response.data)
+        })
+        .catch((error) => {
+            console.log('error dream11')
+        })
+
+    }
+    catch(e){
+        console.log('error')
     }
 })
 
