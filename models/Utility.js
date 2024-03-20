@@ -24,6 +24,11 @@ const UtilsSchema =  new mongoose.Schema({
         required: true,
         default:'empty'
     },
+    classic_dream11_token_two:{
+        type: String,
+        required: true,
+        default:'empty'
+    },
     transferLine:{
         type:String,
         required: true,
