@@ -15,6 +15,7 @@ const router = express.Router()
 // post for creatng the promotion
 router.post('/api/promotion/create',async (req,res)=>{
     try{
+        return;
         let temp = {
             label: req.body.label,
             imageUrl: req.body.imageUrl,
@@ -47,6 +48,7 @@ router.post('/api/promotion/create',async (req,res)=>{
 //update promotion
 router.put('/api/promotion/edit/:id',async (req,res)=>{
     try{
+        return;
         let promotion_obj = await promotion.findById(req.params.id);
         if(promotion_obj){
             promotion_obj.label = req.body.label,
