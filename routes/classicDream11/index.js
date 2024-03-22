@@ -182,289 +182,304 @@ let get_classic_dream11_player_list = async (matchId,sport,tourId)=>{
         return null;
     }
 }
-
 //classic dream11 mapper 
-let classic_dream11_mapper = async ()=>{
-   try{
-    remove_old_load();
-    let cricket_api = 'https://json.myfab11.com/fantasy/games-cricket-active.json';
-    let football_api = 'https://json.myfab11.com/fantasy/games-football-active.json';
-    let kabaddi_api = 'https://json.myfab11.com/fantasy/games-kabaddi-active.json';
-    let tg_cricket_data = await axios.get(cricket_api);
-    let tg_football_data = await axios.get(football_api);
-    let tg_kabaddi_data = await axios.get(kabaddi_api);
-    let d11_cricket_data = await get_classic_dream11_match_list("cricket")
-    let d11_football_data = await get_classic_dream11_match_list("football")
-    let d11_kabaddi_data = await get_classic_dream11_match_list("kabaddi")
-    //cricket 
-    let tg_cricket_match_list = []
-    tg_cricket_data.data.result.games.forEach((match)=>{
-        if(match.mode === 'regular'){
-            tg_cricket_match_list.push(
-                {
-                    id:match.id,
-                    left_team_name:match.home_team_code,
-                    right_team_name:match.away_team_code,
-                    left_team_image:match.home_team.logo,
-                    right_team_image:match.away_team.logo,
-                    series_name: match.tournament.name,
-                    match_time: match.game_date,
-                    lineup_out:match.lineup_out,
-                }
-            )
-        }
-    })
-    for(let i=0;i<d11_cricket_data.length;i++){
-        let dp = d11_cricket_data[i];
-        let d_value = dp.left_shortcut_name.toString().toLowerCase()+dp.right_shortcut_name.toString().toLowerCase();
-        for(let j=0;j<tg_cricket_match_list.length;j++){
-            let fp = tg_cricket_match_list[j]
-            let f_value = fp.left_team_name.toString().toLowerCase()+fp.right_team_name.toString().toLowerCase(); //false after ipl
-            if((d_value === f_value) || (dp.tour_name.toString()=== fp.series_name.toString() === 'Indian T20 League')){
-                //we find the match here 
-                let d11_player_data = await get_classic_dream11_player_list(dp.d11_match_id,'cricket',dp.tour_id)
-                let f_link = 'https://json.myfab11.com/fantasy/game/playerlist-'+fp.id.toString()+'.json'
-                let f11_player_data = await axios.get(f_link)
-                let f11_player_list = []
-                let d11_player_list = d11_player_data.player_list;
-               // console.log(f11_player_data.data)
-                for(let k=0;k<f11_player_data.data.game.away_team.players.length;k++){
-                    let obj = f11_player_data.data.game.away_team.players[k]
-                    f11_player_list.push({
-                        tg_player_id: obj.id,
-                        name: obj.name
-                    })
-                }
-                for(let k=0;k<f11_player_data.data.game.home_team.players.length;k++){
-                    let obj = f11_player_data.data.game.home_team.players[k]
-                    f11_player_list.push({
-                        tg_player_id: obj.id,
-                        name: obj.name
-                    })
-                }
-               // console.log(f11_player_list,d11_player_list)
-                let req_player_mapper_list = [];
-                for(let k=0;k<f11_player_list.length;k++){
-                    let fab_player = f11_player_list[k];
-                    for(let a=0;a<d11_player_list.length;a++){
-                        let dream_player = d11_player_list[a]
-                        if(fab_player.name.toString().toLowerCase()===dream_player.player_name.toString().toLowerCase()){
-                            req_player_mapper_list.push({
-                                tgPlayerId: fab_player.tg_player_id,
-                                dream11PlayerId: dream_player.d11_player_id
-                            })
+let classic_dream11_cricket_mapper = async ()=>{
+    try{
+        remove_old_load();
+        let cricket_api = 'https://json.myfab11.com/fantasy/games-cricket-active.json';
+        let tg_cricket_data = await axios.get(cricket_api);
+        let d11_cricket_data = await get_classic_dream11_match_list("cricket")
+        //cricket 
+        let tg_cricket_match_list = []
+        tg_cricket_data.data.result.games.forEach((match)=>{
+            if(match.mode === 'regular'){
+                tg_cricket_match_list.push(
+                    {
+                        id:match.id,
+                        left_team_name:match.home_team_code,
+                        right_team_name:match.away_team_code,
+                        left_team_image:match.home_team.logo,
+                        right_team_image:match.away_team.logo,
+                        series_name: match.tournament.name,
+                        match_time: match.game_date,
+                        lineup_out:match.lineup_out,
+                    }
+                )
+            }
+        })
+       // console.log(tg_cricket_match_list)
+        for(let i=0;i<d11_cricket_data.length;i++){
+            let dp = d11_cricket_data[i];
+            let d_value = dp.left_shortcut_name.toString().toLowerCase()+dp.right_shortcut_name.toString().toLowerCase();
+            for(let j=0;j<tg_cricket_match_list.length;j++){
+                let fp = tg_cricket_match_list[j]
+                let f_value = fp.left_team_name.toString().toLowerCase()+fp.right_team_name.toString().toLowerCase();
+                let ipl_flag = (dp.tour_name.toString()=== 'Indian T20 League' && fp.series_name.toString() === 'Indian T20 League'); // false after ipl
+                console.log(ipl_flag)
+                if((d_value === f_value) || ipl_flag){
+                    //we find the match here 
+                    let d11_player_data = await get_classic_dream11_player_list(dp.d11_match_id,'cricket',dp.tour_id)
+                    let f_link = 'https://json.myfab11.com/fantasy/game/playerlist-'+fp.id.toString()+'.json'
+                    let f11_player_data = await axios.get(f_link)
+                    let f11_player_list = []
+                    let d11_player_list = d11_player_data.player_list;
+                   // console.log(f11_player_data.data)
+                    for(let k=0;k<f11_player_data.data.game.away_team.players.length;k++){
+                        let obj = f11_player_data.data.game.away_team.players[k]
+                        f11_player_list.push({
+                            tg_player_id: obj.id,
+                            name: obj.name
+                        })
+                    }
+                    for(let k=0;k<f11_player_data.data.game.home_team.players.length;k++){
+                        let obj = f11_player_data.data.game.home_team.players[k]
+                        f11_player_list.push({
+                            tg_player_id: obj.id,
+                            name: obj.name
+                        })
+                    }
+                   // console.log(f11_player_list,d11_player_list)
+                    let req_player_mapper_list = [];
+                    for(let k=0;k<f11_player_list.length;k++){
+                        let fab_player = f11_player_list[k];
+                        for(let a=0;a<d11_player_list.length;a++){
+                            let dream_player = d11_player_list[a]
+                            if(fab_player.name.toString().toLowerCase()===dream_player.player_name.toString().toLowerCase()){
+                                req_player_mapper_list.push({
+                                    tgPlayerId: fab_player.tg_player_id,
+                                    dream11PlayerId: dream_player.d11_player_id
+                                })
+                            }
                         }
                     }
-                }
-                //console.log(req_player_mapper_list)
-                let req_mapper_obj = {}
-                req_mapper_obj["sport"]="cricket";
-                req_mapper_obj["tgMatchId"]=fp.id;
-                req_mapper_obj["dream11MatchId"]=dp.d11_match_id;
-                req_mapper_obj["tourId"] = dp.tour_id
-                req_mapper_obj["playerMapping"] = req_player_mapper_list;
-                let vp_check_list = await classicDream11Mapper.find({tgMatchId:fp.id.toString()})
-                if(vp_check_list.length>0){
-                    let vp_check = vp_check_list[0];
-                    vp_check.tgMatchId = fp.id;
-                    vp_check.dream11MatchId = dp.d11_match_id;
-                    vp_check.tourId = dp.tour_id;
-                    vp_check.playerMapping = req_player_mapper_list;
-                    vp_check.createdAt = Date.now()
-                    await vp_check.save()
-                }
-                else{
-                    await classicDream11Mapper.create(req_mapper_obj);
-                }
-                //create new if needed
-                if(!mainLoadMatchIdClassic.includes(fp.id.toString())){
-                    create_load(fp.id.toString())
+                    //console.log(req_player_mapper_list)
+                    let req_mapper_obj = {}
+                    req_mapper_obj["sport"]="cricket";
+                    req_mapper_obj["tgMatchId"]=fp.id;
+                    req_mapper_obj["dream11MatchId"]=dp.d11_match_id;
+                    req_mapper_obj["tourId"] = dp.tour_id
+                    req_mapper_obj["playerMapping"] = req_player_mapper_list;
+                    let vp_check_list = await classicDream11Mapper.find({tgMatchId:fp.id.toString()})
+                    if(vp_check_list.length>0){
+                        let vp_check = vp_check_list[0];
+                        vp_check.tgMatchId = fp.id;
+                        vp_check.dream11MatchId = dp.d11_match_id;
+                        vp_check.tourId = dp.tour_id;
+                        vp_check.playerMapping = req_player_mapper_list;
+                        vp_check.createdAt = Date.now()
+                        await vp_check.save()
+                    }
+                    else{
+                        await classicDream11Mapper.create(req_mapper_obj);
+                    }
+                    //create new if needed
+                    if(!mainLoadMatchIdClassic.includes(fp.id.toString())){
+                        create_load(fp.id.toString())
+                    }
                 }
             }
         }
     }
-  //  console.log('cricket data added')
-    //football
-    let tg_football_match_list = []
-    tg_football_data.data.result.games.forEach((match)=>{
-        if(match.mode === 'regular'){
-            tg_football_match_list.push(
-                {
-                    id:match.id,
-                    left_team_name:match.home_team_code,
-                    right_team_name:match.away_team_code,
-                    left_team_image:match.home_team.logo,
-                    right_team_image:match.away_team.logo,
-                    series_name: match.tournament.name,
-                    match_time: match.game_date,
-                    lineup_out:match.lineup_out,
-                }
-            )
-        }
-    })
-    for(let i=0;i<d11_football_data.length;i++){
-        let dp = d11_football_data[i];
-        let d_value = dp.left_shortcut_name.toString().toLowerCase()+dp.right_shortcut_name.toString().toLowerCase();
-        for(let j=0;j<tg_football_match_list.length;j++){
-            let fp = tg_football_match_list[j]
-            let f_value = fp.left_team_name.toString().toLowerCase()+fp.right_team_name.toString().toLowerCase();
-            if(d_value === f_value){
-                //we find the match here 
-                let d11_player_data = await get_classic_dream11_player_list(dp.d11_match_id,'football',dp.tour_id)
-                let f_link = 'https://json.myfab11.com/fantasy/game/playerlist-'+fp.id.toString()+'.json'
-                let f11_player_data = await axios.get(f_link)
-                let f11_player_list = []
-                let d11_player_list = d11_player_data.player_list;
-               // console.log(f11_player_data.data)
-                for(let k=0;k<f11_player_data.data.game.away_team.players.length;k++){
-                    let obj = f11_player_data.data.game.away_team.players[k]
-                    f11_player_list.push({
-                        tg_player_id: obj.id,
-                        name: obj.name
-                    })
-                }
-                for(let k=0;k<f11_player_data.data.game.home_team.players.length;k++){
-                    let obj = f11_player_data.data.game.home_team.players[k]
-                    f11_player_list.push({
-                        tg_player_id: obj.id,
-                        name: obj.name
-                    })
-                }
-               // console.log(f11_player_list,d11_player_list)
-                let req_player_mapper_list = [];
-                for(let k=0;k<f11_player_list.length;k++){
-                    let fab_player = f11_player_list[k];
-                    for(let a=0;a<d11_player_list.length;a++){
-                        let dream_player = d11_player_list[a]
-                        if(fab_player.name.toString().toLowerCase()===dream_player.player_name.toString().toLowerCase()){
-                            req_player_mapper_list.push({
-                                tgPlayerId: fab_player.tg_player_id,
-                                dream11PlayerId: dream_player.d11_player_id
-                            })
-                        }
-                    }
-                }
-              //  console.log(req_player_mapper_list)
-                let req_mapper_obj = {}
-                req_mapper_obj["sport"]="football";
-                req_mapper_obj["tgMatchId"]=fp.id;
-                req_mapper_obj["dream11MatchId"]=dp.d11_match_id;
-                req_mapper_obj["tourId"] = dp.tour_id
-                req_mapper_obj["playerMapping"] = req_player_mapper_list;
-                let vp_check_list = await classicDream11Mapper.find({tgMatchId:fp.id.toString()})
-                if(vp_check_list.length>0){
-                    let vp_check = vp_check_list[0];
-                    vp_check.tgMatchId = fp.id;
-                    vp_check.dream11MatchId = dp.d11_match_id;
-                    vp_check.tourId = dp.tour_id;
-                    vp_check.playerMapping = req_player_mapper_list;
-                    vp_check.createdAt = Date.now()
-                    await vp_check.save()
-                }
-                else{
-                    await classicDream11Mapper.create(req_mapper_obj);
-                }
-                //create new if needed
-                if(!mainLoadMatchIdClassic.includes(fp.id.toString())){
-                create_load(fp.id.toString())
-                }  
-            }
-        }
+    catch(e){
+        console.log(e)
     }
-   // console.log('football data added')
-    //kabaddi
-    let tg_kabaddi_match_list = []
-    tg_kabaddi_data.data.result.games.forEach((match)=>{
-        if(match.mode === 'regular'){
-            tg_kabaddi_match_list.push(
-                {
-                    id:match.id,
-                    left_team_name:match.home_team_code,
-                    right_team_name:match.away_team_code,
-                    left_team_image:match.home_team.logo,
-                    right_team_image:match.away_team.logo,
-                    series_name: match.tournament.name,
-                    match_time: match.game_date,
-                    lineup_out:match.lineup_out,
-                }
-            )
-        }
-    })
-    for(let i=0;i<d11_kabaddi_data.length;i++){
-        let dp = d11_kabaddi_data[i];
-        let d_value = dp.left_shortcut_name.toString().toLowerCase()+dp.right_shortcut_name.toString().toLowerCase();
-        for(let j=0;j<tg_kabaddi_match_list.length;j++){
-            let fp = tg_kabaddi_match_list[j]
-            let f_value = fp.left_team_name.toString().toLowerCase()+fp.right_team_name.toString().toLowerCase();
-            if(d_value === f_value){
-                //we find the match here 
-                let d11_player_data = await get_classic_dream11_player_list(dp.d11_match_id,'kabaddi',dp.tour_id)
-                let f_link = 'https://json.myfab11.com/fantasy/game/playerlist-'+fp.id.toString()+'.json'
-                let f11_player_data = await axios.get(f_link)
-                let f11_player_list = []
-                let d11_player_list = d11_player_data.player_list;
-               // console.log(f11_player_data.data)
-                for(let k=0;k<f11_player_data.data.game.away_team.players.length;k++){
-                    let obj = f11_player_data.data.game.away_team.players[k]
-                    f11_player_list.push({
-                        tg_player_id: obj.id,
-                        name: obj.name
-                    })
-                }
-                for(let k=0;k<f11_player_data.data.game.home_team.players.length;k++){
-                    let obj = f11_player_data.data.game.home_team.players[k]
-                    f11_player_list.push({
-                        tg_player_id: obj.id,
-                        name: obj.name
-                    })
-                }
-               // console.log(f11_player_list,d11_player_list)
-                let req_player_mapper_list = [];
-                for(let k=0;k<f11_player_list.length;k++){
-                    let fab_player = f11_player_list[k];
-                    for(let a=0;a<d11_player_list.length;a++){
-                        let dream_player = d11_player_list[a]
-                        if(fab_player.name.toString().toLowerCase()===dream_player.player_name.toString().toLowerCase()){
-                            req_player_mapper_list.push({
-                                tgPlayerId: fab_player.tg_player_id,
-                                dream11PlayerId: dream_player.d11_player_id
-                            })
-                        }
-                    }
-                }
-              //  console.log(req_player_mapper_list)
-                let req_mapper_obj = {}
-                req_mapper_obj["sport"]="kabaddi";
-                req_mapper_obj["tgMatchId"]=fp.id;
-                req_mapper_obj["dream11MatchId"]=dp.d11_match_id;
-                req_mapper_obj["tourId"] = dp.tour_id
-                req_mapper_obj["playerMapping"] = req_player_mapper_list;
-                let vp_check_list = await classicDream11Mapper.find({tgMatchId:fp.id.toString()})
-                if(vp_check_list.length>0){
-                    let vp_check = vp_check_list[0];
-                    vp_check.tgMatchId = fp.id;
-                    vp_check.dream11MatchId = dp.d11_match_id;
-                    vp_check.tourId = dp.tour_id;
-                    vp_check.playerMapping = req_player_mapper_list;
-                    vp_check.createdAt = Date.now()
-                    await vp_check.save()
-                }
-                else{
-                    await classicDream11Mapper.create(req_mapper_obj);
-                }
-                //create new if needed
-                if(!mainLoadMatchIdClassic.includes(fp.id.toString())){
-                create_load(fp.id.toString())
-                }  
-            }
-        }
+}
+//football
+let classic_dream11_football_mapper = async ()=>{
+    try{
+        let football_api = 'https://json.myfab11.com/fantasy/games-football-active.json';
+        let tg_football_data = await axios.get(football_api);
+        let d11_football_data = await get_classic_dream11_match_list("football")
+          //football
+          let tg_football_match_list = []
+          tg_football_data.data.result.games.forEach((match)=>{
+              if(match.mode === 'regular'){
+                  tg_football_match_list.push(
+                      {
+                          id:match.id,
+                          left_team_name:match.home_team_code,
+                          right_team_name:match.away_team_code,
+                          left_team_image:match.home_team.logo,
+                          right_team_image:match.away_team.logo,
+                          series_name: match.tournament.name,
+                          match_time: match.game_date,
+                          lineup_out:match.lineup_out,
+                      }
+                  )
+              }
+          })
+          for(let i=0;i<d11_football_data.length;i++){
+              let dp = d11_football_data[i];
+              let d_value = dp.left_shortcut_name.toString().toLowerCase()+dp.right_shortcut_name.toString().toLowerCase();
+              for(let j=0;j<tg_football_match_list.length;j++){
+                  let fp = tg_football_match_list[j]
+                  let f_value = fp.left_team_name.toString().toLowerCase()+fp.right_team_name.toString().toLowerCase();
+                  if(d_value === f_value){
+                      //we find the match here 
+                      let d11_player_data = await get_classic_dream11_player_list(dp.d11_match_id,'football',dp.tour_id)
+                      let f_link = 'https://json.myfab11.com/fantasy/game/playerlist-'+fp.id.toString()+'.json'
+                      let f11_player_data = await axios.get(f_link)
+                      let f11_player_list = []
+                      let d11_player_list = d11_player_data.player_list;
+                     // console.log(f11_player_data.data)
+                      for(let k=0;k<f11_player_data.data.game.away_team.players.length;k++){
+                          let obj = f11_player_data.data.game.away_team.players[k]
+                          f11_player_list.push({
+                              tg_player_id: obj.id,
+                              name: obj.name
+                          })
+                      }
+                      for(let k=0;k<f11_player_data.data.game.home_team.players.length;k++){
+                          let obj = f11_player_data.data.game.home_team.players[k]
+                          f11_player_list.push({
+                              tg_player_id: obj.id,
+                              name: obj.name
+                          })
+                      }
+                     // console.log(f11_player_list,d11_player_list)
+                      let req_player_mapper_list = [];
+                      for(let k=0;k<f11_player_list.length;k++){
+                          let fab_player = f11_player_list[k];
+                          for(let a=0;a<d11_player_list.length;a++){
+                              let dream_player = d11_player_list[a]
+                              if(fab_player.name.toString().toLowerCase()===dream_player.player_name.toString().toLowerCase()){
+                                  req_player_mapper_list.push({
+                                      tgPlayerId: fab_player.tg_player_id,
+                                      dream11PlayerId: dream_player.d11_player_id
+                                  })
+                              }
+                          }
+                      }
+                    //  console.log(req_player_mapper_list)
+                      let req_mapper_obj = {}
+                      req_mapper_obj["sport"]="football";
+                      req_mapper_obj["tgMatchId"]=fp.id;
+                      req_mapper_obj["dream11MatchId"]=dp.d11_match_id;
+                      req_mapper_obj["tourId"] = dp.tour_id
+                      req_mapper_obj["playerMapping"] = req_player_mapper_list;
+                      let vp_check_list = await classicDream11Mapper.find({tgMatchId:fp.id.toString()})
+                      if(vp_check_list.length>0){
+                          let vp_check = vp_check_list[0];
+                          vp_check.tgMatchId = fp.id;
+                          vp_check.dream11MatchId = dp.d11_match_id;
+                          vp_check.tourId = dp.tour_id;
+                          vp_check.playerMapping = req_player_mapper_list;
+                          vp_check.createdAt = Date.now()
+                          await vp_check.save()
+                      }
+                      else{
+                          await classicDream11Mapper.create(req_mapper_obj);
+                      }
+                      //create new if needed
+                      if(!mainLoadMatchIdClassic.includes(fp.id.toString())){
+                      create_load(fp.id.toString())
+                      }  
+                  }
+              }
+          }
     }
+    catch(e){
 
-   }
-   catch(e){
-    //console.log('error')
-   }
-    //console.log('Kabaddi data added')
+    }
+}
+//kabaddi 
+let classic_dream11_kabaddi_mapper = async ()=>{
+    try{
+        let kabaddi_api = 'https://json.myfab11.com/fantasy/games-kabaddi-active.json';
+        let tg_kabaddi_data = await axios.get(kabaddi_api);
+        let d11_kabaddi_data = await get_classic_dream11_match_list("kabaddi")
+         //kabaddi
+         let tg_kabaddi_match_list = []
+         tg_kabaddi_data.data.result.games.forEach((match)=>{
+             if(match.mode === 'regular'){
+                 tg_kabaddi_match_list.push(
+                     {
+                         id:match.id,
+                         left_team_name:match.home_team_code,
+                         right_team_name:match.away_team_code,
+                         left_team_image:match.home_team.logo,
+                         right_team_image:match.away_team.logo,
+                         series_name: match.tournament.name,
+                         match_time: match.game_date,
+                         lineup_out:match.lineup_out,
+                     }
+                 )
+             }
+         })
+         for(let i=0;i<d11_kabaddi_data.length;i++){
+             let dp = d11_kabaddi_data[i];
+             let d_value = dp.left_shortcut_name.toString().toLowerCase()+dp.right_shortcut_name.toString().toLowerCase();
+             for(let j=0;j<tg_kabaddi_match_list.length;j++){
+                 let fp = tg_kabaddi_match_list[j]
+                 let f_value = fp.left_team_name.toString().toLowerCase()+fp.right_team_name.toString().toLowerCase();
+                 if(d_value === f_value){
+                     //we find the match here 
+                     let d11_player_data = await get_classic_dream11_player_list(dp.d11_match_id,'kabaddi',dp.tour_id)
+                     let f_link = 'https://json.myfab11.com/fantasy/game/playerlist-'+fp.id.toString()+'.json'
+                     let f11_player_data = await axios.get(f_link)
+                     let f11_player_list = []
+                     let d11_player_list = d11_player_data.player_list;
+                    // console.log(f11_player_data.data)
+                     for(let k=0;k<f11_player_data.data.game.away_team.players.length;k++){
+                         let obj = f11_player_data.data.game.away_team.players[k]
+                         f11_player_list.push({
+                             tg_player_id: obj.id,
+                             name: obj.name
+                         })
+                     }
+                     for(let k=0;k<f11_player_data.data.game.home_team.players.length;k++){
+                         let obj = f11_player_data.data.game.home_team.players[k]
+                         f11_player_list.push({
+                             tg_player_id: obj.id,
+                             name: obj.name
+                         })
+                     }
+                    // console.log(f11_player_list,d11_player_list)
+                     let req_player_mapper_list = [];
+                     for(let k=0;k<f11_player_list.length;k++){
+                         let fab_player = f11_player_list[k];
+                         for(let a=0;a<d11_player_list.length;a++){
+                             let dream_player = d11_player_list[a]
+                             if(fab_player.name.toString().toLowerCase()===dream_player.player_name.toString().toLowerCase()){
+                                 req_player_mapper_list.push({
+                                     tgPlayerId: fab_player.tg_player_id,
+                                     dream11PlayerId: dream_player.d11_player_id
+                                 })
+                             }
+                         }
+                     }
+                   //  console.log(req_player_mapper_list)
+                     let req_mapper_obj = {}
+                     req_mapper_obj["sport"]="kabaddi";
+                     req_mapper_obj["tgMatchId"]=fp.id;
+                     req_mapper_obj["dream11MatchId"]=dp.d11_match_id;
+                     req_mapper_obj["tourId"] = dp.tour_id
+                     req_mapper_obj["playerMapping"] = req_player_mapper_list;
+                     let vp_check_list = await classicDream11Mapper.find({tgMatchId:fp.id.toString()})
+                     if(vp_check_list.length>0){
+                         let vp_check = vp_check_list[0];
+                         vp_check.tgMatchId = fp.id;
+                         vp_check.dream11MatchId = dp.d11_match_id;
+                         vp_check.tourId = dp.tour_id;
+                         vp_check.playerMapping = req_player_mapper_list;
+                         vp_check.createdAt = Date.now()
+                         await vp_check.save()
+                     }
+                     else{
+                         await classicDream11Mapper.create(req_mapper_obj);
+                     }
+                     //create new if needed
+                     if(!mainLoadMatchIdClassic.includes(fp.id.toString())){
+                     create_load(fp.id.toString())
+                     }  
+                 }
+             }
+         }
+     
+        }
+        catch(e){
+         console.log(e)
+        }
 }
 //remove classic dream11 mappers 
 let remove_classic_dream11_mapper = async ()=>{
@@ -479,7 +494,9 @@ let remove_classic_dream11_mapper = async ()=>{
         }
     }
 }
-setInterval(classic_dream11_mapper,1000*300)
+setInterval(classic_dream11_cricket_mapper,1000*300)
+setInterval(classic_dream11_football_mapper,1000*300)
+setInterval(classic_dream11_kabaddi_mapper,1000*300)
 setInterval(remove_classic_dream11_mapper,1000*60*60)
 //api info
 //match list
