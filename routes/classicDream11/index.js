@@ -219,8 +219,8 @@ let classic_dream11_mapper = async ()=>{
         let d_value = dp.left_shortcut_name.toString().toLowerCase()+dp.right_shortcut_name.toString().toLowerCase();
         for(let j=0;j<tg_cricket_match_list.length;j++){
             let fp = tg_cricket_match_list[j]
-            let f_value = fp.left_team_name.toString().toLowerCase()+fp.right_team_name.toString().toLowerCase();
-            if(d_value === f_value){
+            let f_value = fp.left_team_name.toString().toLowerCase()+fp.right_team_name.toString().toLowerCase(); //false after ipl
+            if((d_value === f_value) || (dp.tour_name.toString()=== fp.series_name.toString() === 'Indian T20 League')){
                 //we find the match here 
                 let d11_player_data = await get_classic_dream11_player_list(dp.d11_match_id,'cricket',dp.tour_id)
                 let f_link = 'https://json.myfab11.com/fantasy/game/playerlist-'+fp.id.toString()+'.json'
