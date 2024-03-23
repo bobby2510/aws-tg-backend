@@ -112,16 +112,17 @@ router.post('/api/auth/login',async (req,res)=>{
                         }
                        
                     }
+                    
                     user_obj.markModified('loginHistory')
                     await user_obj.save()
-                    if(blocked === true )
+                    if(false && blocked === true )
                     {
                         res.status(201).json({
                             status:'fail',
                             message:'Your Account has been blocked, contact whatsapp: 9848579715'
                         })  
                     }
-                    if(limitReached===true)
+                    if(false && limitReached===true) //for now ignore
                     {
                         res.status(201).json({
                             status:'fail',

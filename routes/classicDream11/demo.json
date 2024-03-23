@@ -1,0 +1,4181 @@
+{
+	"data": {
+		"match": {
+			"squads": [{
+				"id": 6956,
+				"name": "RRR",
+				"shortName": "RRR",
+				"playerTextBgColor": "#ffffff",
+				"playerTextFontColor": "#000000"
+			}, {
+				"id": 6954,
+				"name": "NLL",
+				"shortName": "NLL",
+				"playerTextBgColor": "#000000",
+				"playerTextFontColor": "#ffffff"
+			}],
+			"status": "NOT_STARTED",
+			"getAllTeamsShared": {
+				"pageInfo": {
+					"nextPage": 2,
+					"previousPage": null,
+					"eventId": "1711088500"
+				},
+				"teams": [
+                    {
+					"expertDetails": {
+						"id": 141809103,
+						"name": "Special11 Champions",
+						"guruScore": 9.1,
+						"profilePicUrl": "https://userassets.dream11.com/fbprofilepic/4abeb4c9a02c5dddb6f14efa08b6733cf0a6c14a_profilepic.jpg?timestamp=1711087200000",
+						"helpedUserWinAmount": 0,
+						"teamsPickedCount": 35005451
+					},
+					"teamCloneCount": 5076,
+					"playerRoles": [{
+						"color": "#F5A623",
+						"name": "Captain",
+						"pointMultiplier": 2,
+						"shortName": "C",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+						}],
+						"id": 1
+					}, {
+						"color": "#4A90E2",
+						"name": "Vice Captain",
+						"pointMultiplier": 1.5,
+						"shortName": "VC",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+						}],
+						"id": 2
+					}],
+					"players": [{
+						"id": 967,
+						"name": "Syed Quadri",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/967.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 161810,
+						"name": "Kandi-Shashikanth Reddy",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/161810.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164821,
+						"name": "Sameer Shaik",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164821.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164825,
+						"name": "Gnaneshwar Singh",
+						"nameInitial": "G",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164825.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164827,
+						"name": "Mohammed Abdul Subhan",
+						"nameInitial": "M",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164827.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164828,
+						"name": "Khadeer",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164828.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164831,
+						"name": "Faiz Ahmed",
+						"nameInitial": "F",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164831.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": {
+							"id": 2,
+							"pointMultiplier": 1.5,
+							"name": "Vice Captain",
+							"shortName": "VC",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164926,
+						"name": "Clement Napier Nagle",
+						"nameInitial": "C",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 7,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164926.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 3,
+							"name": "WK",
+							"shortName": "WK"
+						}
+					}, {
+						"id": 164931,
+						"name": "Rambabu Sarlana",
+						"nameInitial": "R",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164931.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": {
+							"id": 1,
+							"pointMultiplier": 2,
+							"name": "Captain",
+							"shortName": "C",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164935,
+						"name": "Siva Nagaraju Vemareddy",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164935.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164936,
+						"name": "Vishal Sharma",
+						"nameInitial": "V",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164936.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}],
+					"snapshotId": "583fa79643094a2c1126b03688cef142d9025e0f",
+					"teamId": 1,
+					"teamStatus": "PICKED",
+					"contestTypePill": "MEGA",
+					"expertTeamUpdatedAt": "2024-03-21T13:26:48.194+0000",
+					"userTeamId": 0
+				}, {
+					"expertDetails": {
+						"id": 72765979,
+						"name": "Sipul Expert",
+						"guruScore": 9.1,
+						"profilePicUrl": "https://userassets.dream11.com/fbprofilepic/ce4cab2fafd8cb6981d13fac7d7178eff3a5208d_profilepic.jpg?timestamp=1711087200000",
+						"helpedUserWinAmount": 0,
+						"teamsPickedCount": 17861949
+					},
+					"teamCloneCount": 2138,
+					"playerRoles": [{
+						"color": "#F5A623",
+						"name": "Captain",
+						"pointMultiplier": 2,
+						"shortName": "C",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+						}],
+						"id": 1
+					}, {
+						"color": "#4A90E2",
+						"name": "Vice Captain",
+						"pointMultiplier": 1.5,
+						"shortName": "VC",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+						}],
+						"id": 2
+					}],
+					"players": [{
+						"id": 967,
+						"name": "Syed Quadri",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/967.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 161810,
+						"name": "Kandi-Shashikanth Reddy",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/161810.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164821,
+						"name": "Sameer Shaik",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164821.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164825,
+						"name": "Gnaneshwar Singh",
+						"nameInitial": "G",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164825.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164827,
+						"name": "Mohammed Abdul Subhan",
+						"nameInitial": "M",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164827.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164828,
+						"name": "Khadeer",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164828.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164831,
+						"name": "Faiz Ahmed",
+						"nameInitial": "F",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164831.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": {
+							"id": 2,
+							"pointMultiplier": 1.5,
+							"name": "Vice Captain",
+							"shortName": "VC",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164924,
+						"name": "Ananth Madabushi",
+						"nameInitial": "A",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164924.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164926,
+						"name": "Clement Napier Nagle",
+						"nameInitial": "C",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 7,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164926.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 3,
+							"name": "WK",
+							"shortName": "WK"
+						}
+					}, {
+						"id": 164931,
+						"name": "Rambabu Sarlana",
+						"nameInitial": "R",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164931.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": {
+							"id": 1,
+							"pointMultiplier": 2,
+							"name": "Captain",
+							"shortName": "C",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164936,
+						"name": "Vishal Sharma",
+						"nameInitial": "V",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164936.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}],
+					"snapshotId": "1f7d4df77976548bea76e341efb1c741302bb17a",
+					"teamId": 1,
+					"teamStatus": "PICKED",
+					"contestTypePill": "MEGA",
+					"expertTeamUpdatedAt": "2024-03-21T13:07:21.202+0000",
+					"userTeamId": 0
+				}, {
+					"expertDetails": {
+						"id": 26670184,
+						"name": "King Ebru",
+						"guruScore": 9,
+						"profilePicUrl": "https://userassets.dream11.com/fbprofilepic/f7f941278382dc04782a05bdc3799a2640a42b06_profilepic.jpg?timestamp=1711087200000",
+						"helpedUserWinAmount": 0,
+						"teamsPickedCount": 7664230
+					},
+					"teamCloneCount": 1066,
+					"playerRoles": [{
+						"color": "#F5A623",
+						"name": "Captain",
+						"pointMultiplier": 2,
+						"shortName": "C",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+						}],
+						"id": 1
+					}, {
+						"color": "#4A90E2",
+						"name": "Vice Captain",
+						"pointMultiplier": 1.5,
+						"shortName": "VC",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+						}],
+						"id": 2
+					}],
+					"players": [{
+						"id": 967,
+						"name": "Syed Quadri",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/967.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 161810,
+						"name": "Kandi-Shashikanth Reddy",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/161810.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164821,
+						"name": "Sameer Shaik",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164821.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164825,
+						"name": "Gnaneshwar Singh",
+						"nameInitial": "G",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164825.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164827,
+						"name": "Mohammed Abdul Subhan",
+						"nameInitial": "M",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164827.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164828,
+						"name": "Khadeer",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164828.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164831,
+						"name": "Faiz Ahmed",
+						"nameInitial": "F",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164831.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164926,
+						"name": "Clement Napier Nagle",
+						"nameInitial": "C",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 7,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164926.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 3,
+							"name": "WK",
+							"shortName": "WK"
+						}
+					}, {
+						"id": 164931,
+						"name": "Rambabu Sarlana",
+						"nameInitial": "R",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164931.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": {
+							"id": 1,
+							"pointMultiplier": 2,
+							"name": "Captain",
+							"shortName": "C",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164935,
+						"name": "Siva Nagaraju Vemareddy",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164935.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": {
+							"id": 2,
+							"pointMultiplier": 1.5,
+							"name": "Vice Captain",
+							"shortName": "VC",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164936,
+						"name": "Vishal Sharma",
+						"nameInitial": "V",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164936.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}],
+					"snapshotId": "3f54c5ed705b5e250bf6f6479c76c6b53530dca1",
+					"teamId": 1,
+					"teamStatus": "PICKED",
+					"contestTypePill": "MEGA",
+					"expertTeamUpdatedAt": "2024-03-21T06:58:26.889+0000",
+					"userTeamId": 0
+				}, {
+					"expertDetails": {
+						"id": 34289664,
+						"name": "Amit Winnerclub",
+						"guruScore": 8.9,
+						"profilePicUrl": "https://userassets.dream11.com/fbprofilepic/9c4e9ef2f756ed858515d4887b8c82a4a67c3f9e_profilepic.jpg?timestamp=1711087200000",
+						"helpedUserWinAmount": 0,
+						"teamsPickedCount": 12965048
+					},
+					"teamCloneCount": 76,
+					"playerRoles": [{
+						"color": "#F5A623",
+						"name": "Captain",
+						"pointMultiplier": 2,
+						"shortName": "C",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+						}],
+						"id": 1
+					}, {
+						"color": "#4A90E2",
+						"name": "Vice Captain",
+						"pointMultiplier": 1.5,
+						"shortName": "VC",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+						}],
+						"id": 2
+					}],
+					"players": [{
+						"id": 967,
+						"name": "Syed Quadri",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/967.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 161810,
+						"name": "Kandi-Shashikanth Reddy",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/161810.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164821,
+						"name": "Sameer Shaik",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164821.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164825,
+						"name": "Gnaneshwar Singh",
+						"nameInitial": "G",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164825.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164827,
+						"name": "Mohammed Abdul Subhan",
+						"nameInitial": "M",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164827.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164828,
+						"name": "Khadeer",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164828.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164831,
+						"name": "Faiz Ahmed",
+						"nameInitial": "F",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164831.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": {
+							"id": 2,
+							"pointMultiplier": 1.5,
+							"name": "Vice Captain",
+							"shortName": "VC",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164926,
+						"name": "Clement Napier Nagle",
+						"nameInitial": "C",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 7,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164926.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 3,
+							"name": "WK",
+							"shortName": "WK"
+						}
+					}, {
+						"id": 164931,
+						"name": "Rambabu Sarlana",
+						"nameInitial": "R",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164931.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": {
+							"id": 1,
+							"pointMultiplier": 2,
+							"name": "Captain",
+							"shortName": "C",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164935,
+						"name": "Siva Nagaraju Vemareddy",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164935.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164936,
+						"name": "Vishal Sharma",
+						"nameInitial": "V",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164936.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}],
+					"snapshotId": "a2b91c5dc33531d34742212cfb933972eddbdeff",
+					"teamId": 1,
+					"teamStatus": "PICKED",
+					"contestTypePill": "MEGA",
+					"expertTeamUpdatedAt": "2024-03-21T12:46:16.857+0000",
+					"userTeamId": 0
+				}, {
+					"expertDetails": {
+						"id": 37783900,
+						"name": "Evildead King",
+						"guruScore": 8.9,
+						"profilePicUrl": "https://userassets.dream11.com/fbprofilepic/e00b77140836c5ba35f3d79c24b27895579a3244_profilepic.jpg?timestamp=1711087200000",
+						"helpedUserWinAmount": 0,
+						"teamsPickedCount": 13780450
+					},
+					"teamCloneCount": 97,
+					"playerRoles": [{
+						"color": "#F5A623",
+						"name": "Captain",
+						"pointMultiplier": 2,
+						"shortName": "C",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+						}],
+						"id": 1
+					}, {
+						"color": "#4A90E2",
+						"name": "Vice Captain",
+						"pointMultiplier": 1.5,
+						"shortName": "VC",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+						}],
+						"id": 2
+					}],
+					"players": [{
+						"id": 967,
+						"name": "Syed Quadri",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/967.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164821,
+						"name": "Sameer Shaik",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164821.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164825,
+						"name": "Gnaneshwar Singh",
+						"nameInitial": "G",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164825.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164827,
+						"name": "Mohammed Abdul Subhan",
+						"nameInitial": "M",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164827.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164828,
+						"name": "Khadeer",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164828.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164831,
+						"name": "Faiz Ahmed",
+						"nameInitial": "F",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164831.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": {
+							"id": 2,
+							"pointMultiplier": 1.5,
+							"name": "Vice Captain",
+							"shortName": "VC",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164926,
+						"name": "Clement Napier Nagle",
+						"nameInitial": "C",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 7,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164926.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 3,
+							"name": "WK",
+							"shortName": "WK"
+						}
+					}, {
+						"id": 164931,
+						"name": "Rambabu Sarlana",
+						"nameInitial": "R",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164931.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": {
+							"id": 1,
+							"pointMultiplier": 2,
+							"name": "Captain",
+							"shortName": "C",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164935,
+						"name": "Siva Nagaraju Vemareddy",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164935.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164936,
+						"name": "Vishal Sharma",
+						"nameInitial": "V",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164936.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 165563,
+						"name": "Abdul Faheem",
+						"nameInitial": "A",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/default-player-image.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}],
+					"snapshotId": "796c45c39d62743ef5b267eea1adb727cc98da4a",
+					"teamId": 1,
+					"teamStatus": "PICKED",
+					"contestTypePill": "MEGA",
+					"expertTeamUpdatedAt": "2024-03-21T16:14:21.314+0000",
+					"userTeamId": 0
+				}, {
+					"expertDetails": {
+						"id": 97561621,
+						"name": "Conquers Guru",
+						"guruScore": 8.8,
+						"profilePicUrl": "https://userassets.dream11.com/fbprofilepic/cc2bdf2b6f92609bd340e4f7d65c9b0bd82f2a72_profilepic.jpg?timestamp=1711087200000",
+						"helpedUserWinAmount": 0,
+						"teamsPickedCount": 54145217
+					},
+					"teamCloneCount": 526,
+					"playerRoles": [{
+						"color": "#F5A623",
+						"name": "Captain",
+						"pointMultiplier": 2,
+						"shortName": "C",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+						}],
+						"id": 1
+					}, {
+						"color": "#4A90E2",
+						"name": "Vice Captain",
+						"pointMultiplier": 1.5,
+						"shortName": "VC",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+						}],
+						"id": 2
+					}],
+					"players": [{
+						"id": 967,
+						"name": "Syed Quadri",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/967.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 161810,
+						"name": "Kandi-Shashikanth Reddy",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/161810.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164819,
+						"name": "Taher Bin Jaffar",
+						"nameInitial": "T",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164819.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164821,
+						"name": "Sameer Shaik",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164821.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164825,
+						"name": "Gnaneshwar Singh",
+						"nameInitial": "G",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164825.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164828,
+						"name": "Khadeer",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164828.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164831,
+						"name": "Faiz Ahmed",
+						"nameInitial": "F",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164831.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": {
+							"id": 2,
+							"pointMultiplier": 1.5,
+							"name": "Vice Captain",
+							"shortName": "VC",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164926,
+						"name": "Clement Napier Nagle",
+						"nameInitial": "C",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 7,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164926.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 3,
+							"name": "WK",
+							"shortName": "WK"
+						}
+					}, {
+						"id": 164931,
+						"name": "Rambabu Sarlana",
+						"nameInitial": "R",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164931.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": {
+							"id": 1,
+							"pointMultiplier": 2,
+							"name": "Captain",
+							"shortName": "C",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164935,
+						"name": "Siva Nagaraju Vemareddy",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164935.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164936,
+						"name": "Vishal Sharma",
+						"nameInitial": "V",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164936.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}],
+					"snapshotId": "2641d322860aa7114b9d8de1ae3cd177ec2fddf8",
+					"teamId": 1,
+					"teamStatus": "PICKED",
+					"contestTypePill": "MEGA",
+					"expertTeamUpdatedAt": "2024-03-21T13:38:48.665+0000",
+					"userTeamId": 0
+				}, {
+					"expertDetails": {
+						"id": 55018199,
+						"name": "DREAM BIG FOR WIN7688",
+						"guruScore": 8.6,
+						"profilePicUrl": "https://userassets.dream11.com/fbprofilepic/37271587f51fa926ea04bb814eb9597f3c33139b_profilepic.jpg?timestamp=1711087200000",
+						"helpedUserWinAmount": 0,
+						"teamsPickedCount": 6924333
+					},
+					"teamCloneCount": 44,
+					"playerRoles": [{
+						"color": "#F5A623",
+						"name": "Captain",
+						"pointMultiplier": 2,
+						"shortName": "C",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+						}],
+						"id": 1
+					}, {
+						"color": "#4A90E2",
+						"name": "Vice Captain",
+						"pointMultiplier": 1.5,
+						"shortName": "VC",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+						}],
+						"id": 2
+					}],
+					"players": [{
+						"id": 967,
+						"name": "Syed Quadri",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/967.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 161810,
+						"name": "Kandi-Shashikanth Reddy",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/161810.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164821,
+						"name": "Sameer Shaik",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164821.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164825,
+						"name": "Gnaneshwar Singh",
+						"nameInitial": "G",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164825.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164827,
+						"name": "Mohammed Abdul Subhan",
+						"nameInitial": "M",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164827.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164828,
+						"name": "Khadeer",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164828.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164831,
+						"name": "Faiz Ahmed",
+						"nameInitial": "F",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164831.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": {
+							"id": 2,
+							"pointMultiplier": 1.5,
+							"name": "Vice Captain",
+							"shortName": "VC",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164926,
+						"name": "Clement Napier Nagle",
+						"nameInitial": "C",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 7,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164926.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 3,
+							"name": "WK",
+							"shortName": "WK"
+						}
+					}, {
+						"id": 164931,
+						"name": "Rambabu Sarlana",
+						"nameInitial": "R",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164931.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": {
+							"id": 1,
+							"pointMultiplier": 2,
+							"name": "Captain",
+							"shortName": "C",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164935,
+						"name": "Siva Nagaraju Vemareddy",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164935.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164936,
+						"name": "Vishal Sharma",
+						"nameInitial": "V",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164936.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}],
+					"snapshotId": "b97f84c147e0aff486660a5db0bd0d42f595038e",
+					"teamId": 1,
+					"teamStatus": "PICKED",
+					"contestTypePill": "MEGA",
+					"expertTeamUpdatedAt": "2024-03-21T17:10:06.105+0000",
+					"userTeamId": 0
+				}, {
+					"expertDetails": {
+						"id": 158086698,
+						"name": "WealthWhisperer",
+						"guruScore": 8.5,
+						"profilePicUrl": "https://userassets.dream11.com/fbprofilepic/78fef753db795d092456a5b8b9f37a3c89d1f474_profilepic.jpg?timestamp=1711087200000",
+						"helpedUserWinAmount": 0,
+						"teamsPickedCount": 14648118
+					},
+					"teamCloneCount": 36,
+					"playerRoles": [{
+						"color": "#F5A623",
+						"name": "Captain",
+						"pointMultiplier": 2,
+						"shortName": "C",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+						}],
+						"id": 1
+					}, {
+						"color": "#4A90E2",
+						"name": "Vice Captain",
+						"pointMultiplier": 1.5,
+						"shortName": "VC",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+						}],
+						"id": 2
+					}],
+					"players": [{
+						"id": 967,
+						"name": "Syed Quadri",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/967.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 161810,
+						"name": "Kandi-Shashikanth Reddy",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/161810.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164819,
+						"name": "Taher Bin Jaffar",
+						"nameInitial": "T",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164819.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164820,
+						"name": "P Jayaprakash",
+						"nameInitial": "P",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 7,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164820.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164821,
+						"name": "Sameer Shaik",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164821.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164825,
+						"name": "Gnaneshwar Singh",
+						"nameInitial": "G",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164825.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164831,
+						"name": "Faiz Ahmed",
+						"nameInitial": "F",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164831.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": {
+							"id": 2,
+							"pointMultiplier": 1.5,
+							"name": "Vice Captain",
+							"shortName": "VC",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164924,
+						"name": "Ananth Madabushi",
+						"nameInitial": "A",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164924.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164926,
+						"name": "Clement Napier Nagle",
+						"nameInitial": "C",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 7,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164926.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 3,
+							"name": "WK",
+							"shortName": "WK"
+						}
+					}, {
+						"id": 164931,
+						"name": "Rambabu Sarlana",
+						"nameInitial": "R",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164931.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": {
+							"id": 1,
+							"pointMultiplier": 2,
+							"name": "Captain",
+							"shortName": "C",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164934,
+						"name": "Krishna Kumar",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 7,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164934.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}],
+					"snapshotId": "1cabef1900d238e7d4abe8301c1a596326d62ca9",
+					"teamId": 1,
+					"teamStatus": "PICKED",
+					"contestTypePill": "MEGA",
+					"expertTeamUpdatedAt": "2024-03-21T16:08:18.903+0000",
+					"userTeamId": 0
+				}, {
+					"expertDetails": {
+						"id": 7971904,
+						"name": "Demanding Victory",
+						"guruScore": 8.5,
+						"profilePicUrl": "https://userassets.dream11.com/fbprofilepic/e449582aa4b1420c4f170d9dd61b99a656af7f64_profilepic.jpg?timestamp=1711087200000",
+						"helpedUserWinAmount": 0,
+						"teamsPickedCount": 287986
+					},
+					"teamCloneCount": 216,
+					"playerRoles": [{
+						"color": "#F5A623",
+						"name": "Captain",
+						"pointMultiplier": 2,
+						"shortName": "C",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+						}],
+						"id": 1
+					}, {
+						"color": "#4A90E2",
+						"name": "Vice Captain",
+						"pointMultiplier": 1.5,
+						"shortName": "VC",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+						}],
+						"id": 2
+					}],
+					"players": [{
+						"id": 967,
+						"name": "Syed Quadri",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/967.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 161810,
+						"name": "Kandi-Shashikanth Reddy",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/161810.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164821,
+						"name": "Sameer Shaik",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164821.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164825,
+						"name": "Gnaneshwar Singh",
+						"nameInitial": "G",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164825.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164827,
+						"name": "Mohammed Abdul Subhan",
+						"nameInitial": "M",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164827.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164828,
+						"name": "Khadeer",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164828.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164831,
+						"name": "Faiz Ahmed",
+						"nameInitial": "F",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164831.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": {
+							"id": 2,
+							"pointMultiplier": 1.5,
+							"name": "Vice Captain",
+							"shortName": "VC",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164926,
+						"name": "Clement Napier Nagle",
+						"nameInitial": "C",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 7,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164926.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 3,
+							"name": "WK",
+							"shortName": "WK"
+						}
+					}, {
+						"id": 164931,
+						"name": "Rambabu Sarlana",
+						"nameInitial": "R",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164931.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": {
+							"id": 1,
+							"pointMultiplier": 2,
+							"name": "Captain",
+							"shortName": "C",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164935,
+						"name": "Siva Nagaraju Vemareddy",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164935.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164936,
+						"name": "Vishal Sharma",
+						"nameInitial": "V",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164936.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}],
+					"snapshotId": "cd93f6a32c11b14114b3a32e39c0e87939836328",
+					"teamId": 1,
+					"teamStatus": "PICKED",
+					"contestTypePill": "MEGA",
+					"expertTeamUpdatedAt": "2024-03-22T01:41:03.663+0000",
+					"userTeamId": 0
+				}, {
+					"expertDetails": {
+						"id": 39289421,
+						"name": "Choudhary Gamerz",
+						"guruScore": 8.3,
+						"profilePicUrl": "https://userassets.dream11.com/fbprofilepic/97961cb7629f9e88cb0a9795b35f32df3c34ddaa_profilepic.jpg?timestamp=1711087200000",
+						"helpedUserWinAmount": 0,
+						"teamsPickedCount": 5163133
+					},
+					"teamCloneCount": 33,
+					"playerRoles": [{
+						"color": "#F5A623",
+						"name": "Captain",
+						"pointMultiplier": 2,
+						"shortName": "C",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+						}],
+						"id": 1
+					}, {
+						"color": "#4A90E2",
+						"name": "Vice Captain",
+						"pointMultiplier": 1.5,
+						"shortName": "VC",
+						"artwork": [{
+							"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+						}],
+						"id": 2
+					}],
+					"players": [{
+						"id": 967,
+						"name": "Syed Quadri",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/967.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 161810,
+						"name": "Kandi-Shashikanth Reddy",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 9,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/161810.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164821,
+						"name": "Sameer Shaik",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164821.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164825,
+						"name": "Gnaneshwar Singh",
+						"nameInitial": "G",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164825.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164827,
+						"name": "Mohammed Abdul Subhan",
+						"nameInitial": "M",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164827.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 1,
+							"name": "BAT",
+							"shortName": "BAT"
+						}
+					}, {
+						"id": 164828,
+						"name": "Khadeer",
+						"nameInitial": "K",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164828.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164831,
+						"name": "Faiz Ahmed",
+						"nameInitial": "F",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164831.png"
+						}],
+						"squad": {
+							"id": 6954,
+							"name": "NLL",
+							"shortName": "NLL",
+							"playerTextBgColor": "#000000",
+							"playerTextFontColor": "#ffffff"
+						},
+						"role": {
+							"id": 2,
+							"pointMultiplier": 1.5,
+							"name": "Vice Captain",
+							"shortName": "VC",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/ViceCaptain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164926,
+						"name": "Clement Napier Nagle",
+						"nameInitial": "C",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 7,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164926.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 3,
+							"name": "WK",
+							"shortName": "WK"
+						}
+					}, {
+						"id": 164931,
+						"name": "Rambabu Sarlana",
+						"nameInitial": "R",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 8,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164931.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": {
+							"id": 1,
+							"pointMultiplier": 2,
+							"name": "Captain",
+							"shortName": "C",
+							"artwork": [{
+								"src": "https://assets.dream11.com/public/imgs/playerRoleArtwork/Captain_Default.svg"
+							}]
+						},
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}, {
+						"id": 164935,
+						"name": "Siva Nagaraju Vemareddy",
+						"nameInitial": "S",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164935.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 2,
+							"name": "BOWL",
+							"shortName": "BOWL"
+						}
+					}, {
+						"id": 164936,
+						"name": "Vishal Sharma",
+						"nameInitial": "V",
+						"playerProfileDisplay": "Role",
+						"points": 0,
+						"credits": 6.5,
+						"lineupStatus": {
+							"status": "PLAYING",
+							"text": "Played last match",
+							"color": "#153f7a"
+						},
+						"substituteInfo": {
+							"isSub": false,
+							"priority": 0,
+							"replacedWith": null
+						},
+						"artwork": [{
+							"src": "https://d13ir53smqqeyp.cloudfront.net/player-images/partner-image/Hyderabad/164936.png"
+						}],
+						"squad": {
+							"id": 6956,
+							"name": "RRR",
+							"shortName": "RRR",
+							"playerTextBgColor": "#ffffff",
+							"playerTextFontColor": "#000000"
+						},
+						"role": null,
+						"type": {
+							"id": 4,
+							"name": "ALL",
+							"shortName": "ALL"
+						}
+					}],
+					"snapshotId": "488fea22fa6b1bb5b1b121792b613f9ebc14a64d",
+					"teamId": 1,
+					"teamStatus": "PICKED",
+					"contestTypePill": "MEGA",
+					"expertTeamUpdatedAt": "2024-03-21T13:52:28.793+0000",
+					"userTeamId": 0
+				}],
+				"totalExpertTeams": 0
+			},
+			"startTime": "2024-03-22T08:00:00.000Z"
+		}
+	}
+}
