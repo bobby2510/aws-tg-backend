@@ -10,6 +10,14 @@ const  ClassicDream11Mapper=  new mongoose.Schema({
         type: String,
         required: true
     },
+    left_team_image:{
+        type: String,
+        required: false
+    },
+    right_team_image:{
+        type: String,
+        required: false
+    },
     sport:{
         type: String,
         required: true

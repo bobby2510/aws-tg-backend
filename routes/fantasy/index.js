@@ -184,224 +184,76 @@ let get_base_second_url = (match_id)=>{
 //football = 5 
 //basketball = 7
 //lineupStatus: "LINEUP_ANNOUNCED"
-router.get('/api/fantasy/matches',async (req,res)=>{
+router.get('/api/fantasy/matches/:sport',async (req,res)=>{
     try{
         let classic_dream11_list = await classicDream11Mapper.find({}).sort({createdAt:-1}).limit(120)
         let tg_match_ids = []
         for(let i=0;i<classic_dream11_list.length;i++){
             tg_match_ids.push(classic_dream11_list[i].tgMatchId.toString())
         }
-      // console.log(tg_match_ids)
-       // console.log(tg_match_ids)
         let req_data = []
-        let vp = true;
-        if(vp){
-            let cricket_api = 'https://json.myfab11.com/fantasy/games-cricket-active.json';
-            let football_api = 'https://json.myfab11.com/fantasy/games-football-active.json';
-            let kabaddi_api = 'https://json.myfab11.com/fantasy/games-kabaddi-active.json';
-            let basketball_api = 'https://json.myfab11.com/fantasy/games-nba-active.json';
-            let resp1 = await axios.get(cricket_api);
-            let resp2 = await axios.get(football_api);
-            let resp3 = await axios.get(kabaddi_api);
-            let resp4 = await axios.get(basketball_api);
-            req_data = [[],[],[],[]];
-            //cricket 
-            resp1.data.result.games.forEach((match)=>{
-                if(match.mode === 'regular'){
-                    req_data[0].push(
-                        {
-                            id:match.id,
-                            left_team_name:match.home_team_code,
-                            right_team_name:match.away_team_code,
-                            left_team_image:match.home_team.logo,
-                            right_team_image:match.away_team.logo,
-                            series_name: match.tournament.name,
-                            match_time: match.game_date,
-                            lineup_out: match.lineupStatus === 'LINEUP_ANNOUNCED' ? 1 : 0,
-                            automatic: tg_match_ids.includes(match.id.toString()) ? true : false
-                        }
-                    )
-                }
+        let sport = req.params.sport;
+        let sport_list = ['cricket','football','basketball','kabaddi']
+        let link_list = ['https://json.myfab11.com/fantasy/games-cricket-active.json','https://json.myfab11.com/fantasy/games-football-active.json',
+        'https://json.myfab11.com/fantasy/games-nba-active.json','https://json.myfab11.com/fantasy/games-kabaddi-active.json',
+        ]
+        let sport_index = sport_list.indexOf(sport)
+        if(sport_index===-1){
+            res.status(404).json({
+                status:'fail',
+                message:'Something went wrong!'
             })
-            //football
-            resp2.data.result.games.forEach((match)=>{
-                if(match.mode === 'regular'){
-                    req_data[1].push(
-                        {
-                            id:match.id,
-                            left_team_name:match.home_team_code,
-                            right_team_name:match.away_team_code,
-                            left_team_image:match.home_team.logo,
-                            right_team_image:match.away_team.logo,
-                            series_name: match.tournament.name,
-                            match_time: match.game_date,
-                            lineup_out: match.lineupStatus === 'LINEUP_ANNOUNCED' ? 1 : 0,
-                            automatic: tg_match_ids.includes(match.id.toString()) ? true : false
-                        }
-                    )
-                }
-            })
-             //basketball
-             resp4.data.result.games.forEach((match)=>{
-                if(match.mode === 'regular'){
-                    req_data[2].push(
-                        {
-                            id:match.id,
-                            left_team_name:match.home_team_code,
-                            right_team_name:match.away_team_code,
-                            left_team_image:match.home_team.logo,
-                            right_team_image:match.away_team.logo,
-                            series_name: match.tournament.name,
-                            match_time: match.game_date,
-                            lineup_out: match.lineupStatus === 'LINEUP_ANNOUNCED' ? 1 : 0,
-                            automatic: tg_match_ids.includes(match.id.toString()) ? true : false
-                        }
-                    )
-                }
-            })
-            //kabaddi
-            resp3.data.result.games.forEach((match)=>{
-                if(match.mode === 'regular'){
-                    req_data[3].push(
-                        {
-                            id:match.id,
-                            left_team_name:match.home_team_code,
-                            right_team_name:match.away_team_code,
-                            left_team_image:match.home_team.logo,
-                            right_team_image:match.away_team.logo,
-                            series_name: match.tournament.name,
-                            match_time: match.game_date,
-                            lineup_out: match.lineupStatus === 'LINEUP_ANNOUNCED' ? 1 : 0,
-                            automatic: tg_match_ids.includes(match.id.toString()) ? true : false
-                        }
-                    )
-                }
-            })
-
+            return;
         }
-        else{
-            let response = await axios.get(all_matches_api)
-            let cricket_api = 'https://json.myfab11.com/fantasy/games-cricket-active.json';
-            let resp1 = await axios.get(cricket_api);
-            let data = response.data
-     
-            //extra cricket data 
-               //cricket 
-               let cricket_list  = []
-               resp1.data.result.games.forEach((match)=>{
-                if(match.mode === 'regular'){
-                    cricket_list.push(
-                        {
-                            id:match.id,
-                            left_team_name:match.home_team_code,
-                            right_team_name:match.away_team_code,
-                            left_team_image:match.home_team.logo,
-                            right_team_image:match.away_team.logo,
-                            series_name: match.tournament.name,
-                            match_time: match.game_date,
-                            lineup_out: match.lineupStatus === 'LINEUP_ANNOUNCED' ? 1 : 0,
-                            automatic: tg_match_ids.includes(match.id.toString()) ? true : false
-                        }
-                    )
+        let req_api = link_list[sport_index]
+        let resp1 = await axios.get(req_api);
+        req_data = [];
+        //sport 
+        resp1.data.result.games.forEach((match)=>{
+            if(match.mode === 'regular'){
+                let left_image = null
+                let right_image = null 
+                let match_index = tg_match_ids.indexOf(match.id.toString())
+                if(match_index>=0){
+                    let vp_dp = classic_dream11_list[match_index]
+                    left_image = vp_dp.left_team_image
+                    right_image = vp_dp.right_team_image
                 }
-            })
-
-            //end 
-          //  console.log(data)
-            // 0 -> cricket, 1 -> football , 2 -> basketball 
-            let category_list = [
-                [1,2,3,4],
-                [5],
-                [7],
-                [6]
-            ]
-           // console.log(data)
-            for(let i =0;i<category_list.length;i++)
-                req_data.push([])
-            data.result.games.forEach((match)=>{
-                category_list.forEach((array,index)=>{
-                    if(array.includes(match.tournament.sport_category_id) && match.mode === 'regular')
+                req_data.push(
                     {
-                        req_data[index].push({
-                            id:match.id,
-                            left_team_name:match.home_team_code,
-                            right_team_name:match.away_team_code,
-                            left_team_image:match.home_team.logo,
-                            right_team_image:match.away_team.logo,
-                            series_name: match.tournament.name,
-                            match_time: match.game_date,
-                            lineup_out:match.lineup_out,
-                            automatic: tg_match_ids.includes(match.id.toString()) ? true : false
-                        })
+                        id:match.id,
+                        left_team_name:match.home_team_code,
+                        right_team_name:match.away_team_code,
+                        left_team_image: left_image ? left_image : match.home_team.logo,
+                        right_team_image: right_image ? right_image : match.away_team.logo,
+                        series_name: match.tournament.name,
+                        match_time: match.game_date,
+                        sport_index: sport_index,
+                        lineup_out: match.lineupStatus === 'LINEUP_ANNOUNCED' ? 1 : 0,
+                        automatic: tg_match_ids.includes(match.id.toString()) ? true : false
                     }
-                })
-            })
-
-            req_data[0] = cricket_list;
-
-        }
-       
-        //extra data temporery
-        // let tm = extra_data.filter(d =>{
-        //     let mt = new Date(d.match_time);
-        //     let pt = new Date(Date.now());
-        //     if(mt>pt) return true;
-        //     else return false;
-        // })
-        // for(let i=0;i<tm.length;i++)
-        // req_data[0].push(tm[i]);
-    
-         //sorting the matches based on the time
-        // req_data.forEach((sport_array)=>{
-        //     sport_array.sort((x,y)=>{
-        //         let first = new Date(x.match_time)
-        //         let second = new Date(y.match_time)
-        //         if(first<second)
-        //         return -1
-        //         else 
-        //         return 1 
-        //     })
-        // })
-    
-        // for(let i=0;i<req_data.length;i++)
-        // {
-        //     let sport_array = req_data[i]
-        //     let present_time = new Date(Date.now())
-        //     for(let j=0;j<sport_array.length;j++)
-        //     {
-        //         let match = sport_array[j]
-        //         let current_match_time = new Date(match.match_time)
-        //         let time_obj = timeDifference(current_match_time,present_time)
-        //         if(time_obj.days ==0 && time_obj.hours==0 && time_obj.minutes<=45 )
-        //         {
-        //             let req_url = get_base_second_url(match.id)
-        //            // console.log(req_url)
-        //             let new_response = await axios.get(req_url)
-        //             //console.log(new_response)
-        //             if(new_response.data.game.lineupStatus === 'LINEUP_ANNOUNCED')
-        //                 match.lineup_out = 1 
-        //         }
-        //     }
-        // }
+                )
+            }
+        })
         let password = "coder_bobby_believer01_tg_software";
         //do encryption here 
-       let stuff_data = [[],[],[],[]];
-        for(let i=0;i<req_data.length;i++){
-            for(let j=0;j<req_data[i].length;j++){
-                let vp = JSON.stringify(req_data[i][j]);
-                let hashed_value = CryptoJS.AES.encrypt(vp,password).toString();
-                stuff_data[i].push(hashed_value);
-            }
+       let stuff_data = [];
+        for(let j=0;j<req_data.length;j++){
+            let vp = JSON.stringify(req_data[j]);
+            let hashed_value = CryptoJS.AES.encrypt(vp,password).toString();
+            stuff_data.push(hashed_value);
         }
         
         res.status(200).json({
             status:'success',
-            data: stuff_data
+            data: req_data
         })
     }
     catch(e){
-     //   console.log('hi here')
-      //  console.log(e)
+        res.status(404).json({
+            status:'fail',
+            message:'Something went wrong!'
+        })
     }
 })
 //image helper 
@@ -438,16 +290,10 @@ let getRoleId = (category_list,sport_category_id,position)=>{
 
 router.get('/api/fantasy/match/:id',async (req,res)=>{
         try{
-            let automatic_list = await automaticmapper.find({tgMatchId: req.params.id.toString()});
             let classic_dream11_list = await classicDream11Mapper.find({tgMatchId: req.params.id.toString()});
-            let automatic_obj = null;
             let classic_obj = null;
             if(classic_dream11_list.length>0){
                 classic_obj = classic_dream11_list[0];
-            }
-
-            if(automatic_list.length>0){
-                automatic_obj = automatic_list[0];
             }
             let req_url = get_base_second_url(req.params.id)
             let response = await axios.get(req_url) 
@@ -486,7 +332,6 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                     if(player.last_match_playing_info === "Played last match"){
                         last_play = 1;
                     }
-                console.log(kvp)
                 left_team_players.push({
                     name: player.name,
                     image: getPlayerImage(player.image),
@@ -563,7 +408,13 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                     let flag = false;
                    for(let j=0;j<classic_obj.playerMapping.length;j++){
                     if(classic_obj.playerMapping[j].tgPlayerId.toString() === p.player_fixed_id.toString()){
-                        p["pl_id"] = classic_obj.playerMapping[j].dream11PlayerId;
+                        let c_player = classic_obj.playerMapping[j];
+                        p["pl_id"] = c_player.dream11PlayerId;
+                        p.image = c_player.d11_player_image ? c_player.d11_player_image : p.image 
+                        p.credits = c_player.d11_credits ? c_player.d11_credits : p.credits
+                        p.selected_by = c_player.d11_player_selection_percentage ? c_player.d11_player_selection_percentage : p.selected_by
+                        p.captain_percentage = c_player.d11_captain_selection_percentange ? c_player.d11_captain_selection_percentange : p.captain_percentage
+                        p.vice_captain_percentage = c_player.d11_vicecaptain_selection_percentage ? c_player.d11_vicecaptain_selection_percentage : p.vice_captain_percentage
                         flag = true;
                         break;
                     }
@@ -584,7 +435,13 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                     let flag = false;
                    for(let j=0;j<classic_obj.playerMapping.length;j++){
                     if(classic_obj.playerMapping[j].tgPlayerId.toString() === p.player_fixed_id.toString()){
-                        p["pl_id"] = classic_obj.playerMapping[j].dream11PlayerId;
+                        let c_player = classic_obj.playerMapping[j];
+                        p["pl_id"] = c_player.dream11PlayerId;
+                        p.image = c_player.d11_player_image ? c_player.d11_player_image : p.image 
+                        p.credits = c_player.d11_credits ? c_player.d11_credits : p.credits
+                        p.selected_by = c_player.d11_player_selection_percentage ? c_player.d11_player_selection_percentage : p.selected_by
+                        p.captain_percentage = c_player.d11_captain_selection_percentange ? c_player.d11_captain_selection_percentange : p.captain_percentage
+                        p.vice_captain_percentage = c_player.d11_vicecaptain_selection_percentage ? c_player.d11_vicecaptain_selection_percentage : p.vice_captain_percentage
                         flag = true;
                         break;
                     }
@@ -600,13 +457,14 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
             }
             req_data.left_team_players = temp_left_players;
             req_data.right_team_players = temp_right_players;
+            req_data.left_team_image = classic_obj.left_team_image ? classic_obj.left_team_image : req_data.left_team_image
+            req_data.right_team_image = classic_obj.right_team_image ? classic_obj.right_team_image : req_data.right_team_image
             if(classic_obj){
                 req_data["automatic"] = true;
             }
             else{
                 req_data["automatic"] = false;
             }
-
             // do some stuff here 
            let password = "coder_bobby_believer01_tg_software";
             //do encryption here 
@@ -637,7 +495,7 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
             stuff_data.right_team_players = right_hash;
             res.status(200).json({
                 status:'success',
-                data: stuff_data
+                data: req_data
             })
         }
         catch(e){

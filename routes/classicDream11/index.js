@@ -168,6 +168,10 @@ let get_classic_dream11_player_list = async (matchId,sport,tourId)=>{
                     player_name: p.name,
                     player_role: role[p.type.id],
                     credits: p.credits,
+                    player_image: p.artwork[0].src,
+                    player_selection_percentage: p.statistics.selectionRate,
+                    captain_selection_percentage: p.statistics.role[0].selectionRate,
+                    vicecaptain_selection_percentage: p.statistics.role[1].selectionRate,
                     team_index: team_id_list.indexOf(p.squad.id),
                     team_id: p.squad.id,
                 })
@@ -214,8 +218,10 @@ let classic_dream11_cricket_mapper = async ()=>{
             for(let j=0;j<tg_cricket_match_list.length;j++){
                 let fp = tg_cricket_match_list[j]
                 let f_value = fp.left_team_name.toString().toLowerCase()+fp.right_team_name.toString().toLowerCase();
-                let ipl_flag = (dp.tour_name.toString()=== 'Indian T20 League' && fp.series_name.toString() === 'Indian T20 League'); // false after ipl
-                console.log(ipl_flag)
+                let f_time = new Date(fp.match_time).getTime();
+                let d_time = new Date(dp.start_time).getTime();
+                let ipl_flag = (dp.tour_name.toString()=== 'Indian T20 League' && fp.series_name.toString() === 'Indian T20 League') && (f_time === d_time); // false after ipl
+                //console.log(ipl_flag)
                 if((d_value === f_value) || ipl_flag){
                     //we find the match here 
                     let d11_player_data = await get_classic_dream11_player_list(dp.d11_match_id,'cricket',dp.tour_id)
@@ -247,7 +253,12 @@ let classic_dream11_cricket_mapper = async ()=>{
                             if(fab_player.name.toString().toLowerCase()===dream_player.player_name.toString().toLowerCase()){
                                 req_player_mapper_list.push({
                                     tgPlayerId: fab_player.tg_player_id,
-                                    dream11PlayerId: dream_player.d11_player_id
+                                    dream11PlayerId: dream_player.d11_player_id,
+                                    d11_credits: dream_player.credits,
+                                    d11_player_image: dream_player.player_image,
+                                    d11_player_selection_percentage: dream_player.player_selection_percentage,
+                                    d11_captain_selection_percentange: dream_player.captain_selection_percentage,
+                                    d11_vicecaptain_selection_percentage: dream_player.vicecaptain_selection_percentage,
                                 })
                             }
                         }
@@ -258,6 +269,8 @@ let classic_dream11_cricket_mapper = async ()=>{
                     req_mapper_obj["tgMatchId"]=fp.id;
                     req_mapper_obj["dream11MatchId"]=dp.d11_match_id;
                     req_mapper_obj["tourId"] = dp.tour_id
+                    req_mapper_obj["left_team_image"] = dp.left_team_image
+                    req_mapper_obj["right_team_image"] = dp.right_team_image
                     req_mapper_obj["playerMapping"] = req_player_mapper_list;
                     let vp_check_list = await classicDream11Mapper.find({tgMatchId:fp.id.toString()})
                     if(vp_check_list.length>0){
