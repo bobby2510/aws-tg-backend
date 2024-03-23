@@ -507,9 +507,9 @@ let remove_classic_dream11_mapper = async ()=>{
         }
     }
 }
-setInterval(classic_dream11_cricket_mapper,1000*3)
-setInterval(classic_dream11_football_mapper,1000*4)
-setInterval(classic_dream11_kabaddi_mapper,1000*5)
+setInterval(classic_dream11_cricket_mapper,1000*300)
+setInterval(classic_dream11_football_mapper,1000*400)
+setInterval(classic_dream11_kabaddi_mapper,1000*500)
 setInterval(remove_classic_dream11_mapper,1000*60*60)
 //api info
 //match list
