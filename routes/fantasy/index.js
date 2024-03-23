@@ -246,7 +246,7 @@ router.get('/api/fantasy/matches/:sport',async (req,res)=>{
         
         res.status(200).json({
             status:'success',
-            data: req_data
+            data: stuff_data
         })
     }
     catch(e){
@@ -495,7 +495,7 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
             stuff_data.right_team_players = right_hash;
             res.status(200).json({
                 status:'success',
-                data: req_data
+                data: stuff_data
             })
         }
         catch(e){
