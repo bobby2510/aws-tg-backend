@@ -45,8 +45,10 @@ router.post('/api/auth/login',async (req,res)=>{
         user_obj = await user.findOne({phoneNumber:req.body.phoneNumber})
         if(user_obj!=null)
         {
+           // console.log(user_obj)
             if(user_obj.password === req.body.password)
             {
+               // console.log('here')
                 //some stuff needs to be done here 
                 let eligible = false
                 let limitReached = false 
@@ -92,15 +94,18 @@ router.post('/api/auth/login',async (req,res)=>{
                         }
                     }
                     else{
+                       // console.log('more here')
                         if(blockUserIfEligible(user_obj)=== true )
                         {
                             user_obj.accountBlocked= true 
                             blocked = true 
                         }
+                       // console.log('temp here')
                         let arr_length = my_arr.length 
                         if(getFormattedDate(my_arr[arr_length-1].date) === getFormattedDate(Date.now()))
                         {
                             limitReached= true 
+                            eligible=true
                         }
                         else{
                             eligible=true 
@@ -112,7 +117,7 @@ router.post('/api/auth/login',async (req,res)=>{
                         }
                        
                     }
-                    
+
                     user_obj.markModified('loginHistory')
                     await user_obj.save()
                     if(false && blocked === true )
@@ -157,6 +162,7 @@ router.post('/api/auth/login',async (req,res)=>{
         }
     }
     catch(e){
+        console.log(e)
         res.status(404).json({
             status:'fail',
             message:'Some Error Occured!'
