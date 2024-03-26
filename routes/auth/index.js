@@ -105,7 +105,6 @@ router.post('/api/auth/login',async (req,res)=>{
                         if(getFormattedDate(my_arr[arr_length-1].date) === getFormattedDate(Date.now()))
                         {
                             limitReached= true 
-                            eligible=true
                         }
                         else{
                             eligible=true 
@@ -120,14 +119,14 @@ router.post('/api/auth/login',async (req,res)=>{
 
                     user_obj.markModified('loginHistory')
                     await user_obj.save()
-                    if(false && blocked === true )
+                    if(blocked === true )
                     {
                         res.status(201).json({
                             status:'fail',
                             message:'Your Account has been blocked, contact whatsapp: 9848579715'
                         })  
                     }
-                    if(false && limitReached===true) //for now ignore
+                    if(limitReached===true) //for now ignore
                     {
                         res.status(201).json({
                             status:'fail',

@@ -457,8 +457,8 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
             }
             req_data.left_team_players = temp_left_players;
             req_data.right_team_players = temp_right_players;
-            req_data.left_team_image = classic_obj.left_team_image ? classic_obj.left_team_image : req_data.left_team_image
-            req_data.right_team_image = classic_obj.right_team_image ? classic_obj.right_team_image : req_data.right_team_image
+            req_data.left_team_image = classic_obj?.left_team_image ? classic_obj.left_team_image : req_data.left_team_image
+            req_data.right_team_image = classic_obj?.right_team_image ? classic_obj.right_team_image : req_data.right_team_image
             if(classic_obj){
                 req_data["automatic"] = true;
             }
@@ -495,7 +495,7 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
             stuff_data.right_team_players = right_hash;
             res.status(200).json({
                 status:'success',
-                data: stuff_data
+                data: req_data
             })
         }
         catch(e){
