@@ -329,14 +329,17 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                 }
                     //last match played
                     let last_play = 0;
-                    if(player.last_match_playing_info === "Played last match"){
+                    let last_play_text = ""
+                    if(player.last_match_playing_info){
                         last_play = 1;
+                        last_play_text = player.last_match_playing_info
                     }
                 left_team_players.push({
                     name: player.name,
                     image: getPlayerImage(player.image),
                     playing: kvp,
                     last_play: last_play,
+                    last_play_text: last_play_text,
                     role: getRoleId(category_list,sport_category_id_list,player.position),  
                     credits: Number(player.cost)/10,
                     points: player.points,
@@ -366,14 +369,17 @@ router.get('/api/fantasy/match/:id',async (req,res)=>{
                 }
                     //last match played
                     let last_play = 0;
-                    if(player.last_match_playing_info === "Played last match"){
+                    let last_play_text = ""
+                    if(player.last_match_playing_info){
                         last_play = 1;
+                        last_play_text = player.last_match_playing_info
                     }
                 right_team_players.push({
                     name: player.name,
                     image: getPlayerImage(player.image),
                     playing: kvp,
                     last_play: last_play,
+                    last_play_text: last_play_text,
                     role: getRoleId(category_list,sport_category_id_list,player.position),
                     credits: Number(player.cost)/10,
                     points: player.points,

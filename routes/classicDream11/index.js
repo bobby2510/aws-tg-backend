@@ -222,7 +222,7 @@ let classic_dream11_cricket_mapper = async ()=>{
                 let d_time = new Date(dp.start_time).getTime();
                 let ipl_flag = (dp.tour_name.toString()=== 'Indian T20 League' && fp.series_name.toString() === 'Indian T20 League') && (f_time === d_time); // false after ipl
                 //console.log(ipl_flag)
-                if((d_value === f_value) || ipl_flag){
+                if((d_value === f_value && f_time === d_time) || ipl_flag){
                     //we find the match here 
                     let d11_player_data = await get_classic_dream11_player_list(dp.d11_match_id,'cricket',dp.tour_id)
                     let f_link = 'https://json.myfab11.com/fantasy/game/playerlist-'+fp.id.toString()+'.json'
@@ -507,6 +507,75 @@ let remove_classic_dream11_mapper = async ()=>{
         }
     }
 }
+
+//extract guru teams 
+let extract_dream11_guru_teams = async ()=>{
+    try{
+        let class_dream11_match_list_url = 'https://www.dream11.com/graphql/query/react-native/market-place-teams-query';
+        let util_db_list = await utildb.find({})
+        let auth_token = util_db_list[0].classic_dream11_token_one;
+        let header_data =  {
+            headers: {
+              "Authorization": `Bearer ${auth_token}`,
+              'Content-Type': 'application/json',
+                "guest-id": "14c3cb3c-5093-463d-a5a3-c1bbbb631565",
+                "app_version":"5.21.2",
+                "device": "androidfull",
+                "deviceid":"2d3ea3da5cc24097",
+                "locale":"en-US",
+                "siteid":"1",
+                "user-agent":"Dalvik/2.1.0 (Linux; U; Android 9; SM-G977N Build/LMY48Z)",
+                "a1":"thmG6ty/YjwvaSxJjnrUBX0wxTkPx1dSoAytzrOiLXY2E7ApiLiQMv9cA90Zyd6P25si46bw/8aI1YcMlAzcRAjof+WxYXOqYaBzJQawgVGs9Hy+/xeXQdmCeb+p+eTUnUQEkGBY9KkS4V9B+cYeqa/uLp+CdR7XfTmBUEQHV+I=",
+                "ek1":"0gBwPxY/tGPOUkphuqAKzA==",
+                "ek2":"thmG6ty/YjwvaSxJjnrUBef3IMF1L3fMQtB0JiLya/o=",
+                "version":1337
+            }
+        }
+        let req_obj = {
+            "query": "\n    query MarketPlaceTeamsQuery($site: String!, $matchId: Int!, $contestType: ContestTypePills!, $page: Int!, $limit: Int!, $sortBy: String, $eventId: String, $premiumTeamsEnabled: Boolean = false) {\n  match(id: $matchId, site: $site) {\n    squads {\n      id\n      name\n      shortName\n      playerTextBgColor\n      playerTextFontColor\n    }\n    status\n    getAllTeamsShared(\n      contestType: $contestType\n      page: $page\n      limit: $limit\n      sortBy: $sortBy\n      eventId: $eventId\n    ) {\n      pageInfo {\n        nextPage\n        previousPage\n        eventId\n      }\n      teams {\n        ...GuruTeamDetails\n      }\n      totalExpertTeams\n    }\n    startTime\n    getAllTeamsSharedPaid(\n      contestType: $contestType\n      page: $page\n      limit: $limit\n      sortBy: $sortBy\n      eventId: $eventId\n    ) @include(if: $premiumTeamsEnabled) {\n      pageInfo {\n        nextPage\n        previousPage\n        eventId\n      }\n      teams {\n        ...GuruTeamDetails\n      }\n      totalExpertTeams\n    }\n  }\n  virtualCoinBalance @include(if: $premiumTeamsEnabled) {\n    currentBalance\n  }\n}\n    \n    fragment GuruTeamDetails on TeamDetails {\n  expertDetails {\n    id\n    name\n    guruScore\n    profilePicUrl\n    helpedUserWinAmount\n    teamsPickedCount\n  }\n  teamCloneCount\n  playerRoles {\n    color\n    name\n    pointMultiplier\n    shortName\n    artwork {\n      src\n    }\n    id\n  }\n  players {\n    id\n    name\n    nameInitial\n    playerProfileDisplay\n    points\n    credits\n    lineupStatus {\n      status\n      text\n      color\n    }\n    substituteInfo {\n      isSub\n      priority\n      replacedWith {\n        id\n      }\n    }\n    artwork {\n      src\n    }\n    squad {\n      id\n      name\n      shortName\n      playerTextBgColor\n      playerTextFontColor\n    }\n    role {\n      id\n      pointMultiplier\n      name\n      shortName\n      artwork {\n        src\n      }\n    }\n    type {\n      id\n      name\n      shortName\n    }\n  }\n  snapshotId\n  teamId\n  teamStatus\n  contestTypePill\n  expertTeamUpdatedAt\n  userTeamId\n  isTeamLocked @include(if: $premiumTeamsEnabled)\n  teamCategory @include(if: $premiumTeamsEnabled)\n  teamPrice @include(if: $premiumTeamsEnabled)\n}\n    ",
+            "variables": {
+                "site": "cricket",
+                "matchId": 82304,
+                "contestType": "MEGA",
+                "page": 1,
+                "limit": 10,
+                "sortBy": "GURU_SCORE_DESC",
+                "eventId": "",
+                "premiumTeamsEnabled": false
+            }
+        }
+        let response = await axios.post(class_dream11_match_list_url,req_obj,header_data)
+        let data =  response.data;
+        if(data){
+            let match_list = data.data.site.matches.edges;
+            let req_match_list = []
+            for(let i=0;i<match_list.length;i++){
+                let p = match_list[i]
+                req_match_list.push({
+                    d11_match_id: p.id,
+                    start_time: p.startTime,
+                    left_team_id: p.squads[0].id,
+                    left_shortcut_name: p.squads[0].shortName,
+                    right_team_id: p.squads[1].id,
+                    right_shortcut_name: p.squads[1].shortName,
+                    left_team_image: p.squads[0].flag[0].src,
+                    right_team_image: p.squads[1].flag[0].src,
+                    tour_name: p.tour.name,
+                    tour_id: p.tour.id
+                })
+            }
+            return req_match_list
+        }
+        else return null;
+       }
+       catch(e){
+        return null;
+       }
+}
+
+
+
+
 setInterval(classic_dream11_cricket_mapper,1000*300)
 setInterval(classic_dream11_football_mapper,1000*400)
 setInterval(classic_dream11_kabaddi_mapper,1000*500)
